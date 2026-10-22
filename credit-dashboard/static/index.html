@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>単位取得状況</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">CREDIT OVERVIEW</p>
+        <h1>単位取得状況</h1>
+        <p class="muted">新潟大学工学部・2025年度入学・2年次・知能情報システムプログラム対象</p>
+      </div>
+    </header>
+
+    <section class="upload-panel" aria-labelledby="upload-heading">
+      <div>
+        <p class="eyebrow">LOCAL PROCESSING</p>
+        <h2 id="upload-heading">成績CSVを選択</h2>
+        <p class="muted upload-description">CSVはこのアプリのバックエンドでメモリ上だけで解析し、保存しません。上限は5 MiBです。</p>
+      </div>
+      <form id="upload-form">
+        <label id="drop-zone" class="drop-zone" for="csv-file">
+          <span class="drop-title">CSVをここにドロップ</span>
+          <span class="muted">またはクリックして選択</span>
+          <input id="csv-file" name="file" type="file" accept=".csv,text/csv">
+        </label>
+        <div class="upload-actions">
+          <span id="selected-file" class="selected-file">ファイルが選択されていません</span>
+          <button id="submit" type="submit">解析する</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="error" class="error" role="alert" hidden></div>
+    <div id="status" class="status" role="status" aria-live="polite"></div>
+    <section id="dashboard" hidden>
+      <div class="student" id="student"></div>
+      <div class="cards" id="cards"></div>
+      <p class="note">取得済みには、合格かつ単位数が確定した科目だけを算入します。進級・卒業要件による判定はまだ行いません。</p>
+      <div id="warnings" class="warnings" role="status" hidden></div>
+
+      <section aria-labelledby="category-heading">
+        <div class="section-heading"><h2 id="category-heading">科目区分別</h2><span id="course-count"></span></div>
+        <div id="categories"></div>
+      </section>
+
+      <section aria-labelledby="courses-heading">
+        <div class="section-heading"><h2 id="courses-heading">科目一覧</h2></div>
+        <label class="select-label" for="course-filter">表示する区分</label>
+        <select id="course-filter"><option value="all">すべて</option></select>
+        <div class="table-scroll"><table>
+          <thead><tr><th>科目名</th><th>大分類</th><th>分野</th><th>必選区分</th><th class="numeric">単位数</th><th>状態</th></tr></thead>
+          <tbody id="courses"></tbody>
+        </table></div>
+      </section>
+
+      <section aria-labelledby="json-heading" class="json-section">
+        <div class="section-heading"><h2 id="json-heading">JSONデータ</h2></div>
+        <details><summary>JSONを表示</summary><pre id="json"></pre></details>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

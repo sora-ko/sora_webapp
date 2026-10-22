@@ -1,0 +1,57 @@
+:root {font-family: system-ui, -apple-system, "Noto Sans JP", sans-serif; color: #172328; background: #f4f7f5;}
+* {box-sizing: border-box;}
+body {margin: 0;}
+.shell {max-width: 1120px; padding: 42px 24px 80px; margin: auto;}
+.masthead, .section-heading {display: flex; align-items: end; justify-content: space-between; gap: 18px;}
+.eyebrow {letter-spacing: .18em; color: #28795d; font-size: .75rem; font-weight: 700;}
+h1 {font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 10px; letter-spacing: -.04em;}
+h2 {font-size: 1.35rem; margin: 0;}
+h3 {font-size: 1.08rem; margin: 0 0 16px;}
+.muted, .note, .section-heading span {color: #61716b;}
+.muted {margin: 0;}
+button {background: #1f7254; color: white; border: 0; padding: 12px 18px; border-radius: 10px; font: inherit; font-weight: 600; cursor: pointer;}
+button:hover {background: #16593f;}
+button:disabled {cursor: wait; opacity: .65;}
+button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible, .drop-zone:focus-within {outline: 3px solid #8ac9ac; outline-offset: 3px;}
+.upload-panel {margin-top: 30px; padding: 24px; background: #e9f3ed; border: 1px solid #c9ded1; border-radius: 16px; display: grid; grid-template-columns: minmax(220px, .8fr) minmax(320px, 1.2fr); gap: 24px; align-items: center;}
+.upload-description {margin-top: 8px; line-height: 1.6;}
+.drop-zone {min-height: 132px; padding: 22px; border: 2px dashed #7cac94; border-radius: 12px; background: rgba(255,255,255,.72); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; cursor: pointer; text-align: center; transition: border-color .15s, background .15s;}
+.drop-zone:hover, .drop-zone.dragging {border-color: #1f7254; background: white;}
+.drop-zone input {position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;}
+.drop-title {font-weight: 700; color: #245c48;}
+.upload-actions {display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 12px;}
+.selected-file {min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #405b50; font-size: .88rem;}
+.error {background: #fff0ee; color: #92382d; padding: 18px; border-radius: 12px; margin-top: 24px;}
+.status {min-height: 1.5em; margin-top: 16px; color: #405b50;}
+.warnings {background: #fff7e9; color: #77501e; padding: 16px; border-radius: 12px; margin: -20px 0 30px;}
+.student {margin: 28px 0 18px; color: #405b50; font-weight: 600;}
+.cards {display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;}
+.card, .category-item, .table-scroll, details {background: white; border: 1px solid #dce7e0; border-radius: 14px;}
+.card {padding: 22px; display: flex; flex-direction: column; gap: 8px;}
+.card-title {font-size: .9rem; color: #405b50;}
+.card strong {font-size: 1.8rem; letter-spacing: -.04em;}
+.note {font-size: .85rem; line-height: 1.6; margin: 18px 0 42px;}
+section section {margin-top: 42px;}
+.section-heading {margin-bottom: 18px;}
+.category-block {margin-bottom: 28px;}
+.category-grid {display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;}
+.category-item {padding: 15px 17px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px;}
+.category-item strong {white-space: nowrap; color: #176044;}
+.category-item small {grid-column: 1 / -1; color: #886339;}
+.select-label {margin-right: 8px; font-size: .88rem; color: #405b50;}
+select {margin-bottom: 16px; padding: 8px 12px; border: 1px solid #b9ccc0; border-radius: 8px; background: white; font: inherit;}
+.table-scroll {overflow-x: auto;}
+table {width: 100%; border-collapse: collapse; min-width: 760px; font-size: .9rem;}
+th, td {text-align: left; padding: 12px 14px; border-bottom: 1px solid #edf1ee;}
+th {color: #52645a; background: #f9fbf9; font-weight: 600; white-space: nowrap;}
+tr:last-child td {border-bottom: 0;}
+.numeric {text-align: right; white-space: nowrap;}
+td.passed {color: #1f7254; font-weight: 600; white-space: nowrap;}
+td.unconfirmed {color: #986333; white-space: nowrap;}
+td.failed {color: #92382d; white-space: nowrap;}
+a {color: #1f7254;}
+details {padding: 16px;}
+summary {cursor: pointer; font-weight: 600;}
+pre {font-size: .8rem; overflow-x: auto; max-height: 560px; padding: 14px; background: #f5f7f6; border-radius: 8px;}
+@media (max-width: 780px) {.cards {grid-template-columns: repeat(2, 1fr);} .category-grid {grid-template-columns: 1fr;} .masthead {align-items: start; flex-direction: column;} .upload-panel {grid-template-columns: 1fr;}}
+@media (max-width: 440px) {.cards {grid-template-columns: 1fr;} .shell {padding: 24px 16px 60px;} .upload-panel {padding: 18px;} .upload-actions {align-items: stretch; flex-direction: column;} .upload-actions button {width: 100%;}}

@@ -1,0 +1,7 @@
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+# 成績CSVは学生本人が画面から都度アップロードし、リポジトリへ置かない。
+data/*.csv
