@@ -1,0 +1,244 @@
+{
+  "$schema": "../../../../profile.schema.json",
+  "schema_version": 1,
+  "profile_id": "niigata-engineering-sis-2025-v1",
+  "scope": {
+    "institution": "新潟大学",
+    "faculty": "工学部",
+    "program": "知能情報システムプログラム",
+    "admission_year": 2025
+  },
+  "mvp_policy": {
+    "decided_on": "2026-10-26",
+    "notes": [
+      "通常入学・留年なし・編入なしを前提とし、留学生向け代替規則と早期卒業は対象外です。夜間主科目は含まれない前提です。",
+      "MVP独自方針として、対象の専門科目一覧にない専門科目を教養の選択単位へ算入します。大学の正式な他プログラム科目の取扱いとは異なります。",
+      "他大学の単位認定は未対応です。既知の他大学単位ラベルは要件集計から除外し、未知の表記は推測しません。"
+    ]
+  },
+  "source_documents": [
+    {
+      "id": "student_handbook_2025",
+      "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+      "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+      "official": true,
+      "verified_on": "2026-10-26",
+      "page_numbering_note": "冊子下部のページ番号とPDFビューアーのページ番号を併記する。"
+    }
+  ],
+  "classification": {
+    "evidence_status": "needs_confirmation",
+    "course_catalog_path": "niigata/engineering/smart-information-systems/2025/course-catalog.json",
+    "outside_catalog_policy": "liberal_elective",
+    "excluded_course_names": ["単位互換協定に基づき修得した他大学開設科目"],
+    "course_name_ignored_suffixes": ["◆"],
+    "course_name_aliases": {
+      "エンジニアのためのデータサイエンス入門（情報電子分野）": "エンジニアのためのデータサイエンス入門",
+      "健康スポーツ科学実習 I": "健康スポーツ科学実習Ⅰ"
+    },
+    "faculty_specialized_prefixes": ["専門"],
+    "liberal_category_prefixes": [
+      "大学学習法",
+      "英語",
+      "初修外国語",
+      "健康・スポーツ",
+      "情報リテラシー",
+      "自然系共通専門基礎",
+      "自然科学",
+      "人文社会・教育科学",
+      "新潟大学個性化科目",
+      "医歯学",
+      "留学生基本科目"
+    ],
+    "specialized_groups": [
+      {
+        "id": "specialized_foundation",
+        "source_prefix": "専門基礎",
+        "normalized_value": "specialized_foundation"
+      },
+      {
+        "id": "specialized_applied",
+        "source_prefix": "専門応用",
+        "normalized_value": "specialized_applied"
+      }
+    ],
+    "requirement_type_codes": {
+      "必修": "A",
+      "選択必修": "B",
+      "選択": "C",
+      "特殊選択": "D",
+      "自由": "E"
+    },
+    "unknown_policy": "unknown",
+    "blocking_open_question_ids": ["category_aliases"]
+  },
+  "requirements": {
+    "progression_year_2": {
+      "title": "第2年次進級条件",
+      "status": "partial",
+      "evidence_status": "transcribed",
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程細則 第10条〜第13条",
+          "printed_pages": [23, 24],
+          "pdf_pages": [27, 28]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "履修上の注意 第8項（進級・卒業要件単位に含まれない科目）",
+          "printed_pages": [65],
+          "pdf_pages": [69]
+        }
+      ],
+      "blocking_open_question_ids": [],
+      "conditions": [
+        {
+          "id": "minimum_residence",
+          "label": "在学期間",
+          "kind": "minimum_residence_years",
+          "minimum": 1,
+          "missing_input_result": "unknown"
+        },
+        {
+          "id": "total_credits",
+          "label": "D科目を除く修得単位",
+          "kind": "minimum_credits",
+          "minimum": 32,
+          "selector": {
+            "curriculum_areas": ["liberal_arts", "faculty_specialized"],
+            "excluded_requirement_codes": ["D"]
+          }
+        },
+        {
+          "id": "designated_course_group",
+          "label": "指定5科目の修得単位",
+          "kind": "minimum_credits_from_named_courses",
+          "minimum": 4,
+          "selector": {
+            "course_names": [
+              "総合工学概論",
+              "総合技術科学演習",
+              "技術者の心がまえ",
+              "知的財産概論",
+              "情報セキュリティ概論"
+            ]
+          }
+        }
+      ],
+      "allocation_rules": [
+        {
+          "id": "exclude_d",
+          "kind": "exclude_requirement_code",
+          "requirement_code": "D",
+          "applies_to_condition_ids": ["total_credits"]
+        },
+        {
+          "id": "no_double_counting",
+          "kind": "no_double_counting"
+        }
+      ]
+    },
+    "progression_year_4": {
+      "title": "第4年次進級条件",
+      "status": "partial",
+      "evidence_status": "transcribed",
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程細則 別表第1 第4年次進級基準",
+          "printed_pages": [26],
+          "pdf_pages": [30]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程 別表第1（教養系内訳）",
+          "printed_pages": [7],
+          "pdf_pages": [11]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "履修上の注意 第5項〜第8項",
+          "printed_pages": [64, 65],
+          "pdf_pages": [68, 69]
+        }
+      ],
+      "blocking_open_question_ids": [],
+      "conditions": [
+        {"id": "minimum_residence", "label": "在学期間", "kind": "minimum_residence_years", "minimum": 3, "missing_input_result": "unknown"},
+        {"id": "specialized_foundation_a", "label": "専門基礎 A科目", "kind": "minimum_credits", "minimum": 0, "selector": {"course_group": "specialized_foundation", "requirement_codes": ["A"]}},
+        {"id": "specialized_foundation_b", "label": "専門基礎 B科目", "kind": "minimum_credits", "minimum": 10, "selector": {"course_group": "specialized_foundation", "requirement_codes": ["B"]}},
+        {"id": "specialized_applied_a", "label": "専門応用 A科目", "kind": "minimum_credits", "minimum": 19, "selector": {"course_group": "specialized_applied", "requirement_codes": ["A"]}},
+        {"id": "specialized_applied_b", "label": "専門応用 B科目（専門基礎Bの10単位超過分を含む）", "kind": "minimum_residual_credits", "minimum": 26, "selector": {"any_of": [{"course_group": "specialized_foundation", "requirement_codes": ["B"]}, {"course_group": "specialized_applied", "requirement_codes": ["B"]}]}, "subtract_condition_ids": ["specialized_foundation_b"]},
+        {"id": "specialized_applied_pool", "label": "専門応用 B・C・E科目（最低枠への充当後）", "kind": "minimum_residual_credits", "minimum": 11, "selector": {"any_of": [{"course_group": "specialized_foundation", "requirement_codes": ["B"]}, {"course_group": "specialized_applied", "requirement_codes": ["B", "C", "E"]}], "credit_caps": {"E": 6}}, "subtract_condition_ids": ["specialized_foundation_b", "specialized_applied_b"]},
+        {"id": "specialized_total", "label": "学部専門系科目 計", "kind": "minimum_credits", "minimum": 66, "selector": {"curriculum_areas": ["faculty_specialized"], "excluded_requirement_codes": ["D"], "credit_caps": {"E": 6}}},
+        {"id": "liberal_university_study", "label": "教養・工学リテラシー入門（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "course_name_contains_any": ["工学リテラシー入門"]}},
+        {"id": "liberal_english", "label": "教養・英語（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["英語"]}},
+        {"id": "liberal_initial_language", "label": "教養・初修外国語（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["初修外国語"]}},
+        {"id": "liberal_health_sports", "label": "教養・健康スポーツ科学実習Ⅰ（必修）", "kind": "minimum_credits", "minimum": 1, "selector": {"curriculum_areas": ["liberal_arts"], "course_names": ["健康スポーツ科学実習Ⅰ"]}},
+        {"id": "liberal_information_literacy", "label": "教養・データサイエンス入門（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "course_names": ["エンジニアのためのデータサイエンス入門"]}},
+        {"id": "liberal_humanities_social_required", "label": "教養・人文社会／教育科学（必修）", "kind": "minimum_credits", "minimum": 4, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["人文社会・教育科学"]}},
+        {"id": "liberal_humanities_personalization_required_elective", "label": "教養・人文社会／教育科学または新潟大学個性化科目（選択必修）", "kind": "minimum_residual_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["人文社会・教育科学", "新潟大学個性化科目"]}, "subtract_condition_ids": ["liberal_humanities_social_required"]},
+        {"id": "liberal_natural_foundation", "label": "教養・情報リテラシー／自然系共通専門基礎／自然科学（選択必修）", "kind": "minimum_credits", "minimum": 10, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["情報リテラシー", "自然系共通専門基礎", "自然科学", "情報リテラシー／自然系共通専門基礎"], "excluded_course_names": ["エンジニアのためのデータサイエンス入門"]}},
+        {"id": "liberal_elective", "label": "教養系 選択（必修・選択必修への充当後）", "kind": "minimum_residual_credits", "minimum": 7, "selector": {"curriculum_areas": ["liberal_arts"]}, "subtract_condition_ids": ["liberal_university_study", "liberal_english", "liberal_initial_language", "liberal_health_sports", "liberal_information_literacy", "liberal_humanities_social_required", "liberal_humanities_personalization_required_elective", "liberal_natural_foundation"]},
+        {"id": "liberal_total", "label": "教養系科目 計", "kind": "minimum_credits", "minimum": 32, "selector": {"curriculum_areas": ["liberal_arts"]}},
+        {"id": "cross_area_surplus", "label": "専門または教養の超過単位", "kind": "shared_surplus_minimum", "minimum": 6, "selector": {"curriculum_areas": ["liberal_arts", "faculty_specialized"]}, "source_condition_ids": ["specialized_total", "liberal_total"]},
+        {"id": "overall_total", "label": "修得単位 総計", "kind": "minimum_credits", "minimum": 104, "selector": {"curriculum_areas": ["liberal_arts", "faculty_specialized"], "excluded_requirement_codes": ["D"], "credit_caps": {"E": 6}}}
+      ],
+      "allocation_rules": [
+        {"id": "cap_e", "kind": "credit_cap", "requirement_code": "E", "maximum": 6},
+        {"id": "exclude_d", "kind": "exclude_requirement_code", "requirement_code": "D"},
+        {"id": "no_double_counting", "kind": "no_double_counting"}
+      ]
+    },
+    "graduation": {
+      "title": "卒業資格条件",
+      "status": "partial",
+      "evidence_status": "transcribed",
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程 別表第1・別表第2、工学部規程細則 別表第2、知能情報システムプログラム標準課程表、履修上の注意",
+          "printed_pages": [7, 12, 27, 38, 39, 40, 64, 65],
+          "pdf_pages": [11, 16, 31, 42, 43, 44, 68, 69]
+        }
+      ],
+      "blocking_open_question_ids": [],
+      "conditions": [
+        {"id": "minimum_residence", "label": "在学期間", "kind": "minimum_residence_years", "minimum": 4, "missing_input_result": "unknown"},
+        {"id": "specialized_foundation_a", "label": "専門基礎 A科目", "kind": "minimum_credits", "minimum": 0, "selector": {"course_group": "specialized_foundation", "requirement_codes": ["A"]}},
+        {"id": "specialized_foundation_b", "label": "専門基礎 B科目", "kind": "minimum_credits", "minimum": 10, "selector": {"course_group": "specialized_foundation", "requirement_codes": ["B"]}},
+        {"id": "specialized_applied_a", "label": "専門応用 A科目", "kind": "minimum_credits", "minimum": 27, "selector": {"course_group": "specialized_applied", "requirement_codes": ["A"]}},
+        {"id": "individual_required_courses", "label": "専門系の個別必修科目", "kind": "required_courses", "selector": {"curriculum_areas": ["faculty_specialized"], "requirement_codes": ["A"]}},
+        {"id": "specialized_applied_b", "label": "専門応用 B科目（専門基礎Bの10単位超過分を含む）", "kind": "minimum_residual_credits", "minimum": 28, "selector": {"any_of": [{"course_group": "specialized_foundation", "requirement_codes": ["B"]}, {"course_group": "specialized_applied", "requirement_codes": ["B"]}]}, "subtract_condition_ids": ["specialized_foundation_b"]},
+        {"id": "specialized_applied_pool", "label": "専門応用 B・C・D・E科目（最低枠への充当後）", "kind": "minimum_residual_credits", "minimum": 17, "selector": {"any_of": [{"course_group": "specialized_foundation", "requirement_codes": ["B"]}, {"course_group": "specialized_applied", "requirement_codes": ["B", "C", "D", "E"]}]}, "subtract_condition_ids": ["specialized_foundation_b", "specialized_applied_b"]},
+        {"id": "specialized_total", "label": "学部専門系科目 計", "kind": "minimum_credits", "minimum": 82, "selector": {"curriculum_areas": ["faculty_specialized"]}},
+        {"id": "liberal_university_study", "label": "教養・工学リテラシー入門（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "course_name_contains_any": ["工学リテラシー入門"]}},
+        {"id": "liberal_english", "label": "教養・英語（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["英語"]}},
+        {"id": "liberal_initial_language", "label": "教養・初修外国語（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["初修外国語"]}},
+        {"id": "liberal_health_sports", "label": "教養・健康スポーツ科学実習Ⅰ（必修）", "kind": "minimum_credits", "minimum": 1, "selector": {"curriculum_areas": ["liberal_arts"], "course_names": ["健康スポーツ科学実習Ⅰ"]}},
+        {"id": "liberal_information_literacy", "label": "教養・データサイエンス入門（必修）", "kind": "minimum_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "course_names": ["エンジニアのためのデータサイエンス入門"]}},
+        {"id": "liberal_humanities_social_required", "label": "教養・人文社会／教育科学（必修）", "kind": "minimum_credits", "minimum": 4, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["人文社会・教育科学"]}},
+        {"id": "liberal_humanities_personalization_required_elective", "label": "教養・人文社会／教育科学または新潟大学個性化科目（選択必修）", "kind": "minimum_residual_credits", "minimum": 2, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["人文社会・教育科学", "新潟大学個性化科目"]}, "subtract_condition_ids": ["liberal_humanities_social_required"]},
+        {"id": "liberal_natural_foundation", "label": "教養・情報リテラシー／自然系共通専門基礎／自然科学（選択必修）", "kind": "minimum_credits", "minimum": 10, "selector": {"curriculum_areas": ["liberal_arts"], "fields": ["情報リテラシー", "自然系共通専門基礎", "自然科学", "情報リテラシー／自然系共通専門基礎"], "excluded_course_names": ["エンジニアのためのデータサイエンス入門"]}},
+        {"id": "liberal_elective", "label": "教養系 選択（必修・選択必修への充当後）", "kind": "minimum_residual_credits", "minimum": 11, "selector": {"curriculum_areas": ["liberal_arts"]}, "subtract_condition_ids": ["liberal_university_study", "liberal_english", "liberal_initial_language", "liberal_health_sports", "liberal_information_literacy", "liberal_humanities_social_required", "liberal_humanities_personalization_required_elective", "liberal_natural_foundation"]},
+        {"id": "liberal_total", "label": "教養系科目 計", "kind": "minimum_credits", "minimum": 36, "selector": {"curriculum_areas": ["liberal_arts"]}},
+        {"id": "cross_area_surplus", "label": "専門または教養の超過単位", "kind": "shared_surplus_minimum", "minimum": 6, "selector": {"curriculum_areas": ["liberal_arts", "faculty_specialized"]}, "source_condition_ids": ["specialized_total", "liberal_total"]},
+        {"id": "overall_total", "label": "修得単位 総計", "kind": "minimum_credits", "minimum": 124, "selector": {"curriculum_areas": ["liberal_arts", "faculty_specialized"]}}
+      ],
+      "allocation_rules": [
+        {"id": "no_double_counting", "kind": "no_double_counting"},
+        {"id": "required_courses_check", "kind": "requires_individual_required_courses", "status": "implemented", "applies_to_condition_ids": ["individual_required_courses"]}
+      ]
+    }
+  },
+  "open_questions": [
+    {"id": "residence_input", "status": "resolved", "question": "在学期間は保存せず、任意入力を優先し、未入力時は留年・編入なしのMVP前提でCSV学年を使用する。", "owner": "product"},
+    {"id": "cross_area_allocation_order", "status": "resolved", "question": "共通6単位は、専門計の最低単位超過分と教養計の最低単位超過分の合計として評価する。", "owner": "academic_confirmation"},
+    {"id": "recognized_credit_notation", "status": "resolved", "question": "2026-10-26のMVP方針: 他大学の単位認定は対象外とし、既知ラベルは集計から除外、未知表記は推測しない。編入は対象外。", "owner": "product"},
+    {"id": "course_identity", "status": "resolved", "question": "2026-10-26のMVP前提: 開講コードが異なる再履修行は別科目として扱い、同等科目への名寄せをしない。", "owner": "product"},
+    {"id": "individual_required_courses", "status": "resolved", "question": "科目マスターのrequired_forから卒業必修16科目を読み込み、科目ごとの修得・未修得・判定不能を卒業判定へ接続済み。", "owner": "implementation"},
+    {"id": "graduation_e_credit_treatment", "status": "resolved", "question": "卒業資格基準ではE科目単位数の上限を定めない。", "owner": "academic_confirmation"},
+    {"id": "category_aliases", "status": "open", "question": "年度やCSV出力差による科目区分表記の別名をどこまで同一分類として扱うか。", "owner": "implementation"}
+  ]
+}

@@ -1,0 +1,2450 @@
+{
+  "$schema": "../../../../course-catalog.schema.json",
+  "schema_version": 1,
+  "catalog_id": "niigata-engineering-sis-2025-catalog-v1",
+  "profile_id": "niigata-engineering-sis-2025-v1",
+  "evidence_status": "transcribed",
+  "courses": [
+    {
+      "id": "sis-common-a-01",
+      "course_code": null,
+      "name": "総合工学概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-a-02",
+      "course_code": null,
+      "name": "総合技術科学演習",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-a-03",
+      "course_code": null,
+      "name": "技術者の心がまえ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-a-04",
+      "course_code": null,
+      "name": "知的財産概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-a-05",
+      "course_code": null,
+      "name": "情報セキュリティ概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-a-06",
+      "course_code": null,
+      "name": "国際工学概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-01",
+      "course_code": null,
+      "name": "職業指導（工）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        4
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-02",
+      "course_code": null,
+      "name": "創造プロジェクト基礎",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-03",
+      "course_code": null,
+      "name": "創造プロジェクトⅠ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-04",
+      "course_code": null,
+      "name": "創造プロジェクトⅡ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-05",
+      "course_code": null,
+      "name": "創造研究プロジェクトⅠ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-06",
+      "course_code": null,
+      "name": "創造研究プロジェクトⅡ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-07",
+      "course_code": null,
+      "name": "マーケット・インターンシップ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-08",
+      "course_code": null,
+      "name": "テクノロジー・インターンシップ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-09",
+      "course_code": null,
+      "name": "国際工学事情",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 1,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-10",
+      "course_code": null,
+      "name": "国際工学特論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-11",
+      "course_code": null,
+      "name": "国際技術協力",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 1,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-12",
+      "course_code": null,
+      "name": "国際マーケット・グループワーク・インターンシップＡ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-13",
+      "course_code": null,
+      "name": "国際マーケット・グループワーク・インターンシップＢ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 3,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-14",
+      "course_code": null,
+      "name": "国際テクノロジー・グループワーク・インターンシップＡ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-c-15",
+      "course_code": null,
+      "name": "国際テクノロジー・グループワーク・インターンシップＢ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 3,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-field-b-01",
+      "course_code": null,
+      "name": "電子情報通信概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 1,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            11,
+            39
+          ],
+          "pdf_pages": [
+            15,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-field-b-02",
+      "course_code": null,
+      "name": "知能情報システム概論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 1,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            11,
+            39
+          ],
+          "pdf_pages": [
+            15,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-field-b-03",
+      "course_code": null,
+      "name": "コンピュータ基礎",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            11,
+            39
+          ],
+          "pdf_pages": [
+            15,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-field-b-04",
+      "course_code": null,
+      "name": "プログラミング基礎Ⅰ（情報電子分野）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [
+        "プログラミング基礎Ⅰ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            11,
+            39
+          ],
+          "pdf_pages": [
+            15,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-field-b-05",
+      "course_code": null,
+      "name": "プログラミング基礎Ⅱ（情報電子分野）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [
+        "プログラミング基礎Ⅱ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            11,
+            39
+          ],
+          "pdf_pages": [
+            15,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-01",
+      "course_code": null,
+      "name": "応用数理Ｅ（確率・統計学）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [
+        "応用数理Ｅ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-02",
+      "course_code": null,
+      "name": "電気数理Ⅰ（ベクトル解析）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [
+        "電気数理Ⅰ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-03",
+      "course_code": null,
+      "name": "応用数理Ｂ（常微分方程式）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [
+        "応用数理Ｂ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-04",
+      "course_code": null,
+      "name": "電磁気学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-05",
+      "course_code": null,
+      "name": "応用数理Ｃ（複素解析）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [
+        "応用数理Ｃ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-06",
+      "course_code": null,
+      "name": "電気数理Ⅱ（フーリエ解析）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [
+        "電気数理Ⅱ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-07",
+      "course_code": null,
+      "name": "物理工学Ⅱ（解析力学）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [
+        "物理工学Ⅱ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-08",
+      "course_code": null,
+      "name": "物理工学Ⅲ（量子物理学）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [
+        "物理工学Ⅲ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-foundation-b-09",
+      "course_code": null,
+      "name": "物理工学Ⅳ（熱・統計力学）",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_foundation",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [
+        "物理工学Ⅳ"
+      ],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門基礎 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            38
+          ],
+          "pdf_pages": [
+            16,
+            42
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-01",
+      "course_code": null,
+      "name": "プログラミングＡⅠ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-02",
+      "course_code": null,
+      "name": "プログラミングＡⅡ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-03",
+      "course_code": null,
+      "name": "情報システム基礎実習",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-04",
+      "course_code": null,
+      "name": "知能情報システム実験Ⅰ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-05",
+      "course_code": null,
+      "name": "知能情報システム実験Ⅱ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-06",
+      "course_code": null,
+      "name": "知能情報システム実験Ⅲ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-07",
+      "course_code": null,
+      "name": "知能情報システム実験Ⅳ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-08",
+      "course_code": null,
+      "name": "研究室体験実習",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 1,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-09",
+      "course_code": null,
+      "name": "卒業研修",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 2,
+      "standard_years": [
+        4
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-a-10",
+      "course_code": null,
+      "name": "卒業研究",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "A",
+      "credits": 6,
+      "standard_years": [
+        4
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [
+        "graduation"
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-01",
+      "course_code": null,
+      "name": "情報数学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-02",
+      "course_code": null,
+      "name": "データ構造とアルゴリズム",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-03",
+      "course_code": null,
+      "name": "電気回路",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-04",
+      "course_code": null,
+      "name": "離散数学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-05",
+      "course_code": null,
+      "name": "論理回路",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-06",
+      "course_code": null,
+      "name": "コンピュータネットワーク",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-07",
+      "course_code": null,
+      "name": "形式言語とオートマトン",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-08",
+      "course_code": null,
+      "name": "オペレーティングシステム",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-09",
+      "course_code": null,
+      "name": "コンピュータアーキテクチャ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-10",
+      "course_code": null,
+      "name": "人工知能基礎",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-11",
+      "course_code": null,
+      "name": "機械学習",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-12",
+      "course_code": null,
+      "name": "信号処理",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-13",
+      "course_code": null,
+      "name": "情報理論",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-14",
+      "course_code": null,
+      "name": "技術英語",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-15",
+      "course_code": null,
+      "name": "情報システムとセキュリティ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-b-16",
+      "course_code": null,
+      "name": "データ工学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "B",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 B科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-01",
+      "course_code": null,
+      "name": "数理論理学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-02",
+      "course_code": null,
+      "name": "ネットワーク工学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-03",
+      "course_code": null,
+      "name": "基礎電子回路",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        2
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-04",
+      "course_code": null,
+      "name": "データベース",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-05",
+      "course_code": null,
+      "name": "数値計算プログラミング",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-06",
+      "course_code": null,
+      "name": "人間工学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-07",
+      "course_code": null,
+      "name": "ロボティクス・メカトロニクス",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-08",
+      "course_code": null,
+      "name": "コンパイラ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-09",
+      "course_code": null,
+      "name": "制御工学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-10",
+      "course_code": null,
+      "name": "マルチメディアコンピューティング",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-11",
+      "course_code": null,
+      "name": "生体計測",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-12",
+      "course_code": null,
+      "name": "アシスティブ・テクノロジー",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-13",
+      "course_code": null,
+      "name": "電子デバイス",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-14",
+      "course_code": null,
+      "name": "プログラミングＡⅢ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        3
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-c-15",
+      "course_code": null,
+      "name": "電波・電気通信法規",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "C",
+      "credits": 2,
+      "standard_years": [
+        4
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 C科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            12,
+            39
+          ],
+          "pdf_pages": [
+            16,
+            43
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-01",
+      "course_code": null,
+      "name": "リメディアル演習",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": 1,
+      "standard_years": [
+        1
+      ],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-02",
+      "course_code": null,
+      "name": "インターンシップ",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": 2,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-03",
+      "course_code": null,
+      "name": "施設見学",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": 1,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-04",
+      "course_code": null,
+      "name": "特別講義",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": 1,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-05",
+      "course_code": null,
+      "name": "海外英語研修",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": 4,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-applied-d-06",
+      "course_code": null,
+      "name": "国際研修",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "D",
+      "credits": null,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 D科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            12,
+            40
+          ],
+          "pdf_pages": [
+            12,
+            16,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sis-common-e-01",
+      "course_code": null,
+      "name": "特設講義",
+      "curriculum_area": "faculty_specialized",
+      "course_group": "specialized_applied",
+      "requirement_code": "E",
+      "credits": null,
+      "standard_years": [],
+      "terms": [],
+      "aliases": [],
+      "required_for": [],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "専門応用 E科目（工学科共通・情報電子分野を含む）",
+          "printed_pages": [
+            8,
+            39
+          ],
+          "pdf_pages": [
+            12,
+            43
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,11 @@ import io
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
-from classification import CURRICULUM_PROFILE, classify_category, classify_specialized
+from classification import (
+    classify_course,
+    course_catalog_index,
+    curriculum_profile,
+)
 
 
 REQUIRED_COLUMNS = {"No.", "科目", "科目区分", "単位数", "合否"}
@@ -71,7 +75,7 @@ def _student_info(preamble: list[list[str]]) -> dict[str, str | None]:
     return student
 
 
-def parse_csv_bytes(raw: bytes) -> dict:
+def parse_csv_bytes(raw: bytes, *, profile: dict | None = None) -> dict:
     """成績CSVのバイト列を読み込み、正規化・集計する。"""
     if not raw:
         raise CsvFormatError("CSVが空です")
@@ -110,12 +114,13 @@ def parse_csv_bytes(raw: bytes) -> dict:
         raise CsvFormatError("科目表の見出しに重複があります")
 
     courses = []
+    catalog_index = course_catalog_index(profile)
     warnings = []
     categories = {}
     majors = {
         name: {"major": name, "earned_credits": Decimal(0),
                "unconfirmed_credits": Decimal(0), "course_count": 0}
-        for name in ("教養", "専門", "不明")
+        for name in ("教養", "専門", "不明", "対象外")
     }
     seen_numbers = set()
     earned = Decimal(0)
@@ -153,26 +158,29 @@ def parse_csv_bytes(raw: bytes) -> dict:
         )
         if source_result not in ("", "合", "否"):
             warnings.append(f"{row_number}行目: 未知の合否を未確定として扱いました")
-        major, field, detail, curriculum_area, classification_status = classify_category(category)
         requirement_type = record.get("必選区分", "").strip()
-        course_group, requirement_code = classify_specialized(category, requirement_type)
-        if classification_status == "unknown":
+        source_name = record["科目"].strip()
+        classification = classify_course(
+            source_name, category, requirement_type,
+            profile=profile, catalog_index=catalog_index,
+        )
+        major = classification["major"]
+        field, detail = classification["field"], classification["detail"]
+        if classification["classification_status"] == "unknown":
             warnings.append(f"{row_number}行目: 未知の科目区分のため分類できませんでした")
+        elif classification["classification_reason_code"] == "outside_catalog_as_liberal":
+            warnings.append(f"{row_number}行目: MVP方針により、対象専門科目一覧にない専門科目を教養の選択枠へ分類しました")
+        elif classification["classification_reason_code"] == "excluded_by_mvp_policy":
+            warnings.append(f"{row_number}行目: MVP対象外のため、進級・卒業要件には算入しません")
         course = {
             "no": int(no),
             "sequence": int(no),
             "row_number": row_number,
             "code": record.get("開講番号", "").strip() or None,
             "course_code": record.get("開講番号", "").strip() or None,
-            "name": record["科目"].strip(),
+            "name": source_name,
             "source_category": category,
-            "major": major,
-            "curriculum_area": curriculum_area,
-            "course_group": course_group,
-            "requirement_code": requirement_code,
-            "classification_status": classification_status,
-            "field": field,
-            "detail": detail,
+            **classification,
             "requirement_type": requirement_type or None,
             "field_codes": [x.strip() for x in record.get("分野", "").split(",") if x.strip()],
             "level": record.get("水準", "").strip() or None,
@@ -187,7 +195,7 @@ def parse_csv_bytes(raw: bytes) -> dict:
         }
         courses.append(course)
 
-        bucket = categories.setdefault(category, {
+        bucket = categories.setdefault((category, major), {
             "source_category": category, "major": major, "field": field,
             "detail": detail, "earned_credits": Decimal(0),
             "unconfirmed_credits": Decimal(0), "course_count": 0,
@@ -224,7 +232,7 @@ def parse_csv_bytes(raw: bytes) -> dict:
 
     return {
         "schema_version": 2,
-        "curriculum": CURRICULUM_PROFILE.copy(),
+        "curriculum": curriculum_profile(profile),
         "student": _student_info(rows[:header_index]),
         "summary": {
             "course_count": len(courses),
@@ -235,8 +243,8 @@ def parse_csv_bytes(raw: bytes) -> dict:
             "unconfirmed_credits": _json_number(unconfirmed),
             "majors": [
                 public_bucket(majors[k])
-                for k in ("教養", "専門", "不明")
-                if k != "不明" or majors[k]["course_count"]
+                for k in ("教養", "専門", "不明", "対象外")
+                if k in ("教養", "専門") or majors[k]["course_count"]
             ],
             "categories": [public_bucket(v) for v in categories.values()],
         },
@@ -246,6 +254,6 @@ def parse_csv_bytes(raw: bytes) -> dict:
     }
 
 
-def parse_csv(path: str | Path) -> dict:
+def parse_csv(path: str | Path, *, profile: dict | None = None) -> dict:
     """パスで指定された成績CSVを読み込む互換用インターフェース。"""
-    return parse_csv_bytes(Path(path).read_bytes())
+    return parse_csv_bytes(Path(path).read_bytes(), profile=profile)

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "academic_year": 2026,
+  "institution": "新潟大学",
+  "source": {
+    "document_id": "niigata-offerings-2026-20260313",
+    "title": "令和8年度 新潟大学授業科目開設一覧",
+    "url": "https://www.iess.niigata-u.ac.jp/acpb/upload/20260327161315092692700.pdf",
+    "portal_url": "https://www.iess.niigata-u.ac.jp/intramural.html",
+    "source_as_of": "2026-03-13",
+    "verified_on": "2026-10-26",
+    "expected_pdf_pages": 146,
+    "main_table_pdf_pages": [8, 135],
+    "printed_page_offset": -2
+  },
+  "syllabus": {
+    "search_url": "https://syllabus.niigata-u.ac.jp/",
+    "robots_url": "https://syllabus.niigata-u.ac.jp/robots.txt",
+    "automated_collection": false,
+    "reason": "2026-10-26確認のrobots.txtがUser-agent: * / Disallow: /のため、自動巡回は行わない。授業概要・成績評価方法は未取得とし、推測で作らない。"
+  },
+  "scope": {
+    "course_code_letter": "G",
+    "excluded_categories": ["留学生基本科目"],
+    "excluded_term_zero_policy": true,
+    "note": "初版は公式資料が主として教養教育とするGコード科目を収集する。G以外の学部専門科目を推薦対象へ拡張しない。"
+  },
+  "target_profile": {
+    "profile_id": "niigata-engineering-sis-2025-v1",
+    "admission_year": 2025,
+    "faculty": "工学部",
+    "program": "知能情報システムプログラム",
+    "additional_primary_audiences": ["自然系学部・他"],
+    "audience_source_ref": {
+      "url": "https://www.iess.niigata-u.ac.jp/acpb/upload/20260402144523040404000.pdf#page=53",
+      "printed_page": 75,
+      "pdf_page": 53,
+      "note": "自然系学部に理・工・農・医・歯および教育の一部を含む記載を根拠に、単純な自然系学部・他だけを主聴講対象の合致として扱う。学部・分野が追加指定された表記は要確認。"
+    }
+  }
+}

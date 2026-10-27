@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/course-catalog-v1.json",
+  "title": "Course catalog",
+  "type": "object",
+  "required": ["schema_version", "catalog_id", "profile_id", "evidence_status", "courses"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": 1},
+    "catalog_id": {"type": "string", "minLength": 1},
+    "profile_id": {"type": "string", "minLength": 1},
+    "evidence_status": {
+      "enum": ["transcribed", "verified", "needs_confirmation"]
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "course_code",
+          "name",
+          "curriculum_area",
+          "course_group",
+          "requirement_code",
+          "credits",
+          "standard_years",
+          "terms",
+          "aliases",
+          "required_for",
+          "source_refs"
+        ],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "course_code": {"type": ["string", "null"]},
+          "name": {"type": "string", "minLength": 1},
+          "curriculum_area": {
+            "enum": ["liberal_arts", "faculty_specialized", "unknown"]
+          },
+          "course_group": {
+            "enum": ["specialized_foundation", "specialized_applied", null]
+          },
+          "requirement_code": {"enum": ["A", "B", "C", "D", "E", null]},
+          "credits": {"type": ["number", "null"], "minimum": 0},
+          "standard_years": {
+            "type": "array",
+            "items": {"type": "integer", "minimum": 1},
+            "uniqueItems": true
+          },
+          "terms": {"type": "array", "items": {"type": "string"}},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "required_for": {"type": "array", "items": {"type": "string"}},
+          "source_refs": {"type": "array", "minItems": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

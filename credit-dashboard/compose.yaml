@@ -4,6 +4,16 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     read_only: true
+    environment:
+      RECOMMENDATION_CATALOG_DIR: /app/recommendation-data
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-}
+    volumes:
+      - type: bind
+        source: ./data/recommendations/2026/liberal-catalog.json
+        target: /app/recommendation-data/2026/liberal-catalog.json
+        read_only: true
+        bind:
+          create_host_path: false
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

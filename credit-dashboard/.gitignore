@@ -5,3 +5,15 @@ __pycache__/
 
 # 成績CSVは学生本人が画面から都度アップロードし、リポジトリへ置かない。
 data/*.csv
+
+# 動作確認用の架空CSVもローカルだけで利用し、Gitへ追加しない。
+examples/**/*.csv
+
+# 履修推薦用に取得・生成する科目データ、原資料、抽出結果は公開しない。
+/data/recommendations/
+
+# 共同開発者へ別途手渡しするZIP。生成データ・架空CSVもGitへ送らない。
+/handoff/
+
+# Windowsからコピーしたファイルのダウンロード元情報。
+*:Zone.Identifier

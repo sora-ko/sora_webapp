@@ -3,27 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>単位取得状況</title>
+  <title>単位・時間割ダッシュボード</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/workspace-state.js" defer></script>
   <script src="/app.js" defer></script>
+  <script src="/navigation.js" defer></script>
+  <script src="/recommendation-api.js" defer></script>
+  <script src="/recommendations.js" defer></script>
+  <script src="/timetable.js" defer></script>
+  <script src="/recommendation-search.js" defer></script>
 </head>
 <body>
   <main class="shell">
     <header class="masthead">
       <div>
-        <p class="eyebrow">CREDIT OVERVIEW</p>
-        <h1>単位取得状況</h1>
-        <p class="muted">新潟大学工学部・2025年度入学・2年次・知能情報システムプログラム対象</p>
+        <p class="eyebrow">CREDIT &amp; TIMETABLE</p>
+        <h1>単位と時間割</h1>
+        <p id="target-summary" class="muted">対象年度・プログラムを読み込んでいます…</p>
       </div>
+      <span class="privacy-label"><span class="privacy-dot" aria-hidden="true"></span>データは保存しません</span>
     </header>
 
+    <div class="workspace-tabs" role="tablist" aria-label="確認する機能">
+      <button id="report-tab" class="workspace-tab" type="button" role="tab" aria-controls="report-panel" aria-selected="true" tabindex="0" data-panel="report-panel">
+        <span class="tab-number" aria-hidden="true">01</span>
+        <span><strong>単位集計</strong><small>取得単位と進級・卒業条件</small></span>
+      </button>
+      <button id="timetable-tab" class="workspace-tab" type="button" role="tab" aria-controls="timetable-panel" aria-selected="false" tabindex="-1" data-panel="timetable-panel">
+        <span class="tab-number" aria-hidden="true">02</span>
+        <span><strong>時間割と教養候補</strong><small>マスを選んで候補科目を確認</small></span>
+      </button>
+    </div>
+
+    <section id="report-panel" class="feature-panel" role="tabpanel" aria-labelledby="report-tab">
+    <details class="content-panel csv-upload-panel" open>
+    <summary><h2 id="upload-heading">成績CSVを選択</h2></summary>
     <section class="upload-panel" aria-labelledby="upload-heading">
       <div>
         <p class="eyebrow">LOCAL PROCESSING</p>
-        <h2 id="upload-heading">成績CSVを選択</h2>
         <p class="muted upload-description">CSVはこのアプリのバックエンドでメモリ上だけで解析し、保存しません。上限は5 MiBです。</p>
       </div>
       <form id="upload-form">
+        <div class="context-grid">
+          <label>
+            <span>対象の規則プロファイル</span>
+            <select id="profile-select" name="profile_id" required>
+              <option value="">対象情報を読み込んでいます…</option>
+            </select>
+          </label>
+          <label>
+            <span>在学期間（年・任意上書き）</span>
+            <input id="residence-years" name="residence_years" type="number" min="0" max="100" step="0.5" inputmode="decimal" placeholder="例: 1">
+          </label>
+          <p class="context-help muted">未入力時は、留年・編入がなくCSVの学年と在学年数が一致するMVP前提で、学年を在学期間として使用します。</p>
+        </div>
         <label id="drop-zone" class="drop-zone" for="csv-file">
           <span class="drop-title">CSVをここにドロップ</span>
           <span class="muted">またはクリックして選択</span>
@@ -31,39 +64,177 @@
         </label>
         <div class="upload-actions">
           <span id="selected-file" class="selected-file">ファイルが選択されていません</span>
-          <button id="submit" type="submit">解析する</button>
+          <div class="button-group">
+            <button id="clear-report" class="button-secondary" type="button">クリア</button>
+            <button id="submit" type="submit">解析する</button>
+          </div>
         </div>
       </form>
     </section>
+    </details>
 
+    <details class="content-panel"><summary>集計方針</summary>
+    <div id="policy-notes" class="note" hidden></div>
+    </details>
     <div id="error" class="error" role="alert" hidden></div>
     <div id="status" class="status" role="status" aria-live="polite"></div>
     <section id="dashboard" hidden>
+      <details class="content-panel"><summary>学生情報・取得単位の概要</summary>
       <div class="student" id="student"></div>
       <div class="cards" id="cards"></div>
-      <p class="note">取得済みには、合格かつ単位数が確定した科目だけを算入します。進級・卒業要件による判定はまだ行いません。</p>
+      <p class="note">取得済みには、合格かつ単位数が確定した科目だけを算入します。「対象外」の科目は取得済みの表示に含め、進級・卒業要件への算入から除外します。判定は参考情報であり、大学による公式判定を代替しません。</p>
       <div id="warnings" class="warnings" role="status" hidden></div>
+      </details>
 
-      <section aria-labelledby="category-heading">
-        <div class="section-heading"><h2 id="category-heading">科目区分別</h2><span id="course-count"></span></div>
+      <details id="evaluation-section" class="content-panel" aria-labelledby="evaluation-heading" hidden>
+        <summary><h2 id="evaluation-heading">進級・卒業要件との比較</h2></summary>
+        <p class="muted">CSVの学年に応じた要件を表示します。教養系の卒業要件内訳は、どの学年でも卒業資格条件内に表示します。</p>
+        <div id="evaluations"></div>
+      </details>
+
+      <details class="content-panel" aria-labelledby="category-heading">
+        <summary><h2 id="category-heading">科目区分別</h2></summary>
+        <p id="course-count" class="muted"></p>
         <div id="categories"></div>
-      </section>
+      </details>
 
-      <section aria-labelledby="courses-heading">
-        <div class="section-heading"><h2 id="courses-heading">科目一覧</h2></div>
+      <details class="content-panel" aria-labelledby="courses-heading">
+        <summary><h2 id="courses-heading">科目一覧</h2></summary>
         <label class="select-label" for="course-filter">表示する区分</label>
         <select id="course-filter"><option value="all">すべて</option></select>
         <div class="table-scroll"><table>
           <thead><tr><th>科目名</th><th>大分類</th><th>分野</th><th>必選区分</th><th class="numeric">単位数</th><th>状態</th></tr></thead>
           <tbody id="courses"></tbody>
         </table></div>
-      </section>
+      </details>
 
-      <section aria-labelledby="json-heading" class="json-section">
-        <div class="section-heading"><h2 id="json-heading">JSONデータ</h2></div>
-        <details><summary>JSONを表示</summary><pre id="json"></pre></details>
-      </section>
+      <details aria-labelledby="json-heading" class="json-section content-panel">
+        <summary><h2 id="json-heading">JSONデータ</h2></summary>
+        <pre id="json"></pre>
+      </details>
     </section>
+    </section>
+
+    <section id="timetable-panel" class="feature-panel" role="tabpanel" aria-labelledby="timetable-tab" hidden>
+      <details class="content-panel csv-upload-panel" open>
+      <summary><h2 id="timetable-upload-heading">履修表を読み込む</h2></summary>
+      <section class="upload-panel timetable-upload" aria-labelledby="timetable-upload-heading">
+        <div>
+          <p class="eyebrow">TIMETABLE CHECK</p>
+          <p class="muted upload-description">履修照会から取得したCSVで、タームごとの曜日・時限を確認します。成績CSVとは別のファイルを選択してください。</p>
+          <span class="feature-badge">時間割のマスから教養候補を確認</span>
+        </div>
+        <form id="timetable-form">
+          <label id="timetable-drop-zone" class="drop-zone" for="timetable-file">
+            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h2m4 0h2m-8 3h2"/></svg>
+            <span class="drop-title">履修表CSVをここにドロップ</span>
+            <span class="muted">またはクリックして選択 · 5 MiBまで</span>
+            <input id="timetable-file" name="file" type="file" accept=".csv,text/csv">
+          </label>
+          <div class="upload-actions">
+            <span id="timetable-selected-file" class="selected-file">ファイルが選択されていません</span>
+            <div class="button-group">
+              <button id="timetable-clear" class="button-secondary" type="button">クリア</button>
+              <button id="timetable-submit" type="submit">履修表を解析</button>
+            </div>
+          </div>
+          <p class="upload-footnote">CSVはメモリ上で解析し、ファイル・DB・ブラウザーの永続領域には保存しません。</p>
+        </form>
+      </section>
+      </details>
+
+      <div id="timetable-error" class="error" role="alert" hidden></div>
+      <div id="timetable-status" class="status" role="status" aria-live="polite"></div>
+
+      <details class="content-panel"><summary>教養候補の対象</summary>
+      <section class="recommendation-settings" aria-label="教養候補の対象">
+        <div><p class="eyebrow">COURSE FINDER</p><label for="recommendation-catalog">候補を探す対象</label><select id="recommendation-catalog"><option value="">読込中…</option></select><p id="recommendation-scope" class="muted" role="status">候補データを読み込んでいます…</p></div>
+        <button id="recommendation-browse" class="button-secondary" type="button" disabled>CSVなしで候補を見る</button>
+      </section>
+      </details>
+
+      <details class="credit-search-panel content-panel" aria-labelledby="credit-search-heading">
+        <summary><h3 id="credit-search-heading">不足単位を補える教養を探す</h3></summary>
+        <p class="eyebrow">CREDIT MATCH</p>
+        <p class="muted">単位集計タブで選択した成績CSVと、上で選択した履修表CSVを使います。卒業要件の不足を、空き時間にある教養科目と照合します。</p>
+        <p id="credit-search-files" class="credit-search-files" role="status"></p>
+        <form id="credit-search-form" class="credit-search-actions">
+          <label class="term-select-label" for="credit-search-term">探索するターム<select id="credit-search-term"></select></label>
+          <button id="credit-search-submit" type="submit">空き時間と不足単位から探す</button>
+          <button id="credit-search-clear" class="button-secondary" type="button">探索結果をクリア</button>
+        </form>
+        <div id="credit-search-error" class="error" role="alert" hidden></div>
+        <details id="credit-search-result" class="content-panel" aria-live="polite" hidden>
+          <summary>単位照合の探索結果</summary>
+          <p id="credit-search-status" class="recommendation-status" role="status"></p>
+          <details class="credit-search-baseline"><summary>照合した卒業要件の内訳</summary><div id="credit-search-baseline"></div></details>
+          <div id="credit-search-candidates" class="recommendation-candidates"></div>
+          <details id="credit-search-review" class="credit-search-review" hidden><summary id="credit-search-review-summary"></summary><div id="credit-search-review-candidates" class="recommendation-candidates"></div></details>
+          <div id="credit-search-notes" class="recommendation-notes"></div>
+          <details class="recommendation-debug"><summary>単位照合APIのJSONを確認</summary><pre id="credit-search-json"></pre></details>
+        </details>
+      </details>
+
+      <details id="timetable-empty" class="content-panel" aria-labelledby="timetable-empty-heading">
+        <summary><h3 id="timetable-empty-heading">時間割の使い方</h3></summary>
+        <div class="empty-panel">
+        <div class="empty-calendar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="muted">読み込み後に年度・タームを切り替え、通常授業の配置と要確認事項を確認できます。</p>
+        <p class="muted">CSVなしでも上のボタンから教養候補を確認できます。履修表を読み込むと、他の曜限との重複も確認します。</p>
+        </div>
+      </details>
+
+      <details id="recommendation-preview" class="calendar-panel content-panel" aria-labelledby="recommendation-preview-heading" hidden>
+        <summary><h3 id="recommendation-preview-heading">マスを選んで教養候補を探す</h3></summary>
+        <div class="calendar-toolbar"><div><p class="muted">履修表未読込：登録済み授業との重複は未確認です。</p></div><label class="term-select-label" for="recommendation-preview-term"><span>表示するターム</span><select id="recommendation-preview-term"></select></label></div>
+        <div id="recommendation-preview-grid" class="table-scroll timetable-scroll" role="region" aria-label="候補を探す時間割" tabindex="0"></div>
+      </details>
+
+      <section id="timetable-dashboard" hidden>
+        <details class="content-panel" aria-labelledby="timetable-overview-heading">
+        <summary><h2 id="timetable-overview-heading">読み取った時間割の概要</h2></summary>
+        <div class="timetable-result-heading">
+          <div><p class="eyebrow">PARSED TIMETABLE</p><p id="timetable-context" class="muted"></p></div>
+          <span id="timetable-readiness" class="status-badge"></span>
+        </div>
+        <div id="timetable-cards" class="cards"></div>
+        <div id="timetable-policy-notes" class="policy-banner" role="note" hidden></div>
+        <div id="timetable-warnings" class="timetable-warnings" role="status" hidden></div>
+        </details>
+
+        <details class="calendar-panel content-panel" aria-labelledby="timetable-grid-heading">
+          <summary><h3 id="timetable-grid-heading">通常授業の配置</h3></summary>
+          <div class="calendar-toolbar">
+            <div><p class="muted">月〜金・1〜5限のマスを選ぶと教養候補を確認できます。</p></div>
+            <label class="term-select-label" for="timetable-term"><span>表示する年度・ターム</span><select id="timetable-term"></select></label>
+          </div>
+          <div class="calendar-legend"><span><i class="legend-dot occupied" aria-hidden="true"></i>通常授業あり</span><span><i class="legend-dot empty" aria-hidden="true"></i>通常授業なし</span><span><i class="legend-dot unconfirmed" aria-hidden="true"></i>未確認</span></div>
+          <div id="timetable-grid" class="table-scroll timetable-scroll" role="region" aria-label="読み取った時間割。横方向にスクロールできます" tabindex="0"></div>
+          <p class="calendar-note">「通常授業なし」は履修可能を保証するものではありません。番号0で除外した授業や、CSVに掲載されていない範囲は含みません。未解決の情報があれば空き時間の判定を保留します。</p>
+        </details>
+
+        <details class="content-panel" aria-labelledby="timetable-courses-heading">
+          <summary><h2 id="timetable-courses-heading">表示中タームの通常科目</h2></summary>
+          <p id="timetable-course-count" class="muted"></p>
+          <p class="muted timetable-list-help">この確認画面では、APIが返す開講番号と曜限を表示します。科目名・教員名は履修表APIの返却対象に含めていません。</p>
+          <div class="table-scroll"><table class="timetable-course-table"><thead><tr><th scope="col">開講番号</th><th scope="col">年度・ターム</th><th scope="col">曜日・時限</th></tr></thead><tbody id="timetable-courses"></tbody></table></div>
+        </details>
+
+        <details class="json-section content-panel" aria-labelledby="timetable-json-heading">
+          <summary><h2 id="timetable-json-heading">履修表の開発用データ</h2></summary>
+          <pre id="timetable-json"></pre>
+        </details>
+      </section>
+      <details id="recommendation-result" class="recommendation-result content-panel" aria-labelledby="recommendation-heading" aria-live="polite" hidden>
+        <summary><h2 id="recommendation-heading"></h2></summary>
+        <div class="section-heading"><p class="eyebrow">COURSE CANDIDATES</p><span id="recommendation-count"></span></div>
+        <p id="recommendation-status" class="recommendation-status" role="status"></p>
+        <div id="recommendation-candidates" class="recommendation-candidates"></div>
+        <div id="recommendation-notes" class="recommendation-notes"></div>
+        <details class="recommendation-debug"><summary>候補APIのJSONを確認</summary><pre id="recommendation-json"></pre></details>
+      </details>
+    </section>
+    <footer class="page-footer">タブの切り替えでは結果を保持します。ページの再読み込みや「クリア」で、読み込んだデータは破棄されます。</footer>
   </main>
 </body>
 </html>

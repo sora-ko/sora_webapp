@@ -1,6 +1,9 @@
 const $ = (id) => document.getElementById(id);
 let report = null;
 let selectedFile = null;
+let profiles = [];
+let reportRequestVersion = 0;
+let reportController = null;
 
 function node(tag, value, className) {
   const element = document.createElement(tag);
@@ -28,13 +31,14 @@ function renderCards(summary) {
 
 function renderCategories(summary) {
   $('categories').replaceChildren();
-  for (const major of ['教養', '専門', '不明']) {
+  for (const major of ['教養', '専門', '不明', '対象外']) {
     const majorSummary = summary.majors.find((item) => item.major === major);
     if (!majorSummary) continue;
-    const block = document.createElement('div');
+    const block = document.createElement('details');
     block.className = 'category-block';
-    const title = node('h3', `${major} · ${majorSummary.earned_credits} 単位`);
+    const title = node('summary', major);
     block.append(title);
+    block.append(node('p', `取得済み ${majorSummary.earned_credits} 単位`, 'muted'));
     const grid = document.createElement('div');
     grid.className = 'category-grid';
     for (const category of summary.categories.filter((c) => c.major === major)) {
@@ -91,6 +95,91 @@ function renderCourseFilter(data) {
   select.append(majorGroup, categoryGroup);
 }
 
+const statusLabels = {
+  satisfied: '条件を満たす',
+  not_satisfied: '条件を満たさない',
+  unknown: '判定不能',
+};
+
+const requiredCourseStatusLabels = {
+  satisfied: '修得済み',
+  not_satisfied: '未修得・必要単位未達',
+  unknown: '判定不能',
+};
+
+function renderEvaluations(evaluations) {
+  const section = $('evaluation-section');
+  const container = $('evaluations');
+  container.replaceChildren();
+  section.hidden = !evaluations.length;
+  for (const evaluation of evaluations) {
+    const card = document.createElement('details');
+    card.className = `evaluation evaluation-${evaluation.status}`;
+    const title = document.createElement('summary');
+    title.append(node('h3', evaluation.title));
+    const heading = document.createElement('div');
+    heading.className = 'evaluation-heading';
+    heading.append(
+      node('span', statusLabels[evaluation.status] || evaluation.status, `status-badge ${evaluation.status}`),
+    );
+    card.append(title, heading, node('p', evaluation.description, 'evaluation-description'));
+
+    const conditions = document.createElement('div');
+    conditions.className = 'condition-list';
+    for (const condition of evaluation.conditions) {
+      const item = document.createElement('div');
+      item.className = 'condition';
+      item.append(
+        node('strong', condition.label),
+        node('span', statusLabels[condition.status] || condition.status, `status-badge ${condition.status}`),
+        node('p', condition.description, 'muted'),
+      );
+      if (Array.isArray(condition.course_results)) {
+        const details = document.createElement('details');
+        details.className = 'required-course-details';
+        const summary = node('summary', '必修科目ごとの修得状況');
+        const list = document.createElement('ul');
+        for (const course of condition.course_results) {
+          const row = document.createElement('li');
+          row.append(
+            node('strong', course.name),
+            document.createTextNode(' '),
+            node('span', requiredCourseStatusLabels[course.status] || course.status, `status-badge ${course.status}`),
+            node('p', course.description, 'muted'),
+          );
+          list.append(row);
+        }
+        details.append(summary, list);
+        item.append(details);
+      }
+      conditions.append(item);
+    }
+    card.append(conditions);
+
+    for (const source of evaluation.sources || []) {
+      const sourceLine = document.createElement('p');
+      sourceLine.className = 'source-link';
+      sourceLine.append('根拠: ');
+      const link = document.createElement('a');
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noreferrer';
+      link.textContent = `${source.title}（冊子 ${source.printed_pages.join(', ')}ページ）`;
+      sourceLine.append(link);
+      card.append(sourceLine);
+    }
+    if (evaluation.caveats?.length) {
+      const details = document.createElement('details');
+      const summary = node('summary', '判定上の要確認事項');
+      const list = document.createElement('ul');
+      for (const caveat of evaluation.caveats) list.append(node('li', caveat.message));
+      details.append(summary, list);
+      card.append(details);
+    }
+    container.append(card);
+  }
+}
+
 function renderReport(data) {
   report = data;
   const student = data.student;
@@ -105,6 +194,7 @@ function renderReport(data) {
   renderCards(data.summary);
   renderCategories(data.summary);
   renderCourseFilter(data);
+  renderEvaluations(data.evaluations || []);
   $('course-count').textContent = `${data.summary.course_count} 科目`;
   renderCourses();
   $('warnings').hidden = data.warnings.length === 0;
@@ -116,9 +206,10 @@ function renderReport(data) {
 function clearReport() {
   report = null;
   $('dashboard').hidden = true;
-  for (const id of ['student', 'cards', 'categories', 'courses', 'warnings']) {
+  for (const id of ['student', 'cards', 'categories', 'courses', 'warnings', 'evaluations']) {
     $(id).replaceChildren();
   }
+  $('evaluation-section').hidden = true;
   $('course-count').textContent = '';
   $('json').textContent = '';
   $('course-filter').replaceChildren(node('option', 'すべて'));
@@ -126,8 +217,22 @@ function clearReport() {
 }
 
 function setSelectedFile(file) {
+  invalidateReport();
   selectedFile = file || null;
+  window.creditWorkspace.setFile('grades', selectedFile);
   $('selected-file').textContent = selectedFile ? selectedFile.name : 'ファイルが選択されていません';
+}
+
+function invalidateReport() {
+  reportRequestVersion += 1;
+  reportController?.abort();
+  reportController = null;
+  clearReport();
+  $('submit').disabled = false;
+  $('upload-form').setAttribute('aria-busy', 'false');
+  $('error').hidden = true;
+  $('error').textContent = '';
+  $('status').textContent = '';
 }
 
 async function upload(event) {
@@ -139,30 +244,92 @@ async function upload(event) {
     return;
   }
   const button = $('submit');
+  const version = ++reportRequestVersion;
+  reportController?.abort();
+  reportController = new AbortController();
   button.disabled = true;
+  $('upload-form').setAttribute('aria-busy', 'true');
   clearReport();
   $('status').textContent = 'CSVを解析しています…';
   try {
     const body = new FormData();
     body.append('file', selectedFile, selectedFile.name);
-    const response = await fetch('/api/v1/reports', {method: 'POST', body, cache: 'no-store'});
+    body.append('profile_id', $('profile-select').value);
+    if ($('residence-years').value) body.append('residence_years', $('residence-years').value);
+    const response = await fetch('/api/v1/reports', {method: 'POST', body, signal: reportController.signal, cache: 'no-store'});
     const data = await response.json();
+    if (version !== reportRequestVersion) return;
     if (!response.ok) throw new Error(data.error?.message || `HTTP ${response.status}`);
     renderReport(data);
     $('status').textContent = '解析が完了しました。';
   } catch (error) {
+    if (version !== reportRequestVersion || error.name === 'AbortError') return;
     clearReport();
     $('status').textContent = '';
     $('error').textContent = `解析に失敗しました: ${error.message}`;
     $('error').hidden = false;
   } finally {
-    button.disabled = false;
+    if (version === reportRequestVersion) {
+      reportController = null;
+      $('upload-form').setAttribute('aria-busy', 'false');
+      button.disabled = false;
+    }
+  }
+}
+
+function profileLabel(profile) {
+  return `${profile.institution} ${profile.faculty} ${profile.program}（${profile.admission_year}年度入学）`;
+}
+
+function updateTargetSummary() {
+  const profile = profiles.find((item) => item.profile_id === $('profile-select').value);
+  if (!profile) return;
+  const implemented = new Set(profile.implemented_requirement_ids || []);
+  const titles = (profile.requirements || [])
+    .filter((requirement) => implemented.has(requirement.requirement_id))
+    .map((requirement) => requirement.title);
+  const evaluationText = titles.length ? ` · 対応要件: ${titles.join('、')}` : '';
+  $('target-summary').textContent = `${profileLabel(profile)}${evaluationText}`;
+  const notes = profile.policy_notes || [];
+  $('policy-notes').replaceChildren(...notes.map((note) => node('p', note)));
+  $('policy-notes').hidden = notes.length === 0;
+}
+
+async function loadProfiles() {
+  try {
+    const response = await fetch('/api/v1/rule-profiles', {cache: 'no-store'});
+    const data = await response.json();
+    if (!response.ok || !Array.isArray(data.profiles) || !data.profiles.length) {
+      throw new Error('対象プロファイルを取得できません。');
+    }
+    profiles = data.profiles;
+    const select = $('profile-select');
+    select.replaceChildren();
+    for (const profile of profiles) {
+      const option = node('option', profileLabel(profile));
+      option.value = profile.profile_id;
+      option.selected = profile.profile_id === data.default_profile_id;
+      select.append(option);
+    }
+    updateTargetSummary();
+  } catch (error) {
+    $('error').textContent = `対象情報の取得に失敗しました: ${error.message}`;
+    $('error').hidden = false;
   }
 }
 
 $('upload-form').addEventListener('submit', upload);
 $('csv-file').addEventListener('change', (event) => setSelectedFile(event.target.files[0]));
 $('course-filter').addEventListener('change', renderCourses);
+$('profile-select').addEventListener('change', () => {
+  invalidateReport();
+  updateTargetSummary();
+});
+$('residence-years').addEventListener('input', invalidateReport);
+$('clear-report').addEventListener('click', () => {
+  $('csv-file').value = '';
+  setSelectedFile(null);
+});
 
 const dropZone = $('drop-zone');
 for (const eventName of ['dragenter', 'dragover']) {
@@ -179,5 +346,10 @@ for (const eventName of ['dragleave', 'drop']) {
 }
 dropZone.addEventListener('drop', (event) => {
   const file = event.dataTransfer.files[0];
-  if (file) setSelectedFile(file);
+  if (file) {
+    $('csv-file').value = '';
+    setSelectedFile(file);
+  }
 });
+
+loadProfiles();
