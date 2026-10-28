@@ -4,7 +4,10 @@
   const days = ['', '月', '火', '水', '木', '金', '土', '日'];
   const api = window.createRecommendationClient();
   let catalogs = [];
+  let catalogLoading = true;
+  let catalogError = '';
   let timetableFile = null;
+  let timetableContext = null;
   let version = 0;
   let request = null;
 
@@ -14,8 +17,20 @@
     if (className) item.className = className;
     return item;
   }
-  const key = catalog => `${catalog.academic_year}:${catalog.profile_id}`;
-  const selectedCatalog = () => catalogs.find(catalog => key(catalog) === $('recommendation-catalog').value);
+  const selectedCatalog = () => {
+    const profile = window.creditWorkspace.profile();
+    const matches = catalogs.filter(catalog => catalog.profile_id === profile?.profile_id);
+    if (timetableFile) return matches.find(catalog => catalog.academic_year === timetableContext?.academic_year);
+    return matches.sort((a, b) => b.academic_year - a.academic_year)[0];
+  };
+  function selectionMessage() {
+    if (!window.creditWorkspace.profile()) return '「単位集計」タブで対象プログラムを選択してください。';
+    if (catalogLoading) return '候補データを読み込んでいます。しばらくお待ちください。';
+    if (catalogError) return catalogError;
+    if (timetableFile && !timetableContext?.academic_year) return '履修表の開講年度を確認できません。年度・タームの情報を確認してください。';
+    const year = timetableContext?.academic_year;
+    return `単位集計で選択した対象${year ? `の${year}年度` : ''}に対応する教養候補データがありません。`;
+  }
 
   function invalidate() {
     version += 1;
@@ -49,7 +64,11 @@
     $('recommendation-heading').textContent = `第${context.term}ターム · ${days[context.weekday]}曜${context.period}限`;
     button.setAttribute('aria-pressed', 'true');
     if (!catalog) {
-      $('recommendation-status').textContent = '利用できるカタログを選択してください。';
+      $('recommendation-status').textContent = selectionMessage();
+      return;
+    }
+    if (catalog.academic_year !== context.academic_year) {
+      $('recommendation-status').textContent = 'この開講年度に対応する教養候補データがありません。';
       return;
     }
     const currentVersion = version;
@@ -123,19 +142,33 @@
 
   function updateCatalog() {
     invalidate();
+    const profile = window.creditWorkspace.profile();
+    $('recommendation-target').textContent = profile
+      ? `単位集計と共通：${profile.faculty} ${profile.program}（${profile.admission_year}年度入学）`
+      : '対象プログラムは「単位集計」タブで選択してください。';
     const catalog = selectedCatalog();
+    const previousTerm = $('recommendation-preview-term').value;
     $('recommendation-preview-term').replaceChildren();
-    if (!catalog) return;
+    $('recommendation-browse').disabled = !catalog;
+    if (!catalog) {
+      $('recommendation-scope').textContent = selectionMessage();
+      $('recommendation-preview-grid').replaceChildren();
+      $('recommendation-preview').hidden = true;
+      window.dispatchEvent(new Event('recommendation-context-changed'));
+      return;
+    }
     for (const term of catalog.terms) {
       const option = node('option', `第${term}ターム`);
       option.value = String(term);
       $('recommendation-preview-term').append(option);
     }
+    if (catalog.terms.includes(Number(previousTerm))) $('recommendation-preview-term').value = previousTerm;
     $('recommendation-scope').textContent = `${catalog.academic_year}年度 · 代表${catalog.course_count}科目。学年での絞り込みなし。修得済み・不足単位は未照合です。`;
     if (!$('recommendation-preview').hidden) renderPreview();
+    window.dispatchEvent(new Event('recommendation-context-changed'));
   }
 
-  $('recommendation-catalog').addEventListener('change', updateCatalog);
+  window.addEventListener('credit-profile-changed', updateCatalog);
   $('recommendation-preview-term').addEventListener('change', renderPreview);
   $('recommendation-browse').addEventListener('click', () => {
     if (!selectedCatalog()) return;
@@ -147,13 +180,18 @@
   });
   window.creditRecommendations = {
     catalogs: () => [...catalogs],
+    selectedCatalog,
+    selectionMessage,
+    timetableContext: () => timetableContext ? {...timetableContext} : null,
     decorateCell: picker,
     invalidate,
     clear() {
       invalidate();
       timetableFile = null;
+      timetableContext = null;
       $('recommendation-preview').hidden = true;
       $('recommendation-browse').hidden = false;
+      updateCatalog();
     },
     setTimetable(_data, file) {
       invalidate();
@@ -161,23 +199,21 @@
       $('recommendation-preview').hidden = true;
       $('recommendation-browse').hidden = true;
     },
+    setTimetableContext(context) {
+      timetableContext = context ? {...context} : null;
+      updateCatalog();
+    },
   };
 
   (async () => {
     try {
       catalogs = await api.catalogs();
-      $('recommendation-catalog').replaceChildren();
-      for (const catalog of catalogs) {
-        const option = node('option', `${catalog.academic_year}年度 · ${catalog.program}`);
-        option.value = key(catalog);
-        $('recommendation-catalog').append(option);
-      }
-      $('recommendation-browse').disabled = catalogs.length === 0;
-      window.dispatchEvent(new Event('recommendation-catalogs-loaded'));
-      if (!catalogs.length) $('recommendation-scope').textContent = '推薦用カタログがありません。公開データJSONの配置を確認してください。';
-      else updateCatalog();
+      catalogLoading = false;
+      updateCatalog();
     } catch (error) {
-      $('recommendation-scope').textContent = `候補データを読み込めません：${error.message}`;
+      catalogLoading = false;
+      catalogError = `候補データを読み込めません：${error.message}`;
+      updateCatalog();
     }
   })();
 })();

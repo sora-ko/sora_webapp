@@ -1,6 +1,8 @@
 # 分業・データ引き継ぎ手順
 
-更新日: 2026-10-27。Gitにはアプリケーション、規則プロファイル、生成コード、自動テスト、文書を置く。推薦用生成データと架空CSVは手渡しZIPで渡す。実在する学生の成績CSV・履修表CSVはどちらにも含めない。
+更新日: 2026-10-28。Gitにはアプリケーション、規則プロファイル、生成コード、自動テスト、文書に加え、起動用の公開カタログと確認済みの架空CSVを置く。クローン後の起動に手渡しZIPは不要。実在する学生の成績CSV・履修表CSVは含めない。
+
+2026-10-28追記：この文書とAPI仕様から別の試作UIを作成した。画面は`/prototype/`、参照した資料・不足していた契約項目・検証方法は[試作フロントエンドの記録](prototype-handoff-test.md)にまとめる。
 
 ## 1. 現在利用できる範囲
 
@@ -9,37 +11,33 @@
 - 2026年度の代表63開講で、教養の曜限検索と、修得単位・空き時間からの探索を行う。推薦は学年で絞らない。教養条件がすべて充足していれば、専門だけの不足では推薦しない。
 - CSVと解析結果はサーバー・ブラウザーのメモリだけで扱い、保存・セッション・ログインは実装しない。
 
-## 2. 手渡しZIPの内容
+## 2. Gitで共有するデータ
 
-ZIP名は`credit-dashboard-handoff-2026-10-27.zip`。作成側ではGit対象外の`handoff/`に置く。展開先はGitリポジトリのルートではなく、`compose.yaml`・`server.py`がある`credit-dashboard/`ディレクトリとする。
+2026-10-28の利用者指定により、次の5ファイルをGitへ追加した。通常のCSVや`data/`全体を許可せず、`.gitignore`の許可リストで共有対象を限定する。
 
-| ZIP内の相対パス | 用途 |
+| プロジェクト内の相対パス | 用途 |
 | --- | --- |
 | `data/recommendations/2026/liberal-catalog.json` | 実行に必要なカタログ。schema version 3、63開講 |
 | `data/recommendations/2026/README.md` | 85/100枠のカバー範囲と候補がない15枠の調査結果 |
-| `data/recommendations/2026/sources/course-offerings.pdf` | 公開の公式開設一覧。オフライン再生成用 |
-| `data/recommendations/2026/raw-rows.json` | 公開表の抽出済みセル。再生成用 |
-| `data/recommendations/2026/extraction-audit.json` | PDF・抽出セルのハッシュとページ別照合。再生成用 |
 | `examples/first-year-sample.csv` | 架空の1年生。34単位、第2年次進級`satisfied` |
 | `examples/graduation-sample.csv` | 架空の卒業確認用簡略版。124単位、卒業`satisfied` |
 | `examples/graduation-sample-original-format.csv` | 上記と同じ科目構成のCP932・19列版。卒業`satisfied` |
-| `handoff/README.md`・`manifest.json`・`SHA256SUMS` | 展開手順、コードの対応リビジョン、同梱ファイルのSHA256 |
 
-旧版カタログ、画像、仮想環境、キャッシュ、実際の学生CSVは同梱しない。実行時に必要な推薦データはJSON1ファイルだけで、公開PDF・抽出結果は生成作業用である。PDFに記載された公開の教員情報は学生データとは区別する。
+カタログには開講番号・科目名・単位・区分・ターム・曜限だけを含み、学生情報・教員情報・成績を含めない。サンプルの氏名・在籍番号・教員・成績は架空であり、実在する学生CSVから転記していない。`.gitattributes`でサンプルの文字コード・改行を保持する。
 
-## 3. 復元と起動
+元PDF・抽出セル・監査結果・旧版・画像・旧手渡しZIPはローカルに保持し、Git対象外を維持する。公開PDFや抽出セルに含まれる教員名も配布用ファイルへ含めない。これらは起動・通常テストには不要で、再生成する開発者が必要時に公式原本を取得する。旧ZIPは以前のコード向けのため、新しいクローンへ展開しない。
 
-1. 更新されたGitのコードを取得する。ZIPの`handoff/manifest.json`に対応する`source_commit`を記録するので、組み合わせるコードを確認する。
-2. `credit-dashboard/`へ移動し、ZIPを展開する。既に独自データがある場合は別の作業コピーで検証し、無断で上書きしない。
+## 3. クローンと起動
+
+Docker Engine / Compose pluginが利用できる環境で、次を実行する。カタログの別途配置・ZIP展開・PDF解析依存のインストールは不要である。初回のDockerビルドではベースイメージとPython依存を取得するネットワーク接続が必要。
 
 ```bash
-cd credit-dashboard
-python3 -m zipfile -e /path/to/credit-dashboard-handoff-2026-10-27.zip .
-sha256sum -c handoff/SHA256SUMS
+git clone https://github.com/sora-ko/sora_webapp.git
+cd sora_webapp/credit-dashboard
 docker compose up --build
 ```
 
-`http://localhost:8000`で利用する。Composeは生成済みJSONの存在を前提とし、未配置なら起動に失敗する。学生CSVをサーバーのフォルダーへ置く必要はなく、ブラウザーから毎回選択する。
+`http://localhost:8000/prototype/`で試作画面、`http://localhost:8000/`で従来画面を利用する。CSVなしの教養候補閲覧も利用できる。成績集計の確認には、ブラウザーから`examples/first-year-sample.csv`または`examples/graduation-sample-original-format.csv`を選択する。学生CSVをサーバーのフォルダーへ置く必要はなく、実データを使う場合もブラウザーから毎回選択する。
 
 Dockerを使わない場合はPython 3.12で次を実行する。
 
@@ -50,13 +48,14 @@ python3 -m venv .venv
 .venv/bin/python server.py
 ```
 
-架空CSV3点は一部の自動テストも利用するため、テスト前に復元する。期待値は[サンプル説明](../examples/README.md)。公開資料の抽出キャッシュが復元されていれば、次でネットワーク取得なしに同じ簡易JSONを再生成できる。
+架空CSV3点は一部の自動テストも利用する。期待値は[サンプル説明](../examples/README.md)。再生成作業だけを行う場合は、次で開発専用依存と公式原本を取得する。
 
 ```bash
-.venv/bin/python scripts/build_liberal_catalog.py
+.venv/bin/python -m pip install -r requirements-catalog.txt
+.venv/bin/python scripts/build_liberal_catalog.py --download
 ```
 
-PDFを再抽出するときだけ`requirements-catalog.txt`が必要になる。新規取得・年度更新は[カタログ生成手順](liberal-catalog.md)を参照する。ZIPを再作成する際も同梱パスを明示し、`data/`全体をまとめない。
+原本と有効な抽出キャッシュが既にローカルにある場合は`--download`なしで再生成できる。新規取得・年度更新は[カタログ生成手順](liberal-catalog.md)を参照する。新しい年度・サンプルをGitへ追加するときも個人情報を確認し、許可するファイルを明示する。
 
 ## 4. フロントエンドとの契約
 
@@ -73,6 +72,8 @@ PDFを再抽出するときだけ`requirements-catalog.txt`が必要になる。
 CSVは`multipart/form-data`で送る。レポートID、Cookie、事前の解析API呼出しは不要で、各APIが元CSVを再検証する。1ファイル5 MiB、探索は2ファイルで合計10 MiB＋multipart用64 KiB。エラーは`error.code`・日本語`error.message`、必要に応じて`error.details`を返す。全応答は`Cache-Control: no-store`。
 
 フロントエンドは入力・表示・メモリ上の状態管理を担当し、CSV分類・単位配賦・学務判定・推薦効果・時間重複はバックエンドに任せる。未知値と未充足を区別し、配列が空という理由だけで履修不可と表示しない。元Fileと結果を同じアプリのメモリで共有し、ファイル・プロファイル・対象タームの変更で古い結果を無効にする。
+
+対象プログラムは単位集計側で一度だけ選び、公開プロファイル情報をメモリで共有する。教養候補側は対象名を表示し、候補閲覧と不足探索に同じ`profile_id`を渡す。解析済み履修表の選択年度に対応するカタログを使い、未解析なら同一プロファイルの最新年度を明示する。対象や年度に対応するデータがなければ案内し、別の対象へ代替しない。APIの入力・JSON形式は従来どおり。
 
 別ポートでの開発は`/api`をプロキシするか、バックエンドの環境変数`CORS_ALLOWED_ORIGINS`に実際のOriginをカンマ区切りで設定する。例は`http://localhost:5173,http://127.0.0.1:5173`。Composeにも同じ変数を渡せる。ワイルドカードとCookie認証は使わない。
 

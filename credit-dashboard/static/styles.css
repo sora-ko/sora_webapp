@@ -174,8 +174,7 @@ body {background: radial-gradient(ellipse at top right, #e9f1eb 0, transparent 5
 .recommendation-settings {display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 22px; background: #fff; border: 1px solid #d5e2d9; border-radius: 14px;}
 .recommendation-settings > div {min-width: 0; flex: 1;}
 .recommendation-settings .eyebrow {margin: 0 0 8px;}
-.recommendation-settings label {display: block; font-size: .8rem; color: #405b50; margin-bottom: 6px;}
-.recommendation-settings select {max-width: 100%; margin: 0 0 8px; font-size: .85rem;}
+.recommendation-settings #recommendation-target {margin: 0; font-size: .9rem; line-height: 1.7;}
 .recommendation-settings .muted {font-size: .76rem; line-height: 1.7;}
 .recommendation-settings button {flex-shrink: 0; font-size: .85rem;}
 .calendar-table td:has(.slot-picker) {padding: 0;}

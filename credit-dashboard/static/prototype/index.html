@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="成績CSVから単位の状況を確認し、時間割から教養科目を探す。学生のための単位ノート。">
+  <title>単位ノート — 単位と履修の見通し</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">本文へ移動</a>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="単位ノート ホーム"><span class="brand-mark" aria-hidden="true">単</span><span>単位ノート<small>CREDIT NOTE</small></span></a>
+    <p class="sidebar-label">学びのダッシュボード</p>
+    <nav class="navigation" aria-label="主な機能">
+      <button type="button" class="nav-item active" data-view="overview" aria-current="page"><span data-icon="dashboard"></span><span>単位の状況</span><span class="nav-arrow">↗</span></button>
+      <button type="button" class="nav-item" data-view="timetable"><span data-icon="calendar"></span><span>時間割・教養</span><span class="nav-arrow">↗</span></button>
+      <button type="button" class="nav-item" data-view="courses"><span data-icon="list"></span><span>科目一覧</span><span class="nav-arrow">↗</span></button>
+    </nav>
+    <div class="sidebar-tip"><span data-icon="leaf"></span><strong>次の一歩を、見つけよう。</strong><p>単位の確認から、空き時間の授業探しまで。</p></div>
+    <div class="sidebar-footer"><span data-icon="shield"></span><p>CSVは保存しません。<br>再読み込みでデータは消えます。</p></div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar"><div class="breadcrumb"><span class="desktop-only">マイキャンパス</span><span class="desktop-only">/</span><strong id="page-label">単位の状況</strong></div><div class="top-actions"><span id="profile-pill" class="profile-pill">対象を読み込み中</span><button type="button" id="help-button" class="icon-button" aria-label="使い方を開く"><span data-icon="help"></span></button></div></header>
+    <main id="main-content" tabindex="-1">
+      <div id="initial-error" class="notice error" role="alert" hidden></div>
+      <section id="view-overview" class="view" aria-labelledby="overview-title">
+        <div class="page-heading"><div><p class="eyebrow">YOUR PROGRESS</p><h1 id="overview-title">単位の状況</h1><p class="lead">いまの到達点と、これから必要なことを。</p></div><span class="soft-label"><span data-icon="spark"></span>大学の公式判定ではない参考情報</span></div>
+
+        <section class="panel upload-card" aria-labelledby="grades-heading">
+          <div class="section-heading"><div><h2 id="grades-heading">成績CSVを読み込む</h2><p>大学から取得したCSVを、そのまま選択してください。</p></div><span class="step-tag">STEP 01</span></div>
+          <div class="upload-layout"><div class="drop-zone" id="grades-drop"><span class="upload-symbol" data-icon="upload"></span><div><strong id="grades-file-name">ファイルをここにドロップ</strong><p>またはボタンから選択 · CSV / 最大5 MB</p></div><button type="button" id="choose-grades" class="button primary">ファイルを選択<span data-icon="plus"></span></button><input type="file" id="grades-input" accept=".csv,text/csv" class="visually-hidden" aria-label="成績CSV"></div><div class="upload-options"><label for="profile-select">対象カリキュラム</label><select id="profile-select" disabled><option value="">読み込み中…</option></select><details class="advanced"><summary>判定条件を調整</summary><label for="residence-years">在学期間（年・任意）</label><input id="residence-years" type="number" min="0" max="100" step="0.5" placeholder="通常は学年から取得"><p>留年・編入なしを前提に、未入力時はCSVの学年を使います。</p></details><div class="file-actions" id="grades-actions" hidden><button type="button" id="retry-grades" class="text-button">このCSVで再解析</button><button type="button" id="clear-grades" class="text-button muted-button">解除</button></div></div></div>
+          <p id="grades-status" class="inline-status" role="status" aria-live="polite"></p><div id="grades-error" class="notice error" role="alert" hidden></div>
+        </section>
+
+        <section id="overview-empty" class="welcome-card"><div class="welcome-art" aria-hidden="true"><div class="art-sheet"><span></span><span></span><span></span><b>✓</b></div><span class="art-dot dot-one"></span><span class="art-dot dot-two"></span></div><div><p class="eyebrow">はじめの一歩</p><h2>単位の見通しを、ここから。</h2><p>成績CSVを読み込むと、修得単位と進級・卒業要件が<br class="desktop-only">ひとつの画面で確認できます。</p><div class="welcome-steps"><span><b>1</b> CSVを追加</span><i>→</i><span><b>2</b> 状況を確認</span><i>→</i><span><b>3</b> 次の授業へ</span></div></div></section>
+
+        <div id="overview-results" hidden>
+          <div class="student-line"><div><span class="student-avatar" data-icon="user"></span><div><strong id="student-name"></strong><span id="student-meta"></span></div></div><span class="updated-tag"><i></i>読み込み済み</span></div>
+          <div id="stats" class="stats-grid" aria-label="単位の集計"></div>
+          <div class="section-heading requirements-heading"><div><h2>進級・卒業までの見通し</h2><p>教養の内訳や必修科目も、ここで確認できます。</p></div><button type="button" id="filter-conditions" class="filter-button" aria-pressed="false"><span data-icon="filter"></span>不足・要確認だけ</button></div>
+          <div id="evaluations" class="evaluation-grid"></div>
+          <div id="report-warnings" class="notice warning" role="status" hidden></div>
+          <button type="button" class="next-step-card" id="go-recommend"><span class="next-icon" data-icon="calendar"></span><span><strong>空き時間で、教養科目を探す</strong><small>時間割を加えると、不足単位に合う候補を確認できます。</small></span><span data-icon="arrow"></span></button>
+        </div>
+        <details id="policy-details" class="policy-details"><summary><span data-icon="info"></span>対象範囲と、この画面の見方</summary><div id="policy-notes"></div><p>「要確認」は、情報不足により判定できない状態です。不合格を意味しません。最終的な進級・卒業の確認には、大学の公式資料を参照してください。</p></details>
+      </section>
+
+      <section id="view-timetable" class="view" aria-labelledby="timetable-title" hidden>
+        <div class="page-heading"><div><p class="eyebrow">FIND YOUR NEXT CLASS</p><h1 id="timetable-title">時間割・教養</h1><p class="lead">気になる時間から、次の授業を見つけよう。</p></div><span id="recommend-profile" class="soft-label">対象カリキュラムを読み込み中</span></div>
+        <section class="panel compact-upload" aria-labelledby="timetable-upload-heading"><div class="drop-zone compact" id="timetable-drop"><span class="upload-symbol" data-icon="calendar"></span><div><h2 id="timetable-upload-heading">履修表CSVを追加</h2><p id="timetable-file-name">登録済み授業との重複を確認できます。</p></div><button type="button" id="choose-timetable" class="button secondary">時間割を読み込む<span data-icon="plus"></span></button><input type="file" id="timetable-input" accept=".csv,text/csv" class="visually-hidden" aria-label="履修表CSV"></div><div class="file-actions" id="timetable-actions" hidden><button type="button" id="clear-timetable" class="text-button muted-button">履修表を解除</button></div><p id="timetable-status" class="inline-status" role="status" aria-live="polite"></p><div id="timetable-error" class="notice error" role="alert" hidden></div></section>
+        <div class="timetable-layout"><section class="panel calendar-panel" aria-labelledby="calendar-heading"><div class="section-heading"><div><h2 id="calendar-heading">時間を選んで探す</h2><p id="calendar-scope">候補データを読み込み中…</p></div><span class="calendar-icon" data-icon="calendar"></span></div><div id="term-tabs" class="term-tabs" role="group" aria-label="開講年度・ターム"></div><div id="calendar-grid" class="calendar-scroll" role="region" aria-label="教養候補を探す時間割" tabindex="0"></div><div class="calendar-legend"><span><i class="legend-dot occupied"></i>通常授業あり</span><span><i class="legend-dot available"></i>候補を探す</span><span><i class="legend-dot unknown"></i>未確認</span></div><p id="calendar-note" class="calendar-note"></p><div id="timetable-notes" class="small-notes"></div></section>
+          <aside class="panel slot-panel" aria-labelledby="slot-heading"><div class="section-heading"><div><p class="eyebrow">CLASS PICKER</p><h2 id="slot-heading">気になる時間を選択</h2></div><span data-icon="spark"></span></div><p id="slot-status" class="slot-hint" role="status" aria-live="polite">時間割のマスを押すと、その時間に開講する教養科目が表示されます。</p><div id="slot-error" class="notice error" role="alert" hidden></div><div id="slot-candidates" class="candidate-list"></div><div id="slot-notes" class="small-notes"></div></aside></div>
+        <section class="panel matching-panel" aria-labelledby="matching-heading"><div class="matching-intro"><span class="matching-symbol" data-icon="spark"></span><div><p class="eyebrow">JUST WHAT YOU NEED</p><h2 id="matching-heading">不足単位に合う教養を探す</h2><p>成績と時間割を照合して、空き時間にある候補を探します。</p></div><button type="button" id="search-button" class="button primary">不足単位から探す<span data-icon="arrow"></span></button></div><p id="matching-files" class="matching-files"></p><div id="search-error" class="notice error" role="alert" hidden></div><div id="search-results" hidden><div class="search-heading"><h3 id="search-status" role="status" aria-live="polite"></h3><button type="button" id="clear-search" class="text-button">結果をクリア</button></div><div id="search-candidates" class="matching-grid"></div><details id="review-details" class="review-details" hidden><summary id="review-summary"></summary><p>必要性や成績に確認が必要な候補です。確実に必要な科目とは限りません。</p><div id="review-candidates" class="matching-grid"></div></details><details class="baseline-details"><summary>照合した教養関連の条件を見る</summary><div id="search-baseline"></div></details><div id="search-notes" class="small-notes"></div></div></section>
+      </section>
+
+      <section id="view-courses" class="view" aria-labelledby="courses-title" hidden>
+        <div class="page-heading"><div><p class="eyebrow">YOUR LEARNING RECORD</p><h1 id="courses-title">科目一覧</h1><p class="lead">読み込んだ科目を、探しやすく、見やすく。</p></div><span id="course-count" class="soft-label">CSV未読み込み</span></div>
+        <div id="courses-empty" class="panel empty-state"><span data-icon="list"></span><h2>まずは成績CSVを読み込んでください</h2><p>修得状況や科目区分で絞り込みできます。</p><button type="button" id="go-upload" class="button primary">単位の状況へ<span data-icon="arrow"></span></button></div>
+        <section id="course-panel" class="panel" hidden><div class="course-toolbar"><label class="search-field"><span data-icon="search"></span><input type="search" id="course-search" placeholder="科目名・開講番号を検索" aria-label="科目名・開講番号を検索"></label><label class="course-filter-label">区分<select id="course-area"><option value="all">すべての区分</option><option value="liberal_arts">教養</option><option value="faculty_specialized">専門</option><option value="unknown">分類不明</option><option value="excluded">対象外</option></select></label><label class="course-filter-label">修得状況<select id="course-result"><option value="all">すべて</option><option value="passed">修得済み</option><option value="failed">未修得</option><option value="unconfirmed">要確認</option></select></label></div><div class="course-table-scroll" role="region" aria-label="科目一覧" tabindex="0"><table class="course-table"><thead><tr><th scope="col">科目名 / 開講番号</th><th scope="col">区分</th><th scope="col">単位</th><th scope="col">修得状況</th><th scope="col">修得年度</th></tr></thead><tbody id="course-rows"></tbody></table></div><p id="course-filter-count" class="table-footnote" role="status"></p></section>
+      </section>
+      <footer class="page-footer"><span>単位ノート <span class="footer-divider">/</span> あなたの学びを、見通しよく。</span><button type="button" id="clear-all" class="text-button muted-button"><span data-icon="trash"></span>読み込んだ情報をクリア</button></footer>
+    </main>
+  </div>
+  <dialog id="help-dialog"><div class="dialog-heading"><h2>単位ノートの使い方</h2><button type="button" id="close-help" class="icon-button" aria-label="使い方を閉じる">×</button></div><ol class="help-steps"><li><strong>成績CSVを選択</strong><p>「単位の状況」から大学の成績CSVを読み込みます。</p></li><li><strong>進級・卒業の見通しを確認</strong><p>不足と要確認を区別し、詳細から条件や根拠を確認できます。</p></li><li><strong>時間割から次の授業へ</strong><p>教養候補はCSVなしでも閲覧できます。履修表CSVを加えると、登録授業との重複を確認します。</p></li></ol><p class="dialog-note">CSV・学生情報は保存しません。タブの切替では保持され、ページの再読み込みで消えます。</p></dialog>
+</body>
+</html>

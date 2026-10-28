@@ -3,16 +3,22 @@
 __pycache__/
 *.py[cod]
 
-# 成績CSVは学生本人が画面から都度アップロードし、リポジトリへ置かない。
-data/*.csv
+# CSVは原則として無視し、確認済みの架空サンプル3点だけを共有する。
+*.[cC][sS][vV]
+!/examples/first-year-sample.csv
+!/examples/graduation-sample.csv
+!/examples/graduation-sample-original-format.csv
 
-# 動作確認用の架空CSVもローカルだけで利用し、Gitへ追加しない。
-examples/**/*.csv
+# 学生データや生成キャッシュは共有しない。起動用の公開カタログだけを許可する。
+/data/*
+!/data/recommendations/
+/data/recommendations/*
+!/data/recommendations/2026/
+/data/recommendations/2026/*
+!/data/recommendations/2026/liberal-catalog.json
+!/data/recommendations/2026/README.md
 
-# 履修推薦用に取得・生成する科目データ、原資料、抽出結果は公開しない。
-/data/recommendations/
-
-# 共同開発者へ別途手渡しするZIP。生成データ・架空CSVもGitへ送らない。
+# 旧手渡しZIPはローカルに保持する。初回起動には不要。
 /handoff/
 
 # Windowsからコピーしたファイルのダウンロード元情報。

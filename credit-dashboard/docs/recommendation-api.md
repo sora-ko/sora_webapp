@@ -11,6 +11,7 @@
 ## 1. 操作の流れ
 
 1. `GET /api/v1/recommendation-catalogs`で対応年度・プロファイル・表示可能なタームを取得する。
+   参考UIでは`profile_id`を単位集計側の選択から受け取り、教養候補側のプログラム選択欄は置かない。解析済み履修表があれば選択中の開講年度と一致するカタログ、なければ同一プロファイルで利用可能な最新年度を使い、対象を文字で表示する。
 2. その範囲の時間割を表示する。参考UIは「時間割と教養候補」タブにある。
 3. マスのクリックで`POST /api/v1/recommendations`へコンテキストを送る。
 4. 履修表を読み込んでいる場合は、元の`File`も毎回送る。バックエンドが解析し、科目の全曜限との重複を除外する。
@@ -106,6 +107,8 @@ Content-Typeは`multipart/form-data`。ブラウザーでは`FormData`を使い�
 ## 6. フロントエンドの分離
 
 DOMに依存しない通信部分は`static/recommendation-api.js`、参考UIは`static/recommendations.js`。UIはReact等へ置き換えてよく、バックエンドの抽出・重複判定を画面へ移植しない。
+
+参考UIの`creditWorkspace.profile()`は、単位集計で選択した`profile_id`・大学・学部・プログラム・入学年度の公開メタデータを返す。`app.js`が初回取得・選択変更時に`setProfile()`で更新し、`credit-profile-changed`を通知する。教養候補はこの共有状態を参照し、プロファイルやカタログ年度が変われば両方の推薦結果を無効にする。未対応の対象、年度不明、対応年度のカタログなしの場合は案内を表示し、別対象へ代替しない。成績CSVのアップロード・解析はマス検索の前提にしない。
 
 ```javascript
 const api = window.createRecommendationClient(); // 別OriginのAPIならURLを渡す

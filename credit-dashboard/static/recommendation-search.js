@@ -5,8 +5,7 @@
   const days = ['', '月', '火', '水', '木', '金'];
   let version = 0;
   let controller = null;
-  const selected = () => window.creditRecommendations.catalogs().find(catalog =>
-    `${catalog.academic_year}:${catalog.profile_id}` === $('recommendation-catalog').value);
+  const selected = () => window.creditRecommendations.selectedCatalog();
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
     if (text != null) element.textContent = String(text);
@@ -37,14 +36,17 @@
   }
   function updateCatalog() {
     const catalog = selected();
+    const previousTerm = $('credit-search-term').value;
     $('credit-search-term').replaceChildren(...(catalog?.terms || []).map(term => {
       const option = node('option', `第${term}ターム`);
       option.value = String(term);
       return option;
     }));
-    const currentTerm = $('timetable-term').value.split(':');
-    if (catalog?.academic_year === Number(currentTerm[0]) && catalog.terms.includes(Number(currentTerm[1]))) {
-      $('credit-search-term').value = currentTerm[1];
+    const currentTerm = window.creditRecommendations.timetableContext();
+    if (catalog && currentTerm && catalog.academic_year === currentTerm.academic_year && catalog.terms.includes(currentTerm.term)) {
+      $('credit-search-term').value = String(currentTerm.term);
+    } else if (catalog?.terms.includes(Number(previousTerm))) {
+      $('credit-search-term').value = previousTerm;
     }
     invalidate();
   }
@@ -75,7 +77,7 @@
       return;
     }
     if (!catalog) {
-      showError('「教養候補の対象」で探索する対象を選択してください。');
+      showError(window.creditRecommendations.selectionMessage());
       return;
     }
     if (!$('credit-search-term').value) {
@@ -116,11 +118,8 @@
     }
   });
   window.addEventListener('credit-files-changed', invalidate);
-  window.addEventListener('recommendation-catalogs-loaded', updateCatalog);
-  window.addEventListener('credit-timetable-parsed', updateCatalog);
-  $('recommendation-catalog').addEventListener('change', updateCatalog);
+  window.addEventListener('recommendation-context-changed', updateCatalog);
   $('credit-search-term').addEventListener('change', invalidate);
   $('credit-search-clear').addEventListener('click', invalidate);
-  $('timetable-term').addEventListener('change', updateCatalog);
   updateCatalog();
 })();

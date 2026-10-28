@@ -1,0 +1,1076 @@
+{
+  "schema_version": 3,
+  "academic_year": 2026,
+  "profile_id": "niigata-engineering-sis-2025-v1",
+  "courses": [
+    {
+      "course_code": "261G0055",
+      "name": "中級EAP( Listening & Speaking)",
+      "credits": 2,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G0059",
+      "name": "中級EAP( Listening & Speaking: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G0060",
+      "name": "中級EAP( Listening & Speaking: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G1001",
+      "name": "ドイツ語圏グローバル理解1(スイス学入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1003",
+      "name": "ドイツ語圏グローバル理解 2 (ドイツ語文化圏研究入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G1031",
+      "name": "中国語圏グローバル理解 7 (エリアスタディーズ北京)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1065",
+      "name": "ドイツ語スタンダード IA4a",
+      "credits": 1.5,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G2029",
+      "name": "健康スポーツ科学実習 Ia",
+      "credits": 0.5,
+      "category": "健康・スポーツ（体育実技）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3011",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3013",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3042",
+      "name": "情報リテラシー概論",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 4
+        },
+        {
+          "weekday": 5,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G3253",
+      "name": "ワーク&ライフのキャリアデザイン",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3261",
+      "name": "おいしさの科学へようこそ!",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G6015",
+      "name": "地学概論A",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        },
+        {
+          "weekday": 4,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G6029",
+      "name": "原子力・放射線防護学入門",
+      "credits": 1,
+      "category": "自然科学（工学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G7041",
+      "name": "日本古典文学O",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 1
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G8005",
+      "name": "「食べる」",
+      "credits": 2,
+      "category": "医歯学（歯学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0009",
+      "name": "iStep Academic Writing",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G0010",
+      "name": "iStep Academic Writing",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0057",
+      "name": "中級EAP( Listening & Speaking)",
+      "credits": 2,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        },
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G1011",
+      "name": "ドイツ語圏グローバル理解6(声に出すドイツ語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G2030",
+      "name": "健康スポーツ科学実習 Ib",
+      "credits": 0.5,
+      "category": "健康・スポーツ（体育実技）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3017",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3022",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G3039",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3213",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3222",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3223",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3246",
+      "name": "自己・他者理解から始まるキャリア自律",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G6017",
+      "name": "物理学への招待A",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        },
+        {
+          "weekday": 5,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G6022",
+      "name": "基礎雪氷学",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G7040",
+      "name": "日本古典文学K",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G8007",
+      "name": "健康福祉学入門",
+      "credits": 2,
+      "category": "医歯学（歯学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        },
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G0655",
+      "name": "中級EAP( Writing)",
+      "credits": 2,
+      "category": "英語（英語）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G1503",
+      "name": "中国語圏グローバル理解 12 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G1505",
+      "name": "朝鮮語圏グローバル理解 3",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G1586",
+      "name": "古代エジプト神聖文字文A",
+      "credits": 1,
+      "category": "初修外国語（外国語スペシャル）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "263G2521",
+      "name": "健康スポーツ科学講義a",
+      "credits": 1,
+      "category": "健康・スポーツ（体育講義）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3501",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3710",
+      "name": "私のローカルキャリア論 -地域とかかわる多様な働きかた・暮らしかた-",
+      "credits": 2,
+      "category": "新潟大学個性化科目（地域研究）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G3712",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G3746",
+      "name": "平和学概論",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 1,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G3753",
+      "name": "地域災害環境システム学演習",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G6512",
+      "name": "生物学-動物A-",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G7505",
+      "name": "心理学概論",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G7509",
+      "name": "人間関係論",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 1
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G8506",
+      "name": "新潟発福祉学",
+      "credits": 2,
+      "category": "医歯学（歯学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        },
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G0656",
+      "name": "中級EAP( Writing)",
+      "credits": 2,
+      "category": "英語（英語）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G1502",
+      "name": "中国語圏グローバル理解 4 (漢文と中国語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G1587",
+      "name": "古代エジプト神聖文字文B",
+      "credits": 1,
+      "category": "初修外国語（外国語スペシャル）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264G2523",
+      "name": "健康スポーツ科学講義b",
+      "credits": 1,
+      "category": "健康・スポーツ（体育講義）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3508",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3512",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3513",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3524",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G3528",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264G3713",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "264G3716",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "264G3717",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "264G3752",
+      "name": "知の交流",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G6513",
+      "name": "地学概論A",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G7511",
+      "name": "つながりと絆の社会学",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G8501",
+      "name": "原子力と倫理",
+      "credits": 1,
+      "category": "医歯学（医学）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    }
+  ]
+}

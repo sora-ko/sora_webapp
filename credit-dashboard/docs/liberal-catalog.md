@@ -77,13 +77,13 @@
 
 原表は[2026年度の公式開設一覧](https://www.iess.niigata-u.ac.jp/acpb/upload/20260327161315092692700.pdf)、2026-03-13時点。冊子6〜133ページ／PDF8〜135ページから抽出したGコード1,228開講は、全ページで本文と表セルの番号が一致している。英語・初修外国語・自然系共通専門基礎の代表行は画像でも照合済み。
 
-旧 `liberal-catalog.json`、`sis-year2-candidates.json`、`quality-report.json` は `archive/` に移動して保持し、完全削除しない。生成物・原本・保管版は全てGit対象外。学生CSVを収集・保存には使わない。
+旧 `liberal-catalog.json`、`sis-year2-candidates.json`、`quality-report.json` は `archive/` に移動して保持し、完全削除しない。2026-10-28の利用者指定により、現行の実行用`liberal-catalog.json`と調査READMEだけをGit管理する。原本・抽出セル・監査結果・保管版は引き続きGit対象外とし、公開資料に含まれる教員名も配布用データへ含めない。学生CSVを収集・保存には使わない。
 
 シラバスの概要・評価方法は未取得であり、簡易JSONから項目自体を外した。[公開シラバスのrobots.txt](https://syllabus.niigata-u.ac.jp/robots.txt)による自動巡回禁止の確認結果は年度設定に保持する。
 
 ## 5. 再生成
 
-初回起動だけなら[手渡しZIP](handoff.md)から実行用JSONを復元でき、PDF解析依存は不要である。ZIPには公開原本・抽出セル・監査結果も含めるため、以下の通常生成もネットワーク取得なしで実行できる。
+通常の起動はGitに含まれる実行用JSONを使うため、再生成・ZIP展開・PDF解析依存は不要である。[クローン後の起動手順](handoff.md)を参照する。クローンに原本・抽出キャッシュは含まれないため、再生成する場合だけ公式資料を取得する。
 
 原本と抽出セルがある現在の環境では、コマンドは1つでよい。有効な抽出セルを自動再利用し、簡易JSONと調査READMEを生成する。
 
@@ -91,7 +91,7 @@
 .venv/bin/python scripts/build_liberal_catalog.py
 ```
 
-初回だけ、開発専用のPDF依存を入れて公式資料を取得する。
+原本・抽出キャッシュのない新しい作業コピーでは、開発専用のPDF依存を入れて公式資料を取得する。
 
 ```bash
 .venv/bin/python -m pip install -r requirements-catalog.txt

@@ -157,8 +157,8 @@
 
   function renderSelectedTerm() {
     if (!timetable) return;
-    window.creditRecommendations.invalidate();
     const context = selectedContext();
+    window.creditRecommendations.setTimetableContext(context);
     const courses = timetable.courses.filter((course) => matchesContext(course, context));
     renderCards(context);
     renderGrid(context, courses);

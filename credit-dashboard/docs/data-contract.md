@@ -21,6 +21,26 @@ CSV原本はリクエスト処理中だけメモリに保持し、レスポン�
 
 登録・検証済みの年度・プログラム別規則プロファイルを返す。各要素には対象範囲、プロファイル内の要件メタデータ、現在APIで実装済みの`implemented_requirement_ids`を含む。学生データは含めない。
 
+この一覧には`schema_version`はない。入学年度と開講年度を混同しない。基本形は次のとおりで、注意書き・要件は省略例である。
+
+```json
+{
+  "default_profile_id": "niigata-engineering-sis-2025-v1",
+  "profiles": [{
+    "profile_id": "niigata-engineering-sis-2025-v1",
+    "institution": "新潟大学",
+    "faculty": "工学部",
+    "program": "知能情報システムプログラム",
+    "admission_year": 2025,
+    "policy_notes": [],
+    "requirements": [{"requirement_id": "graduation", "title": "卒業資格条件", "rule_status": "partial"}],
+    "implemented_requirement_ids": ["progression_year_2", "progression_year_4", "graduation"]
+  }]
+}
+```
+
+初期選択は`default_profile_id`に対応する要素を使う。画面の所属表示と候補APIへの`profile_id`は、同じ選択から生成する。
+
 ### `POST /api/v1/reports`
 
 - Content-Type: `multipart/form-data`
@@ -136,6 +156,8 @@ CSV原本はリクエスト処理中だけメモリに保持し、レスポン�
 
 取得済み単位へ加算する条件は `result == passed` とする。「合」という文字だけでは単位認定済みとみなさない。
 
+科目には同じ正規化値の`status`も返る。`result`と`status`は表示上の互換フィールドであり、CSV原値は`source_result`にある。新しいフロントエンドはどちらかに統一して表示し、未知の値を合格へ読み替えない。
+
 ### `curriculum_area`
 
 - `liberal_arts`: 教養系科目
@@ -211,7 +233,34 @@ CSV原本はリクエスト処理中だけメモリに保持し、レスポン�
 `student` の値はMVP画面にマスクせず表示するが、ログや永続ストレージには保存しない。
 `curriculum`は選択された規則プロファイルから生成する。CSVの所属表記だけで対象プログラムを確認できない場合は警告するが、表記差だけを根拠に不一致と断定しない。
 
-### `evaluations`要素
+### `summary`の項目（2026-10-28に公開APIで補足確認）
+
+この項目はバックエンドで計算された集計であり、画面で科目一覧から再計算しない。`null`や欠落は「未確認」として表示し、0で補完しない。
+
+| 項目 | 型 | 意味 |
+| --- | --- | --- |
+| `course_count` | 整数 | 解析した科目数 |
+| `passed_count` | 整数 | 有効な単位数を持つ合格科目数 |
+| `unconfirmed_count` | 整数 | 合否・単位等が未確定の科目数 |
+| `unknown_credit_count` | 整数 | 単位数が未確定の科目数 |
+| `earned_credits` | 数値 | CSV上の取得済み単位の合計。「対象外」を含むため、学務要件への算入値とは区別する |
+| `unconfirmed_credits` | 数値 | 未確定科目に記録された既知の単位数の合計。取得済みや修得予定の保証値として扱わない |
+| `majors` | 配列 | 大分類ごとの`major`・`earned_credits`・`unconfirmed_credits`・`course_count` |
+| `categories` | 配列 | 元科目区分と大分類の組ごとの内訳。下記参照 |
+
+`majors[].major`は「教養」「専門」、入力によって「不明」「対象外」。`categories[]`は`source_category`、`major`、`field`、`detail`、`earned_credits`、`unconfirmed_credits`、`course_count`、`passed_count`、`unconfirmed_count`を持つ。`field`・`detail`は元区分の解析結果であり、卒業枠への配賦結果ではない。
+
+### 条件の表示用の項目
+
+`evaluations[].conditions[]`は`id`・`label`・三値の`status`・`reason_code`・日本語`description`を持ち、条件の種類により次の値を返す。
+
+- 単位条件：`minimum_credits`、`confirmed_credits`、`confirmed_credit_shortfall`、`has_uncertain_candidate`。
+- 在学期間：`minimum_years`、`confirmed_years`、`value_source`。
+- 個別必修：後述の`required_course_count`、`satisfied_course_count`、`course_results`等。
+
+`confirmed_credit_shortfall`は確認済み単位だけを使った差であり、条件が`unknown`なら確定した不足ではない。「確認済み単位との差」と表示する。分類別条件と合計条件は重なるため、値を足して独自の不足合計を作らない。進捗バーは同一条件の確認済み値・必要値だけを表示に使い、総合判定は`evaluations[].status`をそのまま使う。
+
+### 学年別の`evaluations`
 
 CSVの学年に応じて次の要件を返す。
 
@@ -252,7 +301,7 @@ CSVの学年に応じて次の要件を返す。
       "id": "minimum_residence",
       "label": "在学期間",
       "status": "satisfied",
-      "reason_code": "minimum_met",
+      "reason_code": "minimum_reached",
       "minimum_years": 1,
       "confirmed_years": 1,
       "value_source": "student_grade_assumption",

@@ -283,7 +283,13 @@ function profileLabel(profile) {
 
 function updateTargetSummary() {
   const profile = profiles.find((item) => item.profile_id === $('profile-select').value);
-  if (!profile) return;
+  window.creditWorkspace.setProfile(profile);
+  if (!profile) {
+    $('target-summary').textContent = '対象プログラムを選択してください。';
+    $('policy-notes').replaceChildren();
+    $('policy-notes').hidden = true;
+    return;
+  }
   const implemented = new Set(profile.implemented_requirement_ids || []);
   const titles = (profile.requirements || [])
     .filter((requirement) => implemented.has(requirement.requirement_id))
@@ -313,6 +319,7 @@ async function loadProfiles() {
     }
     updateTargetSummary();
   } catch (error) {
+    window.creditWorkspace.setProfile(null);
     $('error').textContent = `対象情報の取得に失敗しました: ${error.message}`;
     $('error').hidden = false;
   }

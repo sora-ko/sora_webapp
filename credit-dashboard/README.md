@@ -1,6 +1,8 @@
 # 単位取得状況 MVP
 
-更新日: 2026-10-27。共同開発者は[引き継ぎ・初回起動手順](docs/handoff.md)から確認してください。
+更新日: 2026-10-28。共同開発者は[引き継ぎ・初回起動手順](docs/handoff.md)から確認してください。
+
+2026-10-28に、見やすさを優先した独立した[試作フロントエンド](docs/prototype-handoff-test.md)を追加しました。起動後は **http://localhost:8000/prototype/** で試せます。従来の画面もそのまま利用できます。
 
 成績CSVをブラウザーからアップロードし、バックエンドのメモリ上で解析して区分別集計を表示します。CSV原本はファイル、一時領域、データベースへ保存しません。
 
@@ -17,7 +19,7 @@ MVPの対象は、新潟大学工学部・2025年度入学・知能情報シス�
 - [教養開講カタログ・生成手順](docs/liberal-catalog.md)
 - [教養候補API・フロントエンド接続](docs/recommendation-api.md)
 - [修得単位と空き時間からの教養探索API](docs/recommendation-search-api.md)
-- [分業・手渡しZIPの復元手順](docs/handoff.md)
+- [分業・クローン後の初回起動手順](docs/handoff.md)
 - [アーキテクチャ方針](docs/architecture.md)
 - [学務規則データ設計](docs/rule-data.md)
 - [テスト方針](docs/testing.md)
@@ -36,7 +38,7 @@ MVPの対象は、新潟大学工学部・2025年度入学・知能情報シス�
 
 ## WSL Ubuntu + Dockerで起動
 
-WSL Ubuntu側で Docker Engine / Compose plugin が利用できることを確認してください（Docker Desktop の WSL 統合でも可）。Composeは公開の簡易JSONを読み取り専用で使います。新しいcloneでは先に[手渡しZIPを復元](docs/handoff.md)するか、下記「推薦用の教養開講データ」の手順で`data/recommendations/2026/liberal-catalog.json`を生成・配置してください。このフォルダーで実行します。
+WSL Ubuntu側で Docker Engine / Compose plugin が利用できることを確認してください（Docker Desktop の WSL 統合でも可）。起動用の公開カタログと架空CSV3点はGitに含まれるため、クローン後のZIP展開やカタログ生成は不要です。`compose.yaml`のあるこのフォルダーで実行します。Composeは公開の簡易JSONだけを読み取り専用で使います。
 
 ```bash
 docker compose up --build
@@ -45,6 +47,8 @@ docker compose up --build
 ブラウザーで http://localhost:8000 を開き、「単位集計」で成績CSVを選択して「解析する」を押します。「時間割と教養候補」では履修照会CSVをアップロードし、時間割のマスをクリックすると、その枠を含む教養候補を確認できます。他の曜限との重複もバックエンドで除外します。「CSVなしで候補を見る」なら、登録済み授業との重複を未確認と明示してカタログを閲覧できます。不足単位による順位付けはまだ実装していません。
 
 両タブの入力と結果はメモリだけに保持し、タブ切替では残り、各画面の「クリア」またはページ再読込で破棄します。画面はフロントエンド担当が置き換えられる参考UIです。変更が表示されない場合は再ビルド後にページを再読込してください。
+
+対象プログラムは「単位集計」タブで選び、教養候補にも引き継ぎます。教養候補側での再選択は不要です。解析済みの履修表があるときはその開講年度、ないときは選択した対象で利用可能な最新のカタログ年度を表示します。対応する候補データがなければ案内し、別プログラム・別年度のデータへ切り替えません。
 
 Dockerイメージには`data/`を含めず、公開の簡易JSON1ファイルだけを読み取り専用でマウントします。学生CSVはマウント・保存しません。終了は`Ctrl+C`、バックグラウンド起動時は`docker compose down`です。
 
@@ -63,7 +67,7 @@ python server.py
 
 ## テスト
 
-テストは架空データだけを使用し、プロジェクトの`data/`は読みません。`examples/`のCSV3点はGit対象外で、一部のテストに必要です。初回は[手渡しZIP](docs/handoff.md)から復元してください。
+テストは架空データだけを使用します。`examples/`のCSV3点はGitに含まれ、一部のテストと手動確認で使用します。配布用データの確認では公開カタログも検証します。実在する学生CSVをテストへ使用しないでください。
 
 ブラウザーでの手動確認には、実在する学生情報を含まない[`examples/first-year-sample.csv`](examples/first-year-sample.csv)を使用できます。卒業確認には、元CSVと同じ前置き4行・19列・CP932・CRLF形式の[`examples/graduation-sample-original-format.csv`](examples/graduation-sample-original-format.csv)を使用してください。期待結果は[`examples/README.md`](examples/README.md)に記載しています。
 
@@ -92,7 +96,7 @@ python -m pytest -q
 
 不足単位の探索では、教養の必修・選択必修・選択・合計をすべて満たしていれば、専門や共通超過分・総計が不足していても教養を推薦しません。教養に不足が残る場合は、その教養条件を改善する科目だけを返します。時限を指定した候補閲覧と、成績集計の不足表示は従来どおり利用できます。
 
-生成物と原本はGit・Docker対象外です。出典は科目JSONから外し、年度設定と原表で別管理します。旧JSONは`archive/`へ保持します。原本と抽出済みセルがある場合は`.venv/bin/python scripts/build_liberal_catalog.py`だけで再生成できます。共同開発者の初回取得は次のコマンドです。開発専用のPDF解析依存はWebアプリの実行環境には追加しません。
+起動用の`liberal-catalog.json`と調査READMEはGit管理しています。公開原本PDF・抽出キャッシュ・旧JSON・旧手渡しZIPはGit対象外のまま保持し、Dockerにも含めません。科目JSONに出典を繰り返さず、年度設定と原表で別管理します。原本と抽出済みセルがローカルにある場合は`.venv/bin/python scripts/build_liberal_catalog.py`だけで再生成できます。新しい作業コピーで再生成する場合に限り、次のコマンドで開発専用依存と公式原本を取得します。通常の起動には不要です。
 
 ```bash
 .venv/bin/python -m pip install -r requirements-catalog.txt

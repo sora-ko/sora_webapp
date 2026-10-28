@@ -1,0 +1,4 @@
+# 大学CSVの形式を再現した架空サンプルは、文字コードと改行を変換しない。
+examples/first-year-sample.csv -text
+examples/graduation-sample.csv -text
+examples/graduation-sample-original-format.csv -text

@@ -209,6 +209,7 @@ function gradeRows(name = '架空 画面確認') {
       await page.waitForFunction(() => document.querySelector('#recommendation-json').textContent.length > 0);
       const data = JSON.parse(await page.locator('#recommendation-json').textContent());
       assert.equal(data.basis, 'catalog');
+      assert.equal(data.context.profile_id, await page.locator('#profile-select').inputValue());
       assert.equal(data.status, 'ok');
       assert.ok(data.candidates.length > 0);
       assert.equal(data.checks.timetable, 'not_provided');
@@ -580,6 +581,155 @@ function gradeRows(name = '架空 画面確認') {
       await visible('#timetable-dashboard', false);
       assert.equal(await page.locator('#timetable-json').textContent(), '');
       assert.equal(await page.locator('#timetable-file').inputValue(), '');
+    });
+    const profileMetadata = await (await page.request.get(new URL('/api/v1/rule-profiles', baseUrl).href)).json();
+    const catalogMetadata = await (await page.request.get(new URL('/api/v1/recommendation-catalogs', baseUrl).href)).json();
+    const originalProfile = profileMetadata.profiles[0];
+    const alternativeProfile = {...originalProfile, profile_id: 'fictional-ui-profile', program: '架空の別プログラム'};
+    const unavailableProfile = {...originalProfile, profile_id: 'fictional-no-catalog', program: '架空の未対応プログラム'};
+    const originalCatalog = catalogMetadata.catalogs[0];
+    const slotCalls = [];
+    const searchCalls = [];
+    const mockedSlot = fields => ({schema_version: 1, context: Object.fromEntries(
+      ['profile_id', 'academic_year', 'term', 'weekday', 'period'].map(key => [key, key === 'profile_id' ? fields.get(key) : Number(fields.get(key))])
+    ), basis: fields.has('file') ? 'timetable' : 'catalog', status: 'empty', candidates: [], messages: [],
+      checks: {timetable: 'not_provided', earned_credits: 'not_checked', requirements: 'not_checked', enrollment: 'not_checked'},
+      counts: {matching: 0, returned: 0, excluded_overlap: 0, excluded_unconfirmed: 0, excluded_registered: 0}});
+    const mockedSearch = fields => ({schema_version: 1, context: {profile_id: fields.get('profile_id'),
+      academic_year: Number(fields.get('academic_year')), term: Number(fields.get('term'))},
+      target_requirement_id: 'graduation', status: 'empty', baseline: [], free_slots: [], candidates: [], review_candidates: [],
+      messages: [], checks: {}, counts: {}});
+    const formFields = request => new Request(request.url(), {method: 'POST', headers: request.headers(), body: request.postDataBuffer()}).formData();
+    await page.route('**/api/v1/rule-profiles', route => route.fulfill({json: {...profileMetadata,
+      profiles: [originalProfile, alternativeProfile, unavailableProfile]}}));
+    await page.route('**/api/v1/recommendation-catalogs', route => route.fulfill({json: {schema_version: 1,
+      catalogs: [originalCatalog, {...originalCatalog, academic_year: originalCatalog.academic_year - 1},
+        {...originalCatalog, profile_id: alternativeProfile.profile_id, program: alternativeProfile.program}]}}));
+    await page.route('**/api/v1/recommendations', async route => {
+      const fields = await formFields(route.request());
+      slotCalls.push(fields.get('profile_id'));
+      await route.fulfill({json: mockedSlot(fields)});
+    });
+    await page.route('**/api/v1/recommendation-searches', async route => {
+      const fields = await formFields(route.request());
+      searchCalls.push(fields.get('profile_id'));
+      await route.fulfill({json: mockedSearch(fields)});
+    });
+    await page.reload({waitUntil: 'networkidle'});
+    await check('recommendation target inherits report profile without a second program selector', async () => {
+      assert.equal(await page.locator('#recommendation-catalog').count(), 0);
+      assert.equal(await page.locator('#timetable-panel select[name="profile_id"]').count(), 0);
+      assert.equal(await page.evaluate(() => window.creditWorkspace.profile().profile_id), originalProfile.profile_id);
+      assert.match(await page.locator('#recommendation-target').textContent(), new RegExp(originalProfile.program));
+      await click('#timetable-tab');
+      await click('#recommendation-browse');
+      await click('#recommendation-preview-grid [data-weekday="1"][data-period="1"] button');
+      await page.waitForFunction(() => document.querySelector('#recommendation-json').textContent.length > 0);
+      const data = JSON.parse(await page.locator('#recommendation-json').textContent());
+      assert.equal(data.context.profile_id, originalProfile.profile_id);
+      assert.equal(data.context.academic_year, originalCatalog.academic_year);
+    });
+    await check('profile changes invalidate candidates and both APIs receive the shared selection', async () => {
+      await click('#report-tab');
+      await select('#profile-select', alternativeProfile.profile_id);
+      await upload('#csv-file', csv(gradeRows()));
+      await click('#timetable-tab');
+      assert.match(await page.locator('#recommendation-target').textContent(), /架空の別プログラム/);
+      assert.equal(await page.locator('#recommendation-json').textContent(), '');
+      await click('#recommendation-preview-grid [data-weekday="1"][data-period="1"] button');
+      await page.waitForFunction(() => document.querySelector('#recommendation-json').textContent.length > 0);
+      assert.equal(slotCalls.at(-1), alternativeProfile.profile_id);
+      await timetableUpload(timetableRows({empty: true}));
+      await click('#credit-search-submit');
+      await page.waitForFunction(() => document.querySelector('#credit-search-json').textContent.length > 0);
+      assert.equal(searchCalls.at(-1), alternativeProfile.profile_id);
+      await click('#report-tab');
+      await select('#profile-select', originalProfile.profile_id);
+      await click('#timetable-tab');
+      assert.equal(await page.locator('#recommendation-json').textContent(), '');
+      assert.equal(await page.locator('#credit-search-json').textContent(), '');
+      await click('#credit-search-submit');
+      await page.waitForFunction(() => document.querySelector('#credit-search-json').textContent.length > 0);
+      assert.equal(searchCalls.at(-1), originalProfile.profile_id);
+    });
+    await check('a profile without a catalog cannot reuse another programs candidates', async () => {
+      await click('#report-tab');
+      await select('#profile-select', unavailableProfile.profile_id);
+      await click('#timetable-tab');
+      assert.match(await page.locator('#recommendation-scope').textContent(), /対応する教養候補データがありません/);
+      assert.equal(await page.locator('#recommendation-browse').isDisabled(), true);
+      assert.equal(await page.locator('#credit-search-json').textContent(), '');
+      const before = [slotCalls.length, searchCalls.length];
+      await click('#timetable-grid [data-weekday="1"][data-period="1"] button');
+      assert.match(await page.locator('#recommendation-status').textContent(), /対応する教養候補データがありません/);
+      await click('#credit-search-submit');
+      await visible('#credit-search-error');
+      assert.match(await page.locator('#credit-search-error').textContent(), /対応する教養候補データがありません/);
+      assert.deepEqual([slotCalls.length, searchCalls.length], before);
+    });
+    await check('the timetable year never falls back to a different catalog year', async () => {
+      await click('#report-tab');
+      await select('#profile-select', originalProfile.profile_id);
+      await click('#timetable-tab');
+      const rows = timetableRows({empty: true}).map(row => row.map(cell => cell.replaceAll('2026年度', '2027年度')));
+      await timetableUpload(rows);
+      assert.match(await page.locator('#recommendation-scope').textContent(), /2027年度.*データがありません/);
+      const before = searchCalls.length;
+      await click('#credit-search-submit');
+      await visible('#credit-search-error');
+      assert.equal(searchCalls.length, before);
+      await timetableUpload(timetableRows({empty: true}));
+      assert.equal(await page.locator('#recommendation-browse').isDisabled(), false);
+    });
+    await check('changing profiles rejects late responses from both recommendation APIs', async () => {
+      let release;
+      const held = new Promise(resolve => { release = resolve; });
+      const delayedSlot = async route => { const fields = await formFields(route.request()); await held; await route.fulfill({json: mockedSlot(fields)}); };
+      const delayedSearch = async route => { const fields = await formFields(route.request()); await held; await route.fulfill({json: mockedSearch(fields)}); };
+      await page.route('**/api/v1/recommendations', delayedSlot);
+      await page.route('**/api/v1/recommendation-searches', delayedSearch);
+      await page.evaluate(() => {
+        window.profileOriginalFetch = window.fetch;
+        window.fetch = (url, options = {}) => window.profileOriginalFetch(url, {...options, signal: undefined});
+      });
+      const slotRequested = page.waitForRequest('**/api/v1/recommendations');
+      await click('#timetable-grid [data-weekday="1"][data-period="1"] button');
+      await slotRequested;
+      const searchRequested = page.waitForRequest('**/api/v1/recommendation-searches');
+      await click('#credit-search-submit');
+      await searchRequested;
+      await click('#report-tab');
+      await select('#profile-select', alternativeProfile.profile_id);
+      const responses = Promise.all([page.waitForResponse('**/api/v1/recommendations'), page.waitForResponse('**/api/v1/recommendation-searches')]);
+      release();
+      await responses;
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      assert.equal(await page.locator('#recommendation-json').textContent(), '');
+      assert.equal(await page.locator('#credit-search-json').textContent(), '');
+      assert.equal(await page.locator('#recommendation-result').isVisible(), false);
+      assert.equal(await page.locator('#credit-search-result').isVisible(), false);
+      assert.equal(await page.evaluate(() => window.creditWorkspace.files().grades !== null), true);
+      await page.unroute('**/api/v1/recommendations', delayedSlot);
+      await page.unroute('**/api/v1/recommendation-searches', delayedSearch);
+      await page.evaluate(() => { window.fetch = window.profileOriginalFetch; delete window.profileOriginalFetch; });
+    });
+    for (const path of ['/api/v1/rule-profiles', '/api/v1/recommendation-catalogs', '/api/v1/recommendations', '/api/v1/recommendation-searches']) await page.unroute(`**${path}`);
+    await check('profile and catalog loading can finish in either order without a wrong fallback', async () => {
+      for (const delayedPath of ['/api/v1/rule-profiles', '/api/v1/recommendation-catalogs']) {
+        let release;
+        const held = new Promise(resolve => { release = resolve; });
+        await page.route(`**${delayedPath}`, async route => { await held; await route.continue(); });
+        await page.goto(baseUrl.href, {waitUntil: 'domcontentloaded'});
+        if (delayedPath.endsWith('rule-profiles')) {
+          await page.waitForFunction(() => window.creditRecommendations.catalogs().length > 0);
+          assert.equal(await page.evaluate(() => window.creditWorkspace.profile()), null);
+        } else await page.waitForFunction(() => window.creditWorkspace.profile() !== null);
+        assert.equal(await page.locator('#recommendation-browse').isDisabled(), true);
+        release();
+        await page.waitForFunction(() => !document.querySelector('#recommendation-browse').disabled);
+        assert.equal(await page.evaluate(() => window.creditRecommendations.selectedCatalog().profile_id === window.creditWorkspace.profile().profile_id), true);
+        await page.unroute(`**${delayedPath}`);
+      }
     });
     assert.deepEqual(pageErrors, [], 'browser JavaScript errors');
     assert.deepEqual(outsideRequests, [], 'external network requests');
