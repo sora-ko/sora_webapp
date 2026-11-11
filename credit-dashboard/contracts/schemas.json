@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:credit-dashboard:api-contract:1.2.0",
+  "$id": "urn:credit-dashboard:api-contract:1.3.0",
   "title": "単位取得状況APIの型定義",
   "description": "単体の応答は$defsの対応する型で検証する。全体を応答スキーマとして使わない。",
-  "x-contract-version": "1.2.0",
+  "x-contract-version": "1.3.0",
   "$defs": {
     "ApiErrorBody": {
       "additionalProperties": false,
@@ -3009,6 +3009,19 @@
           "description": "nullは単位数未確認。0への置換は禁止。",
           "title": "Credits"
         },
+        "score": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "CSVの得点。列なし・空欄はnull。合否・単位集計には使わない。",
+          "title": "Score"
+        },
         "status": {
           "enum": [
             "passed",
@@ -3108,6 +3121,7 @@
         "field_codes",
         "level",
         "credits",
+        "score",
         "status",
         "result",
         "source_result",

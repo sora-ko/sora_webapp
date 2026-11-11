@@ -120,6 +120,9 @@ class TranscriptCourse(ContractModel):
     field_codes: list[str]
     level: str | None
     credits: Credit | None = Field(description="nullは単位数未確認。0への置換は禁止。")
+    score: Annotated[float, Field(ge=0)] | None = Field(
+        description="CSVの得点。列なし・空欄はnull。合否・単位集計には使わない。"
+    )
     status: CourseResult
     result: CourseResult = Field(description="statusと同じ正規化状態。原文はsource_result。")
     source_result: str | None

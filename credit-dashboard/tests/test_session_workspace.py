@@ -139,6 +139,7 @@ async def test_upload_restore_and_recommend_without_original_files(client, state
     report = await upload(client, "reports", fictional_grades())
     assert report.status_code == 200
     assert report.json()["report"]["student"]["name"].startswith("架空")
+    assert [course["score"] for course in report.json()["report"]["courses"]] == [85.5, 0, 90, 100, 80, None]
     timetable = await upload(client, "timetables", fictional_timetable(empty=True))
     assert timetable.status_code == 200
     restored = await workspace(client)
@@ -176,12 +177,17 @@ async def test_stateless_upload_does_not_implicitly_hold_student_data(client):
 
 
 @pytest.mark.anyio
-async def test_failed_replacement_clears_previous_report_and_preserves_timetable(client):
+@pytest.mark.parametrize(("raw", "code"), [
+    (b"fictional invalid csv", "missing_columns"),
+    ("No.,科目,科目区分,単位数,合否,得点\n1,架空科目,英語,2,合,架空の不正得点\n".encode("utf-8"), "invalid_value"),
+], ids=["invalid_structure", "invalid_score"])
+async def test_failed_replacement_clears_previous_report_and_preserves_timetable(client, raw, code):
     await upload(client, "reports", fictional_grades())
     await upload(client, "timetables", fictional_timetable(empty=True))
     snapshot = await workspace(client)
-    failed = await upload(client, "reports", b"fictional invalid csv")
+    failed = await upload(client, "reports", raw)
     assert failed.status_code == 422
+    assert failed.json()["error"]["code"] == code
     restored = await workspace(client)
     assert restored["report"] is None and restored["timetable"] == snapshot["timetable"]
     assert restored["revision"] > snapshot["revision"]

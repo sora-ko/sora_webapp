@@ -67,6 +67,44 @@ def _context(rows: list[list[str]], warnings: list) -> dict:
     return context
 
 
+def _normalize_quoted_field_padding(content: str) -> str:
+    """大学の元CSVにある、閉じ引用符と区切りの間の空白だけを取り除く。"""
+    state = "start"
+    pieces = []
+    kept_from = 0
+    index = 0
+    while index < len(content):
+        char = content[index]
+        if state == "quoted":
+            if char == '"':
+                state = "closed"
+        elif state == "closed":
+            if char == '"':
+                # 隣接する二重引用符はセル内の引用符。内側の空白も変更しない。
+                state = "quoted"
+            elif char in " \t":
+                end = index + 1
+                while end < len(content) and content[end] in " \t":
+                    end += 1
+                if end < len(content) and content[end] not in ",\r\n":
+                    # 区切り以外の文字が続く不正な入力は修復せず、strict読取りへ渡す。
+                    break
+                pieces.append(content[kept_from:index])
+                kept_from = end
+                index = end
+                continue
+            elif char in ",\r\n":
+                state = "start"
+            else:
+                break
+        elif char in ",\r\n":
+            state = "start"
+        elif state == "start":
+            state = "quoted" if char == '"' else "unquoted"
+        index += 1
+    return "".join([*pieces, content[kept_from:]]) if pieces else content
+
+
 def parse_timetable_csv_bytes(raw: bytes) -> dict:
     """時間割の縦軸・横軸と開講番号だけを取得し、学生情報や授業名を返さない。"""
     if not raw:
@@ -82,10 +120,22 @@ def parse_timetable_csv_bytes(raw: bytes) -> dict:
                              code="unsupported_encoding")
     if "\0" in content:
         raise CsvFormatError("履修表CSVに不正な文字が含まれています")
+    content = _normalize_quoted_field_padding(content)
+    reader = csv.reader(io.StringIO(content, newline=""), strict=True)
     try:
-        rows = list(csv.reader(io.StringIO(content, newline=""), strict=True))
+        rows = list(reader)
     except csv.Error as error:
-        raise CsvFormatError("履修表CSVの構文が不正です") from error
+        # CSV本文・氏名・科目名を転記せず、物理行の位置と原因の種類だけを案内する。
+        problem = str(error)
+        if "field larger than field limit" in problem:
+            message = "1項目の文字数が読み取り上限を超えています。"
+        elif "unexpected end of data" in problem:
+            message = "引用符が閉じられていない可能性があります。CSVの引用符と改行を確認してください。"
+        elif "expected after" in problem:
+            message = "引用符の直後に区切り以外の文字があります。引用符と区切りを確認してください。"
+        else:
+            message = "構文が不正です。CSVの引用符・区切り・改行を確認してください。"
+        raise CsvFormatError(f"履修表CSVの{max(reader.line_num, 1)}行目付近: {message}") from error
     rows = [[_normalized(value) for value in row] for row in rows]
     header_index = next((i for i, row in enumerate(rows)
                          if sum(value in DAY_COLUMNS for value in row[1:]) >= 2), None)

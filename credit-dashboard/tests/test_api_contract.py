@@ -157,6 +157,13 @@ def test_nonempty_empty_unknown_and_occupied_examples_cannot_be_confused(example
     assert examples["report-no-courses"].body["courses"] == []
 
 
+def test_report_scores_are_numeric_or_null_in_public_examples(examples):
+    courses = examples["report-year2"].body["courses"]
+    assert [course["score"] for course in courses] == [85.5, 0, 90, 100, 80, None]
+    assert courses[2]["status"] == "unconfirmed"
+    assert examples["report-year1"].body["courses"][0]["score"] == 85
+
+
 def test_each_condition_shape_and_unresolved_timetable_shape_is_demonstrated(examples):
     kinds = {type(condition).__name__ for item in examples.values() if item.model == "ReportResponse"
              for evaluation in RESPONSE_MODELS["ReportResponse"].model_validate(item.body).evaluations
@@ -180,6 +187,10 @@ def test_each_condition_shape_and_unresolved_timetable_shape_is_demonstrated(exa
     ("report-year2", ("courses", 0, "status"), "合"),
     ("report-year2", ("courses", 0, "credits"), True),
     ("report-year2", ("courses", 0, "credits"), "DELETE"),
+    ("report-year2", ("courses", 0, "score"), "85.5"),
+    ("report-year2", ("courses", 0, "score"), True),
+    ("report-year2", ("courses", 0, "score"), -1),
+    ("report-year2", ("courses", 0, "score"), "DELETE"),
     ("report-year2", ("warnings",), [{"message": "架空の型違い"}]),
     ("report-year2", ("raw_csv",), "fictional"),
     ("timetable", ("courses", 0, "teacher"), "架空教員"),

@@ -9,7 +9,7 @@ import pytest
 
 from parser import CsvFormatError
 from server import app
-from timetable_parser import parse_opening_code, parse_timetable_csv_bytes
+from timetable_parser import _normalize_quoted_field_padding, parse_opening_code, parse_timetable_csv_bytes
 
 
 def csv_bytes(rows, encoding="cp932", ending="\r\n"):
@@ -81,6 +81,72 @@ def test_student_and_course_descriptions_are_not_returned_or_logged(caplog):
     for value in ["架空 履修学生", "T00000000", "架空所属", "架空科目甲", "架空教員", "架空日時"]:
         assert value not in serialized
         assert value not in caplog.text
+
+
+@pytest.mark.parametrize("encoding", ["cp932", "utf-8-sig"])
+@pytest.mark.parametrize("quoting", [csv.QUOTE_MINIMAL, csv.QUOTE_ALL])
+@pytest.mark.parametrize("with_intensive", [False, True])
+def test_fictional_identity_and_teacher_quotes_do_not_change_timetable(encoding, quoting, with_intensive):
+    rows = timetable() if with_intensive else timetable()[:-3]
+    expected = parse_timetable_csv_bytes(csv_bytes(rows, encoding))
+    rows[0][1] = '架空,氏名 "仮名"\r\n架空の続き'
+    rows[1][1] = '架空所属,架空学科 "架空プログラム"'
+    for row in rows:
+        row[:] = ['架空教員, "仮名"\n架空の続き' if value == '架空教員' else value for value in row]
+    stream = io.StringIO(newline="")
+    csv.writer(stream, quoting=quoting).writerows(rows)
+    assert parse_timetable_csv_bytes(stream.getvalue().encode(encoding)) == expected
+
+
+@pytest.mark.parametrize("padding", [" ", "\t", " \t "])
+@pytest.mark.parametrize("encoding", ["cp932", "utf-8-sig"])
+@pytest.mark.parametrize("with_intensive", [False, True])
+@pytest.mark.parametrize("ending", ["\r\n", "\r", "mixed"], ids=["crlf", "cr", "mixed_newlines"])
+def test_original_export_padding_after_quoted_fields_is_accepted(padding, encoding, with_intensive, ending):
+    rows = timetable() if with_intensive else timetable()[:-3]
+    rows[0][1] = '架空,氏名 "仮名"\r\n架空の続き'
+    stream = io.StringIO(newline="")
+    for index, row in enumerate(rows):
+        terminator = "\r" if ending == "\r" or (ending == "mixed" and index % 2) else "\r\n"
+        csv.writer(stream, quoting=csv.QUOTE_ALL, lineterminator=terminator).writerow(row)
+    canonical = stream.getvalue()
+    padded = canonical.replace('"1限",', '"1限"' + padding + ',', 1)
+    padded = padded.replace('"[氏名]",', '"[氏名]"' + padding + ',', 1)
+    padded = padded[:-len(terminator)] + padding + padded[-len(terminator):]
+    assert parse_timetable_csv_bytes(padded.encode(encoding)) == parse_timetable_csv_bytes(canonical.encode(encoding))
+
+
+@pytest.mark.parametrize("content", [
+    '"  架空,セル内の空白  ","別の架空値"\r\n',
+    '"架空の引用符"" ,\r\n 改行""  ","次"\r\n',
+    '"架空""", "引用符が先頭にない値"\r\n',
+])
+def test_padding_normalization_preserves_quoted_contents(content):
+    assert _normalize_quoted_field_padding(content) == content
+
+
+@pytest.mark.parametrize("suffix", ['余分な文字', ' "余分な引用符"', '\t余分な文字'])
+def test_padding_normalization_does_not_accept_nonpadding_after_quotes(suffix):
+    raw = ('"[氏名]","FICTIONAL_DO_NOT_ECHO"' + suffix + '\r\n').encode()
+    with pytest.raises(CsvFormatError) as error:
+        parse_timetable_csv_bytes(raw)
+    assert error.value.code == "invalid_csv"
+    assert "FICTIONAL_DO_NOT_ECHO" not in str(error.value)
+
+
+@pytest.mark.parametrize("raw,hint", [
+    ('"[氏名]","FICTIONAL_DO_NOT_ECHO\r\n'.encode(), "閉じ"),
+    ('"[氏名]","FICTIONAL_DO_NOT_ECHO"後続文字\r\n'.encode(), "引用符の直後"),
+    (('[氏名],"' + 'X' * (csv.field_size_limit() + 1) + '"\r\n').encode(), "上限"),
+], ids=["unclosed_quote", "characters_after_quote", "field_limit"])
+def test_csv_syntax_errors_explain_location_and_kind_without_echoing_values(raw, hint, caplog):
+    with pytest.raises(CsvFormatError) as error:
+        parse_timetable_csv_bytes(raw)
+    assert error.value.code == "invalid_csv"
+    assert "1行目" in str(error.value)
+    assert hint in str(error.value)
+    assert "FICTIONAL_DO_NOT_ECHO" not in str(error.value)
+    assert "FICTIONAL_DO_NOT_ECHO" not in caplog.text
 
 
 @pytest.mark.parametrize("position", ["grid", "footer"])
@@ -310,6 +376,59 @@ async def test_timetable_upload_api_returns_slots_without_student_data_or_tempor
     for value in ["架空 履修学生", "T00000000", "架空所属", "架空科目甲", "架空教員"]:
         assert value not in response.text
         assert value not in caplog.text
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize("use_session", [False, True], ids=["stateless", "session"])
+async def test_fictional_quoted_timetable_and_syntax_errors_through_both_apis(use_session, monkeypatch, caplog):
+    from session_store import SessionStore
+
+    store = SessionStore()
+    monkeypatch.setattr(app.state, "session_store", store)
+    rows = timetable()
+    marker = '架空,秘密にしない仮名 "引用符"\r\nFICTIONAL_DO_NOT_ECHO'
+    rows[0][1] = marker
+    rows[1][1] = '架空,所属 "仮学科"'
+    for row in rows:
+        row[:] = [marker if value == '架空教員' else value for value in row]
+    stream = io.StringIO(newline="")
+    csv.writer(stream, quoting=csv.QUOTE_ALL).writerows(rows)
+    original_format = stream.getvalue().replace('"1限",', '"1限" ,', 1).encode("cp932")
+    path = "/api/v1/session/timetables" if use_session else "/api/v1/timetables"
+    headers = {"X-Session-Request": "1"} if use_session else {}
+    try:
+        async with httpx2.AsyncClient(transport=httpx2.ASGITransport(app=app),
+                                      base_url="https://timetable.test", headers=headers) as client:
+            mutation = {}
+            if use_session:
+                created = await client.post("/api/v1/session")
+                assert created.status_code == 200
+                mutation = {"X-CSRF-Token": created.json()["csrf_token"], "X-Session-Revision": "0"}
+            response = await client.post(path, headers=mutation, files={
+                "file": ("fictional-timetable.csv", original_format, "text/csv"),
+            })
+            assert response.status_code == 200
+            parsed = response.json()["timetable"] if use_session else response.json()
+            assert parsed["ready_for_recommendation"] is True
+            assert parsed["excluded_term_zero_course_count"] == 1
+            if use_session:
+                mutation["X-Session-Revision"] = str(response.json()["revision"])
+            bad = '"[氏名]","FICTIONAL_DO_NOT_ECHO"余分な文字\r\n'.encode()
+            rejected = await client.post(path, headers=mutation, files={
+                "file": ("fictional-invalid.csv", bad, "text/csv"),
+            })
+            assert rejected.status_code == 422
+            assert rejected.json()["error"]["code"] == "invalid_csv"
+            assert "1行目" in rejected.json()["error"]["message"]
+            assert "引用符の直後" in rejected.json()["error"]["message"]
+            assert rejected.headers["cache-control"] == "no-store"
+            for body in [response.text, rejected.text, caplog.text]:
+                assert "FICTIONAL_DO_NOT_ECHO" not in body
+            if use_session:
+                restored = await client.get("/api/v1/session/workspace")
+                assert restored.json()["timetable"] is None
+    finally:
+        store.clear()
 
 
 @pytest.mark.anyio

@@ -1,0 +1,13 @@
+{
+  "slides": 14,
+  "main_slides": 11,
+  "appendix_slides": 3,
+  "main_seconds": 600,
+  "pdf_text_selectable": true,
+  "pptx_text_and_shapes_editable": true,
+  "all_pptx_xml_parts_valid": 93,
+  "speaker_notes_on_all_slides": true,
+  "element_bounds_checked": true,
+  "synthetic_screen_assets_only": true,
+  "private_path_email_credential_patterns_found": false
+}

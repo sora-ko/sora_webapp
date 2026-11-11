@@ -528,6 +528,7 @@ export type TranscriptCourse = {
   "field_codes": Array<string>;
   "level": (string) | (null);
   "credits": (number) | (null);
+  "score": (number) | (null);
   "status": "passed" | "failed" | "unconfirmed";
   "result": "passed" | "failed" | "unconfirmed";
   "source_result": (string) | (null);

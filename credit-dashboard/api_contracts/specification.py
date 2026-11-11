@@ -7,7 +7,7 @@ from copy import deepcopy
 from .models import RESPONSE_MODELS
 
 
-CONTRACT_VERSION = "1.2.0"
+CONTRACT_VERSION = "1.3.0"
 FILE_BYTES = 5 * 1024 * 1024
 MULTIPART_OVERHEAD_BYTES = 64 * 1024
 

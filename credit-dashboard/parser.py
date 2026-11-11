@@ -38,19 +38,19 @@ class CsvFormatError(ValueError):
         self.details = details or {}
 
 
-def _number(value: str, row_number: int) -> Decimal | None:
+def _number(value: str, row_number: int, *, column: str = "単位数") -> Decimal | None:
     if not value.strip():
         return None
     try:
         number = Decimal(value.strip())
     except InvalidOperation as exc:
         raise CsvFormatError(
-            f"{row_number}行目: 単位数が数値ではありません",
+            f"{row_number}行目: {column}が数値ではありません",
             code="invalid_value",
         ) from exc
     if not number.is_finite() or number < 0:
         raise CsvFormatError(
-            f"{row_number}行目: 単位数が不正です",
+            f"{row_number}行目: {column}が不正です",
             code="invalid_value",
         )
     return number
@@ -148,6 +148,7 @@ def parse_csv_bytes(raw: bytes, *, profile: dict | None = None) -> dict:
         if not record["科目"].strip():
             raise CsvFormatError(f"{row_number}行目: 科目名が空欄です")
         credits = _number(record["単位数"], row_number)
+        score = _number(record.get("得点", ""), row_number, column="得点")
         source_result = record["合否"].strip()
         status = (
             "passed"
@@ -185,6 +186,7 @@ def parse_csv_bytes(raw: bytes, *, profile: dict | None = None) -> dict:
             "field_codes": [x.strip() for x in record.get("分野", "").split(",") if x.strip()],
             "level": record.get("水準", "").strip() or None,
             "credits": _json_number(credits),
+            "score": _json_number(score),
             "status": status,
             "result": status,
             "source_result": source_result or None,

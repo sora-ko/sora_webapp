@@ -62,6 +62,39 @@ class ParserTests(unittest.TestCase):
             parse_csv_bytes(csv_bytes([HEADERS, ["1", "", "", "A", "科目", "英語", "選択", "abc", "合"]]))
         self.assertEqual(context.exception.code, "invalid_value")
 
+    def test_scores_preserve_zero_decimals_and_null_without_affecting_credit_results(self):
+        courses = [
+            ["1", "", "", "F-1", "架空科目A", "英語", "選択", "2", "合", "0"],
+            ["2", "", "", "F-2", "架空科目B", "英語", "選択", "2", "否", "100"],
+            ["3", "", "", "F-3", "架空科目C", "英語", "選択", "2", "", " 89.5 "],
+            ["4", "", "", "F-4", "架空科目D", "英語", "選択", "2", "合", " "],
+            ["5", "", "", "F-5", "架空科目E", "英語", "選択", "", "合", "90"],
+        ]
+        for encoding in ("utf-8-sig", "cp932"):
+            with self.subTest(encoding=encoding):
+                report = parse_csv_bytes(csv_bytes([[*HEADERS, "得点"], *courses], encoding))
+                self.assertEqual([course["score"] for course in report["courses"]], [0, 100, 89.5, None, 90])
+                self.assertIs(type(report["courses"][0]["score"]), int)
+                self.assertIs(type(report["courses"][2]["score"]), float)
+                self.assertEqual([course["status"] for course in report["courses"]],
+                                 ["passed", "failed", "unconfirmed", "passed", "unconfirmed"])
+                self.assertEqual(report["summary"]["earned_credits"], 4)
+                without_scores = parse_csv_bytes(csv_bytes([HEADERS, *[row[:-1] for row in courses]], encoding))
+                self.assertTrue(all(course["score"] is None for course in without_scores["courses"]))
+                self.assertEqual(report["summary"], without_scores["summary"])
+                self.assertEqual(report["warnings"], without_scores["warnings"])
+
+    def test_invalid_scores_explain_row_without_echoing_value(self):
+        for value in ("架空の不正得点", "-1", "NaN", "Infinity", "-Infinity"):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(CsvFormatError, "2行目: 得点") as context:
+                    parse_csv_bytes(csv_bytes([
+                        [*HEADERS, "得点"],
+                        ["1", "", "", "F-1", "架空科目", "英語", "選択", "2", "合", value],
+                    ]))
+                self.assertEqual(context.exception.code, "invalid_value")
+                self.assertNotIn(value, str(context.exception))
+
     def test_course_row_count_is_not_fixed(self):
         courses = [
             [str(number), "10", "1", f"X-{number}", f"架空科目{number}", "英語（英語）", "選択", "1", "合"]

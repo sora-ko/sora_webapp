@@ -143,6 +143,41 @@ async def test_upload_returns_versioned_report_without_logging_student_data(clie
 
 
 @pytest.mark.anyio
+async def test_report_includes_scores_without_changing_evaluations(client):
+    courses = [
+        ["1", "", "", "F-1", "架空科目A", "英語", "選択", "2", "合", "0"],
+        ["2", "", "", "F-2", "架空科目B", "英語", "選択", "2", "否", "89.5"],
+        ["3", "", "", "F-3", "架空科目C", "英語", "選択", "2", "", ""],
+        ["4", "", "", "F-4", "架空科目D", "英語", "選択", "", "合", "100"],
+    ]
+    response = await client.post("/api/v1/reports", files={
+        "file": ("fictional.csv", csv_bytes([[*HEADERS, "得点"], *courses]), "text/csv")})
+    baseline = await client.post("/api/v1/reports", files={
+        "file": ("fictional.csv", csv_bytes([HEADERS, *[row[:-1] for row in courses]]), "text/csv")})
+    assert response.status_code == baseline.status_code == 200
+    report, without_scores = response.json(), baseline.json()
+    assert [course["score"] for course in report["courses"]] == [0, 89.5, None, 100]
+    assert all(course["score"] is None for course in without_scores["courses"])
+    assert report["summary"] == without_scores["summary"]
+    assert report["evaluations"] == without_scores["evaluations"]
+    assert response.headers["cache-control"] == "no-store"
+
+
+@pytest.mark.anyio
+async def test_invalid_score_returns_safe_machine_readable_error(client, caplog):
+    invalid = "架空の非数値得点"
+    raw = csv_bytes([
+        [*HEADERS, "得点"],
+        ["1", "", "", "F-1", "架空科目", "英語", "選択", "2", "合", invalid],
+    ])
+    response = await client.post("/api/v1/reports", files={"file": ("fictional.csv", raw, "text/csv")})
+    assert response.status_code == 422
+    assert response.json() == {"error": {"code": "invalid_value", "message": "2行目: 得点が数値ではありません"}}
+    assert invalid not in response.text and invalid not in caplog.text
+    assert response.headers["cache-control"] == "no-store"
+
+
+@pytest.mark.anyio
 async def test_rule_profiles_are_listed_without_student_data(client):
     response = await client.get("/api/v1/rule-profiles")
     assert response.status_code == 200

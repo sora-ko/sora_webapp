@@ -1,5 +1,7 @@
 # 分業・データ引き継ぎ手順
 
+2026-11-11追記：成績科目の`score: number | null`を含む[フロントエンド実装ガイド](frontend-guide.md)を追加した。新しい画面の制作担当はここから読み、契約リビジョン`1.3.0`の型・架空応答例を使う。成績本文の`schema_version: 2`は維持する。点数の表示、セッション復元、エラー・競合、受入確認まで同ガイドへまとめた。
+
 2026-11-04追記：カタログ309開講への拡充と、[短期セッション・解析結果復元](session-api.md)を実装した。両画面で再読込後も成績・履修表を復元し、CSVを再送せず不足探索を行える。セッションは作成から固定20分で、操作によって延長しない。既存のCSV APIはCookie不要のまま維持し、SQLite・共有評価は2026-11-11の指定で保留中とする。再開条件は[実装計画](session-and-ratings-plan.md)を参照する。
 
 更新日: 2026-11-04。Gitにはアプリケーション、規則プロファイル、生成コード、自動テスト、文書に加え、起動用の公開カタログと確認済みの架空CSVを置く。クローン後の起動に手渡しZIPは不要。実在する学生の成績CSV・履修表CSVは含めない。
@@ -82,6 +84,8 @@ python3 -m venv .venv
 参考UIは置き換えてよい。`static/session-client.js`と`static/recommendation-api.js`はDOMに依存しない通信クライアントだが、その他の画面JSには内部依存が残る。APIの形は[OpenAPI・JSON Schema・TypeScript型](../contracts/README.md)も参照できる。72件の架空HTTP応答例を含め、実際の応答との一致を契約テストで確認する。既存フロントに型の導入や画面の変更を強制しない。
 
 フロント担当はまず`contracts/README.md`を読み、TypeScriptなら`contracts/api.d.ts`、API設計ツールなら`contracts/openapi.json`を利用する。`contracts/examples/index.json`から必要な状態のJSONを選び、バックエンドが起動していない間の画面作成にも使える。既存CSV APIだけを使う接続も引き続き可能。
+
+点数の実装では、通常APIの`courses[].score`と、セッション版・復元時の`report.courses[].score`を区別する。値は数値または`null`で、0点は空欄にしない。合否・単位・GPAを点数から再計算しない。表示例・通信クライアントの使用例・確認用データは[実装ガイド](frontend-guide.md#3-点数追加への対応)を参照する。
 
 復元対応では起動時に`GET /api/v1/session/workspace`を呼ぶ。401なら未解析表示とし、CSV送信時に明示的にセッションを作成する。`POST /api/v1/session/reports`・`timetables`のmultipartで解析済み結果を保持し、以降の`/session/recommendations`・`recommendation-searches`には年度・曜限等の条件だけを送る。変更・検索には`X-Session-Request: 1`・`X-CSRF-Token`・`X-Session-Revision`を付け、`credentials: "include"`を使う。409ではworkspaceを再取得する。復元後のFile欄は空とし、再解析するときだけ再選択する。期限切れ・終了・クリア時の表示破棄も必要。詳しい手順と通信クライアントの使い方は[セッションAPI第8節](session-api.md#8-解析結果の保持復元session-002)を参照する。
 
