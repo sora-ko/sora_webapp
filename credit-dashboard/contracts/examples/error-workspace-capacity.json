@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_data_too_large",
+    "message": "解析結果が一時保持できる容量を超えています。"
+  }
+}

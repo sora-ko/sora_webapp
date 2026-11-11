@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "missing_columns",
+    "message": "成績CSVの形式を確認してください。",
+    "details": {
+      "field": "grades_file"
+    }
+  }
+}

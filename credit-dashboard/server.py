@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import asyncio
 import os
+from contextlib import asynccontextmanager, suppress
 from dataclasses import dataclass, field
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -12,7 +14,6 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
 from python_multipart.exceptions import MultipartParseError
 from python_multipart.multipart import MultipartParser, parse_options_header
 from starlette.datastructures import MutableHeaders
@@ -30,6 +31,8 @@ from parser import CsvFormatError, parse_csv_bytes
 from timetable_parser import parse_timetable_csv_bytes
 from recommendations import RecommendationError, load_catalogs, catalog_metadata, find_catalog, recommend_for_slot
 from recommendation_search import search_recommendations
+from session_api import SessionAwareCorsMiddleware, guard_session_request, workspace_headers, router as session_router
+from session_store import SessionError, SessionSettings, SessionStore
 from requirement_evaluator import (
     MAX_RESIDENCE_YEARS,
     SUPPORTED_REQUIREMENT_IDS,
@@ -309,19 +312,34 @@ def _append_scope_warning(report: dict[str, Any], profile: dict[str, Any]) -> No
         )
 
 
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    store = application.state.session_store
+    cleanup = asyncio.create_task(store.cleanup_loop())
+    try:
+        yield
+    finally:
+        cleanup.cancel()
+        try:
+            with suppress(asyncio.CancelledError):
+                await cleanup
+        finally:
+            store.clear()
+
+
 app = FastAPI(
     title="単位取得状況 API",
     version="1.0.0",
     docs_url=None,
     redoc_url=None,
     openapi_url=None,
+    lifespan=lifespan,
 )
+app.state.session_store = SessionStore(SessionSettings.from_environ())
 cors_origins = [value.strip() for value in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",") if value.strip()]
+app.state.session_allowed_origins = cors_origins
 if cors_origins:
-    if "*" in cors_origins:
-        raise ValueError("CORS_ALLOWED_ORIGINSには具体的なOriginを指定してください")
-    app.add_middleware(CORSMiddleware, allow_origins=cors_origins, allow_methods=["GET", "POST"],
-                       allow_headers=["Content-Type"], allow_credentials=False)
+    app.add_middleware(SessionAwareCorsMiddleware, allow_origins=cors_origins)
 app.add_middleware(SecurityHeadersMiddleware)
 
 
@@ -336,6 +354,11 @@ async def api_error_handler(_request: Request, exc: ApiError) -> JSONResponse:
 @app.exception_handler(RecommendationError)
 async def recommendation_error_handler(_request: Request, exc: RecommendationError) -> JSONResponse:
     return JSONResponse(status_code=exc.status, content=_error_payload(exc.code, str(exc)))
+
+
+@app.exception_handler(SessionError)
+async def session_error_handler(_request: Request, exc: SessionError) -> JSONResponse:
+    return JSONResponse(status_code=exc.status_code, content=_error_payload(exc.code, exc.message))
 
 
 @app.exception_handler(RequestValidationError)
@@ -501,6 +524,90 @@ async def create_recommendation_search(request: Request) -> dict:
     return search_recommendations(catalog, context, parsed["grades_file"], parsed["timetable_file"], profile)
 
 
+async def _upload_workspace(request: Request, kind: str) -> dict:
+    await guard_session_request(request, allow_body=True)
+    token, csrf, revision = workspace_headers(request)
+    store = request.app.state.session_store
+    pending = store.begin_update(token, csrf, revision, kind)
+    # 元CSVの検証・分類・学務判定は既存APIと同じ処理を使う。元バイト列は保持しない。
+    parsed = await (create_report(request) if kind == "report" else create_timetable(request))
+    return store.commit(token, csrf, pending, kind, parsed)
+
+
+@app.post("/api/v1/session/reports")
+async def upload_session_report(request: Request) -> dict:
+    return await _upload_workspace(request, "report")
+
+
+@app.post("/api/v1/session/timetables")
+async def upload_session_timetable(request: Request) -> dict:
+    return await _upload_workspace(request, "timetable")
+
+
+async def _clear_workspace(request: Request, kind: str) -> dict:
+    await guard_session_request(request)
+    token, csrf, revision = workspace_headers(request)
+    store = request.app.state.session_store
+    store.begin_update(token, csrf, revision, kind)
+    return store.workspace(token)
+
+
+@app.delete("/api/v1/session/reports")
+async def clear_session_report(request: Request) -> dict:
+    return await _clear_workspace(request, "report")
+
+
+@app.delete("/api/v1/session/timetables")
+async def clear_session_timetable(request: Request) -> dict:
+    return await _clear_workspace(request, "timetable")
+
+
+async def _workspace_recommendation_inputs(request: Request, *, slot: bool = False) -> tuple:
+    await guard_session_request(request, allow_body=True)
+    credentials = workspace_headers(request)
+    store = request.app.state.session_store
+    store.assert_current(*credentials)
+    names = {"profile_id", "academic_year", "term"} | ({"weekday", "period"} if slot else set())
+    upload = await _read_upload(request, file_fields=frozenset(), required_files=frozenset(),
+                                allowed_fields=frozenset(names))
+    snapshot = store.checked_workspace(*credentials)
+    saved_profile = (snapshot["report"] or {}).get("curriculum", {}).get("rules_version")
+    profile = _selected_profile(upload.fields.get("profile_id") or saved_profile)
+    if saved_profile and profile["profile_id"] != saved_profile:
+        raise SessionError(409, "session_profile_mismatch", "成績を解析した対象と異なります。対象を確認して成績CSVを再解析してください。")
+    context = {"profile_id": profile["profile_id"]}
+    limits = [("academic_year", 2000, 2099), ("term", 1, 4)]
+    if slot:
+        limits.extend([("weekday", 1, 5), ("period", 1, 5)])
+    for name, lower, upper in limits:
+        value = upload.fields.get(name, "")
+        if not value.isascii() or not value.isdigit() or not lower <= int(value) <= upper:
+            raise ApiError(422, "invalid_recommendation_context", "開講年度・ターム・曜日・時限を正しく指定してください。")
+        context[name] = int(value)
+    return credentials, snapshot, profile, context, find_catalog(_recommendation_catalogs(), context)
+
+
+@app.post("/api/v1/session/recommendations")
+async def session_recommendations(request: Request) -> dict:
+    credentials, snapshot, _, context, catalog = await _workspace_recommendation_inputs(request, slot=True)
+    result = recommend_for_slot(catalog, context, snapshot["timetable"])
+    request.app.state.session_store.assert_current(*credentials)
+    return result
+
+
+@app.post("/api/v1/session/recommendation-searches")
+async def session_recommendation_search(request: Request) -> dict:
+    credentials, snapshot, profile, context, catalog = await _workspace_recommendation_inputs(request)
+    if snapshot["report"] is None or snapshot["timetable"] is None:
+        raise SessionError(409, "session_inputs_missing", "成績CSVと履修表CSVを解析してから探索してください。")
+    result = search_recommendations(catalog, context, snapshot["report"], snapshot["timetable"], profile)
+    request.app.state.session_store.assert_current(*credentials)
+    return result
+
+
+app.include_router(session_router)
+
+
 @app.api_route(
     "/api/{api_path:path}",
     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE"],
@@ -515,6 +622,12 @@ async def unknown_api_route(request: Request, api_path: str) -> None:
         "v1/recommendation-catalogs": {"GET"},
         "v1/recommendations": {"POST"},
         "v1/recommendation-searches": {"POST"},
+        "v1/session": {"GET", "POST", "DELETE"},
+        "v1/session/workspace": {"GET"},
+        "v1/session/reports": {"POST", "DELETE"},
+        "v1/session/timetables": {"POST", "DELETE"},
+        "v1/session/recommendations": {"POST"},
+        "v1/session/recommendation-searches": {"POST"},
     }
     if api_path in known_methods and request.method not in known_methods[api_path]:
         raise ApiError(405, "method_not_allowed", "このHTTPメソッドは使用できません。")

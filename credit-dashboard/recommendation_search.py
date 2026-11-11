@@ -69,7 +69,7 @@ def search_recommendations(catalog: dict, context: dict, report: dict, timetable
               "messages": [
                   {"code": "individual_simulation", "message": "各候補を1科目修得した場合の卒業要件への効果です。候補同士の同時履修は確認していません。"},
                   {"code": "benefits_not_additive", "message": "分類別条件と教養合計・総計の改善量は重なるため合算できません。履修中の単位は修得済みに含めません。"},
-                  {"code": "search_scope", "message": "代表科目から探索します。学年で絞らず、修得済みは開講番号または科目名の一致で除外します。先修条件・履修許可は未確認です。"},
+                  {"code": "search_scope", "message": "開講カタログから探索します。学年で絞らず、修得済みは開講番号または科目名の一致で除外します。先修条件・履修許可は未確認です。"},
                   {"code": "liberal_shortage_scope", "message": "教養の必修・選択必修・選択・合計の不足を改善する科目だけを推薦します。専門との共通超過分や総計だけの不足では推薦しません。"},
               ]}
 

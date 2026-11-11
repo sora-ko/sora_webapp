@@ -56,7 +56,7 @@ def write_summary(folder: Path, config: dict, report: dict) -> None:
                  '- 利用するJSONは`liberal-catalog.json`の1つ。科目ごとの出典・監査情報・空の概要は含めない。',
                  '- 元資料と来歴は`catalog_sources/`の年度設定、`sources/`、`raw-rows.json`、`extraction-audit.json`で管理する。',
                  '- 旧JSONは`archive/`へ保管し、完全削除しない。',
-                 '- 代表選定は、元候補が持つ曜限とタームごとの大区分を保持する。最小件数の証明や推薦順位付けではない。',
+            f'- 選定方法：`{report["selection"]}`。`all`は条件に合う全開講、`representative`は曜限とターム別大区分を保つ代表選定。',
                  '- 各曜日・時限で全科目区分が選べることや、同時履修・修得済み除外・先修条件・履修許可は保証しない。',
                  '- 複数曜限の科目はすべての曜日・時限が履修表と重ならないことを、推薦時に別途確認する。',
                  '- シラバスの授業概要・評価方法は未取得。推薦API・画面では学年を使わず指定枠の候補を表示する。', ''])
@@ -82,6 +82,8 @@ def main() -> None:
     parser.add_argument("--download", action="store_true", help="年度別設定にある公式公開PDFを取得する")
     parser.add_argument("--extract-only", action="store_true", help="PDFのセル抽出と完全性照合まで行う")
     parser.add_argument("--reuse-extraction", action="store_true", help="同じSHA256のPDFから抽出済みのセルを再利用する")
+    parser.add_argument("--selection", choices=["all", "representative"], default="all",
+                        help="通常は全候補を使う。旧代表選定も再現できる")
     args = parser.parse_args()
     config = json.loads((ROOT / "catalog_sources" / f"niigata-{args.year}.json").read_text(encoding="utf-8"))
     folder = ROOT / "data" / "recommendations" / str(args.year)
@@ -123,7 +125,7 @@ def main() -> None:
     print(json.dumps({"extracted_rows": len(records), "coverage_matches": True}, ensure_ascii=False))
     if not args.extract_only:
         catalog, target, quality = build_catalog(records, config, digest)
-        compact_catalog, report = build_compact_catalog(catalog, config)
+        compact_catalog, report = build_compact_catalog(catalog, config, selection=args.selection)
         current = folder / "liberal-catalog.json"
         if current.exists() and json.loads(current.read_text(encoding="utf-8")).get("schema_version") in {1, 2}:
             archive_legacy(folder, "liberal-catalog.json")

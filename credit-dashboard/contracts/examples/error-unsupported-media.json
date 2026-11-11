@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "unsupported_media_type",
+    "message": "multipart/form-dataで送信してください。"
+  }
+}

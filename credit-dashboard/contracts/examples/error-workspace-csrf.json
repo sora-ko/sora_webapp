@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "invalid_csrf_token",
+    "message": "操作の確認情報が一致しません。セッションを取得し直してください。"
+  }
+}

@@ -6,7 +6,7 @@
   let catalogs = [];
   let catalogLoading = true;
   let catalogError = '';
-  let timetableFile = null;
+  let timetableLoaded = false;
   let timetableContext = null;
   let version = 0;
   let request = null;
@@ -20,14 +20,14 @@
   const selectedCatalog = () => {
     const profile = window.creditWorkspace.profile();
     const matches = catalogs.filter(catalog => catalog.profile_id === profile?.profile_id);
-    if (timetableFile) return matches.find(catalog => catalog.academic_year === timetableContext?.academic_year);
+    if (timetableLoaded) return matches.find(catalog => catalog.academic_year === timetableContext?.academic_year);
     return matches.sort((a, b) => b.academic_year - a.academic_year)[0];
   };
   function selectionMessage() {
     if (!window.creditWorkspace.profile()) return '「単位集計」タブで対象プログラムを選択してください。';
     if (catalogLoading) return '候補データを読み込んでいます。しばらくお待ちください。';
     if (catalogError) return catalogError;
-    if (timetableFile && !timetableContext?.academic_year) return '履修表の開講年度を確認できません。年度・タームの情報を確認してください。';
+    if (timetableLoaded && !timetableContext?.academic_year) return '履修表の開講年度を確認できません。年度・タームの情報を確認してください。';
     const year = timetableContext?.academic_year;
     return `単位集計で選択した対象${year ? `の${year}年度` : ''}に対応する教養候補データがありません。`;
   }
@@ -77,7 +77,7 @@
     $('recommendation-status').textContent = '候補を確認しています…';
     $('recommendation-result').scrollIntoView({block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
     try {
-      const data = await api.recommend({...context, profile_id: catalog.profile_id}, timetableFile, request.signal);
+      const data = await api.recommend({...context, profile_id: catalog.profile_id}, null, request.signal);
       if (currentVersion !== version) return;
       $('recommendation-status').textContent = {
         ok: data.basis === 'timetable' ? 'すべての曜限で、履修表の通常授業と重複しない候補です。' : 'カタログ上の候補です。履修中の授業との重複は未確認です。',
@@ -187,15 +187,15 @@
     invalidate,
     clear() {
       invalidate();
-      timetableFile = null;
+      timetableLoaded = false;
       timetableContext = null;
       $('recommendation-preview').hidden = true;
       $('recommendation-browse').hidden = false;
       updateCatalog();
     },
-    setTimetable(_data, file) {
+    setTimetable(data) {
       invalidate();
-      timetableFile = file;
+      timetableLoaded = Boolean(data);
       $('recommendation-preview').hidden = true;
       $('recommendation-browse').hidden = true;
     },

@@ -19,7 +19,7 @@
       <button type="button" class="nav-item" data-view="courses"><span data-icon="list"></span><span>科目一覧</span><span class="nav-arrow">↗</span></button>
     </nav>
     <div class="sidebar-tip"><span data-icon="leaf"></span><strong>次の一歩を、見つけよう。</strong><p>単位の確認から、空き時間の授業探しまで。</p></div>
-    <div class="sidebar-footer"><span data-icon="shield"></span><p>CSVは保存しません。<br>再読み込みでデータは消えます。</p></div>
+    <div class="sidebar-footer"><span data-icon="shield"></span><p>CSV原本は保存しません。<br>解析結果は最大20分、一時保持します。</p></div>
   </aside>
 
   <div class="workspace">
@@ -61,9 +61,10 @@
         <div id="courses-empty" class="panel empty-state"><span data-icon="list"></span><h2>まずは成績CSVを読み込んでください</h2><p>修得状況や科目区分で絞り込みできます。</p><button type="button" id="go-upload" class="button primary">単位の状況へ<span data-icon="arrow"></span></button></div>
         <section id="course-panel" class="panel" hidden><div class="course-toolbar"><label class="search-field"><span data-icon="search"></span><input type="search" id="course-search" placeholder="科目名・開講番号を検索" aria-label="科目名・開講番号を検索"></label><label class="course-filter-label">区分<select id="course-area"><option value="all">すべての区分</option><option value="liberal_arts">教養</option><option value="faculty_specialized">専門</option><option value="unknown">分類不明</option><option value="excluded">対象外</option></select></label><label class="course-filter-label">修得状況<select id="course-result"><option value="all">すべて</option><option value="passed">修得済み</option><option value="failed">未修得</option><option value="unconfirmed">要確認</option></select></label></div><div class="course-table-scroll" role="region" aria-label="科目一覧" tabindex="0"><table class="course-table"><thead><tr><th scope="col">科目名 / 開講番号</th><th scope="col">区分</th><th scope="col">単位</th><th scope="col">修得状況</th><th scope="col">修得年度</th></tr></thead><tbody id="course-rows"></tbody></table></div><p id="course-filter-count" class="table-footnote" role="status"></p></section>
       </section>
+      <p id="session-status" class="inline-status" role="status" aria-live="polite"></p>
       <footer class="page-footer"><span>単位ノート <span class="footer-divider">/</span> あなたの学びを、見通しよく。</span><button type="button" id="clear-all" class="text-button muted-button"><span data-icon="trash"></span>読み込んだ情報をクリア</button></footer>
     </main>
   </div>
-  <dialog id="help-dialog"><div class="dialog-heading"><h2>単位ノートの使い方</h2><button type="button" id="close-help" class="icon-button" aria-label="使い方を閉じる">×</button></div><ol class="help-steps"><li><strong>成績CSVを選択</strong><p>「単位の状況」から大学の成績CSVを読み込みます。</p></li><li><strong>進級・卒業の見通しを確認</strong><p>不足と要確認を区別し、詳細から条件や根拠を確認できます。</p></li><li><strong>時間割から次の授業へ</strong><p>教養候補はCSVなしでも閲覧できます。履修表CSVを加えると、登録授業との重複を確認します。</p></li></ol><p class="dialog-note">CSV・学生情報は保存しません。タブの切替では保持され、ページの再読み込みで消えます。</p></dialog>
+  <dialog id="help-dialog"><div class="dialog-heading"><h2>単位ノートの使い方</h2><button type="button" id="close-help" class="icon-button" aria-label="使い方を閉じる">×</button></div><ol class="help-steps"><li><strong>成績CSVを選択</strong><p>「単位の状況」から大学の成績CSVを読み込みます。</p></li><li><strong>進級・卒業の見通しを確認</strong><p>不足と要確認を区別し、詳細から条件や根拠を確認できます。</p></li><li><strong>時間割から次の授業へ</strong><p>教養候補はCSVなしでも閲覧できます。履修表CSVを加えると、登録授業との重複を確認します。</p></li></ol><p class="dialog-note">CSV原本は保存しません。解析結果はメモリに最大20分一時保持し、ページの再読み込み後も復元できます。「読み込んだ情報をクリア」で削除できます。</p></dialog>
 </body>
 </html>

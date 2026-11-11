@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "multiple_files",
+    "message": "同じ入力欄に指定できるCSVは1つだけです。",
+    "details": {
+      "field": "file"
+    }
+  }
+}

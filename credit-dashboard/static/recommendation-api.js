@@ -20,6 +20,9 @@
         return data.catalogs;
       },
       async recommend(context, file, signal) {
+        if (window.creditWorkspace?.session.data()?.timetable) {
+          return window.creditWorkspace.session.slot(context, signal);
+        }
         const body = new FormData();
         for (const key of ['profile_id', 'academic_year', 'term', 'weekday', 'period']) {
           body.append(key, String(context[key]));
@@ -39,6 +42,9 @@
         return data;
       },
       async search(context, gradesFile, timetableFile, signal) {
+        if (window.creditWorkspace?.parsed().grades && window.creditWorkspace?.parsed().timetable) {
+          return window.creditWorkspace.session.search(context, signal);
+        }
         const body = new FormData();
         for (const key of ['profile_id', 'academic_year', 'term']) body.append(key, String(context[key]));
         body.append('grades_file', gradesFile, gradesFile.name);

@@ -1,4 +1,5 @@
 /* 文書化されたHTTP APIだけを使う。既存画面・Pythonモジュールには依存しない。 */
+import '../session-client.js';
 export class ApiError extends Error {
   constructor(message, code = 'request_failed', details = {}) {
     super(message);
@@ -10,6 +11,7 @@ export class ApiError extends Error {
 
 export function createApi(base = '') {
   const origin = base.replace(/\/$/, '');
+  const session = window.createSessionClient(origin);
   async function request(path, {fields, files, signal, schema} = {}) {
     const options = {cache: 'no-store', credentials: 'omit', signal};
     if (fields || files) {
@@ -38,13 +40,13 @@ export function createApi(base = '') {
     return data;
   }
   return {
+    session,
     profiles: signal => request('/api/v1/rule-profiles', {signal}),
     catalogs: signal => request('/api/v1/recommendation-catalogs', {signal, schema: 1}),
-    report: (fields, file, signal) => request('/api/v1/reports', {fields, files: {file}, signal, schema: 2}),
-    timetable: (file, signal) => request('/api/v1/timetables', {files: {file}, signal, schema: 1}),
-    slot: (fields, file, signal) => request('/api/v1/recommendations', {fields, files: {file}, signal, schema: 1}),
-    search: (fields, grades, timetable, signal) => request('/api/v1/recommendation-searches', {
-      fields, files: {grades_file: grades, timetable_file: timetable}, signal, schema: 1,
-    }),
+    report: async (fields, file, signal) => (await session.saveReport(fields, file, signal)).report,
+    timetable: async (file, signal) => (await session.saveTimetable(file, signal)).timetable,
+    slot: (fields, signal) => session.data()?.timetable ? session.slot(fields, signal)
+      : request('/api/v1/recommendations', {fields, signal, schema: 1}),
+    search: (fields, signal) => session.search(fields, signal),
   };
 }

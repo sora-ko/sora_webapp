@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "status": "active",
+  "csrf_token": "fictional_contract_token_0002______________",
+  "ttl_seconds": 1200,
+  "expires_in_seconds": 1200
+}

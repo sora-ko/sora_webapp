@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "format": "niigata-rsrefer-grid",
+  "context": {
+    "academic_year": 2026,
+    "semester": 2,
+    "term": null
+  },
+  "display_contexts": [
+    {
+      "academic_year": 2026,
+      "term": 3
+    },
+    {
+      "academic_year": 2026,
+      "term": 4
+    }
+  ],
+  "represented_weekdays": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "represented_periods": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "courses": [
+    {
+      "course_code": "263T9501",
+      "academic_year": 2026,
+      "term": 3,
+      "slots": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264T9502",
+      "academic_year": 2026,
+      "term": 4,
+      "slots": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    }
+  ],
+  "busy_slots": [
+    {
+      "academic_year": 2026,
+      "term": 3,
+      "weekday": 1,
+      "period": 1
+    },
+    {
+      "academic_year": 2026,
+      "term": 4,
+      "weekday": 3,
+      "period": 2
+    }
+  ],
+  "excluded_term_zero_course_count": 0,
+  "policy_notes": [],
+  "unresolved_courses": [
+    {
+      "course_code": null,
+      "row_number": 6,
+      "weekday": 2,
+      "period": 2,
+      "reason_code": "missing_course_code"
+    }
+  ],
+  "ready_for_recommendation": false,
+  "warnings": [
+    {
+      "code": "missing_course_code",
+      "row_number": 6,
+      "message": "科目情報に開講番号がありません。空き時間の判定を保留します。"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 # 分業・データ引き継ぎ手順
 
-更新日: 2026-10-28。Gitにはアプリケーション、規則プロファイル、生成コード、自動テスト、文書に加え、起動用の公開カタログと確認済みの架空CSVを置く。クローン後の起動に手渡しZIPは不要。実在する学生の成績CSV・履修表CSVは含めない。
+2026-11-04追記：カタログ309開講への拡充と、[短期セッション・解析結果復元](session-api.md)を実装した。両画面で再読込後も成績・履修表を復元し、CSVを再送せず不足探索を行える。セッションは作成から固定20分で、操作によって延長しない。既存のCSV APIはCookie不要のまま維持し、SQLite・共有評価は2026-11-11の指定で保留中とする。再開条件は[実装計画](session-and-ratings-plan.md)を参照する。
+
+更新日: 2026-11-04。Gitにはアプリケーション、規則プロファイル、生成コード、自動テスト、文書に加え、起動用の公開カタログと確認済みの架空CSVを置く。クローン後の起動に手渡しZIPは不要。実在する学生の成績CSV・履修表CSVは含めない。
 
 2026-10-28追記：この文書とAPI仕様から別の試作UIを作成した。画面は`/prototype/`、参照した資料・不足していた契約項目・検証方法は[試作フロントエンドの記録](prototype-handoff-test.md)にまとめる。
 
@@ -8,8 +10,8 @@
 
 - 2025年度入学・知能情報システムの規則で、CSV解析、単位集計、第2・第4年次進級と卒業の三値判定、個別必修16科目の確認を行う。
 - 同じ規則の1年生は第2年次進級＋卒業、2・3年生は第4年次進級＋卒業、4年以上は卒業を表示する。留年・編入なし、在学期間と学年が一致する前提。
-- 2026年度の代表63開講で、教養の曜限検索と、修得単位・空き時間からの探索を行う。推薦は学年で絞らない。教養条件がすべて充足していれば、専門だけの不足では推薦しない。
-- CSVと解析結果はサーバー・ブラウザーのメモリだけで扱い、保存・セッション・ログインは実装しない。
+- 2026年度の309開講で、教養の曜限検索と、修得単位・空き時間からの探索を行う。推薦は学年で絞らない。教養条件がすべて充足していれば、専門だけの不足では推薦しない。
+- CSV原本は処理中のメモリだけで扱う。解析結果は任意の短期セッションのメモリに保持し、固定20分・クリア・明示終了・サーバー再起動で破棄する。永続保存・ログインは実装しない。
 
 ## 2. Gitで共有するデータ
 
@@ -17,7 +19,7 @@
 
 | プロジェクト内の相対パス | 用途 |
 | --- | --- |
-| `data/recommendations/2026/liberal-catalog.json` | 実行に必要なカタログ。schema version 3、63開講 |
+| `data/recommendations/2026/liberal-catalog.json` | 実行に必要なカタログ。schema version 3、309開講 |
 | `data/recommendations/2026/README.md` | 85/100枠のカバー範囲と候補がない15枠の調査結果 |
 | `examples/first-year-sample.csv` | 架空の1年生。34単位、第2年次進級`satisfied` |
 | `examples/graduation-sample.csv` | 架空の卒業確認用簡略版。124単位、卒業`satisfied` |
@@ -37,7 +39,7 @@ cd sora_webapp/credit-dashboard
 docker compose up --build
 ```
 
-`http://localhost:8000/prototype/`で試作画面、`http://localhost:8000/`で従来画面を利用する。CSVなしの教養候補閲覧も利用できる。成績集計の確認には、ブラウザーから`examples/first-year-sample.csv`または`examples/graduation-sample-original-format.csv`を選択する。学生CSVをサーバーのフォルダーへ置く必要はなく、実データを使う場合もブラウザーから毎回選択する。
+`http://localhost:8000/prototype/`で試作画面、`http://localhost:8000/`で従来画面を利用する。CSVなしの教養候補閲覧も利用できる。成績集計の確認には、ブラウザーから`examples/first-year-sample.csv`または`examples/graduation-sample-original-format.csv`を選択する。学生CSVをサーバーのフォルダーへ置く必要はなく、実データを使う場合もブラウザーから選択する。固定20分の保持期間内なら再読み込み後は解析結果を復元できる。
 
 Dockerを使わない場合はPython 3.12で次を実行する。
 
@@ -69,15 +71,19 @@ python3 -m venv .venv
 | `POST /api/v1/recommendations` | 年度・ターム・曜日・時限、任意の履修表`file`。マスの候補閲覧 | 1 | [候補API](recommendation-api.md) |
 | `POST /api/v1/recommendation-searches` | 年度・ターム、`grades_file`と`timetable_file`。教養不足の探索 | 1 | [単位照合API](recommendation-search-api.md) |
 
-CSVは`multipart/form-data`で送る。レポートID、Cookie、事前の解析API呼出しは不要で、各APIが元CSVを再検証する。1ファイル5 MiB、探索は2ファイルで合計10 MiB＋multipart用64 KiB。エラーは`error.code`・日本語`error.message`、必要に応じて`error.details`を返す。全応答は`Cache-Control: no-store`。
+上表の従来APIではCSVを`multipart/form-data`で送り、レポートID・Cookie・事前の解析API呼出しは不要で、各APIが元CSVを再検証する。復元に対応する追加APIは後述する。1ファイル5 MiB、探索は2ファイルで合計10 MiB＋multipart用64 KiB。エラーは`error.code`・日本語`error.message`、必要に応じて`error.details`を返す。全応答は`Cache-Control: no-store`。
 
 フロントエンドは入力・表示・メモリ上の状態管理を担当し、CSV分類・単位配賦・学務判定・推薦効果・時間重複はバックエンドに任せる。未知値と未充足を区別し、配列が空という理由だけで履修不可と表示しない。元Fileと結果を同じアプリのメモリで共有し、ファイル・プロファイル・対象タームの変更で古い結果を無効にする。
 
 対象プログラムは単位集計側で一度だけ選び、公開プロファイル情報をメモリで共有する。教養候補側は対象名を表示し、候補閲覧と不足探索に同じ`profile_id`を渡す。解析済み履修表の選択年度に対応するカタログを使い、未解析なら同一プロファイルの最新年度を明示する。対象や年度に対応するデータがなければ案内し、別の対象へ代替しない。APIの入力・JSON形式は従来どおり。
 
-別ポートでの開発は`/api`をプロキシするか、バックエンドの環境変数`CORS_ALLOWED_ORIGINS`に実際のOriginをカンマ区切りで設定する。例は`http://localhost:5173,http://127.0.0.1:5173`。Composeにも同じ変数を渡せる。ワイルドカードとCookie認証は使わない。
+別ポートでの開発は`/api`をプロキシするか、バックエンドの環境変数`CORS_ALLOWED_ORIGINS`に実際のOriginをカンマ区切りで設定する。例は`http://localhost:5173,http://127.0.0.1:5173`。Composeにも同じ変数を渡せる。ワイルドカードは使わない。従来APIは資格情報なしを維持し、新規のセッションAPIだけ`credentials: "include"`と専用ヘッダーを使う。セッションは同一サイトで利用し、localhostと127.0.0.1を途中で切り替えない。
 
-参考UIは置き換えてよい。`static/recommendation-api.js`はDOMに依存しない通信クライアントだが、その他の画面JSには内部依存が残る。機械可読な応答スキーマ・型は今後整備するため、現段階は上記MarkdownとAPIテストを契約にする。
+参考UIは置き換えてよい。`static/session-client.js`と`static/recommendation-api.js`はDOMに依存しない通信クライアントだが、その他の画面JSには内部依存が残る。APIの形は[OpenAPI・JSON Schema・TypeScript型](../contracts/README.md)も参照できる。72件の架空HTTP応答例を含め、実際の応答との一致を契約テストで確認する。既存フロントに型の導入や画面の変更を強制しない。
+
+フロント担当はまず`contracts/README.md`を読み、TypeScriptなら`contracts/api.d.ts`、API設計ツールなら`contracts/openapi.json`を利用する。`contracts/examples/index.json`から必要な状態のJSONを選び、バックエンドが起動していない間の画面作成にも使える。既存CSV APIだけを使う接続も引き続き可能。
+
+復元対応では起動時に`GET /api/v1/session/workspace`を呼ぶ。401なら未解析表示とし、CSV送信時に明示的にセッションを作成する。`POST /api/v1/session/reports`・`timetables`のmultipartで解析済み結果を保持し、以降の`/session/recommendations`・`recommendation-searches`には年度・曜限等の条件だけを送る。変更・検索には`X-Session-Request: 1`・`X-CSRF-Token`・`X-Session-Revision`を付け、`credentials: "include"`を使う。409ではworkspaceを再取得する。復元後のFile欄は空とし、再解析するときだけ再選択する。期限切れ・終了・クリア時の表示破棄も必要。詳しい手順と通信クライアントの使い方は[セッションAPI第8節](session-api.md#8-解析結果の保持復元session-002)を参照する。
 
 ## 5. 既知の制約と次の作業
 

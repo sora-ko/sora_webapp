@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "file_too_large",
+    "message": "CSVは5 MiB以下にしてください。"
+  }
+}

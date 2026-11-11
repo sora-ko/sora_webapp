@@ -254,3 +254,21 @@ def test_legacy_archival_preserves_original_bytes_and_existing_archive(tmp_path)
     archive_legacy(tmp_path, "old.json")
     assert (tmp_path / "archive/old.json").read_text() == '{"fictional": 1}'
     assert len(list((tmp_path / "archive").glob('old*.json'))) == 2
+
+
+def test_all_selection_preserves_variants_without_loosening_audience_or_schedule():
+    cfg = config()
+    rows = [row(), row(course_code="263G9992"),
+            row(course_code="263G9993", audience="医学部"),
+            row(course_code="260G9994", offered_period="集中")]
+    full, _, _ = build_catalog(rows, cfg, "fictional-hash")
+    all_courses, report = build_compact_catalog(full, cfg, selection="all")
+    representative, _ = build_compact_catalog(full, cfg)
+    assert len(all_courses["courses"]) == 2
+    assert len(representative["courses"]) == 1
+    assert report["selection"] == "all"
+    assert report["pool"] == report["selected"]
+    full["offerings"].reverse()
+    assert build_compact_catalog(full, cfg, selection="all")[0] == all_courses
+    with pytest.raises(ValueError, match="選定方法"):
+        build_compact_catalog(full, cfg, selection="unexpected")

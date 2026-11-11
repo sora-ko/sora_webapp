@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "context": {
+    "profile_id": "niigata-engineering-sis-2025-v1",
+    "academic_year": 2026,
+    "term": 3,
+    "weekday": 1,
+    "period": 5
+  },
+  "basis": "catalog",
+  "status": "empty",
+  "candidates": [],
+  "counts": {
+    "matching": 0,
+    "returned": 0,
+    "excluded_overlap": 0,
+    "excluded_unconfirmed": 0,
+    "excluded_registered": 0
+  },
+  "checks": {
+    "timetable": "not_provided",
+    "earned_credits": "not_checked",
+    "requirements": "not_checked",
+    "enrollment": "not_checked"
+  },
+  "messages": [
+    {
+      "code": "scope_note",
+      "message": "開講カタログからの候補です。修得済み・不足単位・先修条件・履修許可は未確認です。"
+    },
+    {
+      "code": "timetable_not_provided",
+      "message": "履修表未読込のため、登録済み授業との時間重複は確認していません。"
+    }
+  ]
+}

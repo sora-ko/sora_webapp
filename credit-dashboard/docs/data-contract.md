@@ -1,5 +1,9 @@
 # データ契約
 
+2026-11-04追記：[OpenAPI・JSON Schema・TypeScript型・架空応答例](../contracts/README.md)を整備した。本文の意味・運用上の注意は本書と各API文書、機械可読な形は`contracts/`を参照する。既存のURL・入力・返却形式は変更していない。
+
+同日追加：任意利用のセッションAPIは[短時間セッションAPI](session-api.md)へ分離した。作成から固定20分で、操作では延長しない。`/api/v1/session/reports`・`timetables`で解析結果だけをメモリ保持し、`GET /api/v1/session/workspace`で復元する。復元結果からの候補検索・不足探索にも対応する。変更にはCSRFトークンとリビジョンを要求する。既存のCSV APIはCookieなしで利用でき、入力・出力の契約を維持する。
+
 ## 1. 方針
 
 CSV固有の表記を直接フロントエンドや判定ロジックへ流さない。
@@ -11,7 +15,7 @@ CSV原本はリクエスト処理中だけメモリに保持し、レスポン�
 
 履修表の入力には別リソース`POST /api/v1/timetables`を使う。[履修表CSVの読み取り仕様](timetable-csv.md)にフィールド・返却JSON・0のMVP除外方針を定義する。以下の成績レポートJSONとは別モデルであり、履修表の表示科目を取得単位へ加算しない。
 
-公開資料から生成する開講カタログの契約は[教養開講カタログ](liberal-catalog.md)に分離する。現在の簡易JSONは`schema_version: 3`で、`academic_year`・`profile_id`・`courses`を持つ。対象学年は持たず、候補検索のAPIも学年を使わない。科目は開講番号・名前・単位・区分・ターム・曜限の6項目。旧版の`offerings`や出典情報は含めない。ファイル全体の直接配信は行わず、代表科目の収録を履修許可や不足単位に応じた推薦結果として扱わない。
+公開資料から生成する開講カタログの契約は[教養開講カタログ](liberal-catalog.md)に分離する。現在の簡易JSONは`schema_version: 3`で、`academic_year`・`profile_id`・`courses`を持つ。対象学年は持たず、候補検索のAPIも学年を使わない。科目は開講番号・名前・単位・区分・ターム・曜限の6項目。旧版の`offerings`や出典情報は含めない。ファイル全体の直接配信は行わず、カタログへの収録を履修許可や不足単位に応じた推薦結果として扱わない。
 
 時間割のマスからの取得には`GET /api/v1/recommendation-catalogs`と`POST /api/v1/recommendations`を使う。リクエスト、返却JSON、候補なし・占有・未確認の区別、別Origin接続は[候補API仕様](recommendation-api.md)を参照する。ファイル全体をそのまま配信するAPIとは分け、カタログ検索と履修表による重複除外を行う。
 

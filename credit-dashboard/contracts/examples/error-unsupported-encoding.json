@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "unsupported_encoding",
+    "message": "文字コードを判定できません（UTF-8/CP932に対応）"
+  }
+}

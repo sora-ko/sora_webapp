@@ -224,3 +224,7 @@ body {background: radial-gradient(ellipse at top right, #e9f1eb 0, transparent 5
 @media (max-width: 440px) {.credit-search-panel {padding: 17px;} .credit-search-actions {align-items: stretch; flex-direction: column;} .credit-search-actions button {width: 100%;} .credit-search-actions .term-select-label select {min-width: 0;}}
 @media (max-width: 780px) {.recommendation-settings {align-items: stretch; flex-direction: column;} .recommendation-settings button {align-self: start;} .recommendation-candidates {grid-template-columns: minmax(0, 1fr);}}
 @media (max-width: 440px) {.recommendation-result {padding: 17px;} .recommendation-settings {padding: 17px;} .recommendation-settings button {width: 100%;} .recommendation-course-meta {flex-wrap: wrap;}}
+
+.session-controls { display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+.session-controls .status { margin:0; flex:1 1 16rem; overflow-wrap:anywhere; }
+.session-controls button { white-space:normal; }

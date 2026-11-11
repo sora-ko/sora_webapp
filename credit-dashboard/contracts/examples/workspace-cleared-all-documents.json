@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "revision": 8,
+  "session": {
+    "schema_version": 1,
+    "status": "active",
+    "csrf_token": "fictional_workspace_token_0002_____________",
+    "ttl_seconds": 1200,
+    "expires_in_seconds": 1200
+  },
+  "report": null,
+  "timetable": null
+}

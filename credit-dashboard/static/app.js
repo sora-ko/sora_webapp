@@ -205,6 +205,7 @@ function renderReport(data) {
 
 function clearReport() {
   report = null;
+  window.creditWorkspace.setParsed('grades', false);
   $('dashboard').hidden = true;
   for (const id of ['student', 'cards', 'categories', 'courses', 'warnings', 'evaluations']) {
     $(id).replaceChildren();
@@ -221,6 +222,20 @@ function setSelectedFile(file) {
   selectedFile = file || null;
   window.creditWorkspace.setFile('grades', selectedFile);
   $('selected-file').textContent = selectedFile ? selectedFile.name : 'ファイルが選択されていません';
+  forgetSessionReport();
+}
+
+function forgetSessionReport() {
+  window.creditWorkspace.session.clear('reports').catch(error => {
+    $('error').textContent = '一時保持した成績の削除を確認できませんでした。' + error.message;
+    $('error').hidden = false;
+  });
+}
+
+function sessionStatus() {
+  const saved = window.creditWorkspace.session.data();
+  if (saved) $('session-status').textContent = saved.report || saved.timetable
+    ? `解析結果を一時保持しています。残り約${Math.ceil(saved.session.expires_in_seconds / 60)}分で自動削除されます。` : '';
 }
 
 function invalidateReport() {
@@ -252,15 +267,12 @@ async function upload(event) {
   clearReport();
   $('status').textContent = 'CSVを解析しています…';
   try {
-    const body = new FormData();
-    body.append('file', selectedFile, selectedFile.name);
-    body.append('profile_id', $('profile-select').value);
-    if ($('residence-years').value) body.append('residence_years', $('residence-years').value);
-    const response = await fetch('/api/v1/reports', {method: 'POST', body, signal: reportController.signal, cache: 'no-store'});
-    const data = await response.json();
+    const saved = await window.creditWorkspace.session.saveReport({profile_id: $('profile-select').value,
+      residence_years: $('residence-years').value}, selectedFile, reportController.signal);
+    const data = saved.report;
     if (version !== reportRequestVersion) return;
-    if (!response.ok) throw new Error(data.error?.message || `HTTP ${response.status}`);
     renderReport(data);
+    window.creditWorkspace.setParsed('grades', true);sessionStatus();
     $('status').textContent = '解析が完了しました。';
   } catch (error) {
     if (version !== reportRequestVersion || error.name === 'AbortError') return;
@@ -317,6 +329,18 @@ async function loadProfiles() {
       option.selected = profile.profile_id === data.default_profile_id;
       select.append(option);
     }
+    const saved = await window.creditWorkspace.session.restore();
+    if (reportRequestVersion === 0 && saved?.report) {
+      const data = saved.report;
+      const id = data.curriculum.rules_version;
+      if (!profiles.some(profile => profile.profile_id === id)) throw new Error('保持中の成績に対応する対象がありません。CSVを読み込み直してください。');
+      select.value = id;
+      $('residence-years').value = data.evaluation_context.residence_years_source === 'user_input'
+        ? data.evaluation_context.residence_years : '';
+      renderReport(data);window.creditWorkspace.setParsed('grades', true);
+      $('selected-file').textContent = '解析済みの成績情報を復元しました。再解析する場合はCSVを選択し直してください。';
+      $('status').textContent = '一時保持している成績情報を復元しました。';sessionStatus();
+    }
     updateTargetSummary();
   } catch (error) {
     window.creditWorkspace.setProfile(null);
@@ -330,12 +354,29 @@ $('csv-file').addEventListener('change', (event) => setSelectedFile(event.target
 $('course-filter').addEventListener('change', renderCourses);
 $('profile-select').addEventListener('change', () => {
   invalidateReport();
+  forgetSessionReport();
   updateTargetSummary();
 });
-$('residence-years').addEventListener('input', invalidateReport);
+$('residence-years').addEventListener('input', () => {invalidateReport();forgetSessionReport();});
 $('clear-report').addEventListener('click', () => {
   $('csv-file').value = '';
   setSelectedFile(null);
+});
+
+window.addEventListener('credit-parsed-changed', sessionStatus);
+window.addEventListener('credit-session-reset', event => {
+  selectedFile=null;$('csv-file').value='';$('residence-years').value='';invalidateReport();
+  $('selected-file').textContent='ファイルが選択されていません';
+  $('session-status').textContent=event.detail.reason==='expired' ? '一時保持の期限が切れました。CSVを読み込み直してください。'
+    : event.detail.reason==='ended' ? '読み込んだ情報を削除しました。'
+    : event.detail.reason==='conflict' ? '別のタブまたは別の操作で情報が更新されました。ページを再読み込みして最新の情報を確認してください。'
+    : event.detail.reason==='clearing' ? '画面の情報を消去しました。一時保持の削除を確認しています…' : '';
+});
+$('session-end').addEventListener('click', () => {
+  window.creditWorkspace.clearLocal('clearing');
+  window.creditWorkspace.session.end().catch(error=>{
+    $('error').textContent='一時保持の終了を確認できませんでした。'+error.message;$('error').hidden=false;
+  });
 });
 
 const dropZone = $('drop-zone');

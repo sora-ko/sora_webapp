@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "catalogs": [
+    {
+      "academic_year": 2026,
+      "profile_id": "niigata-engineering-sis-2025-v1",
+      "program": "知能情報システムプログラム",
+      "course_count": 3,
+      "terms": [
+        3
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "periods": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ]
+}

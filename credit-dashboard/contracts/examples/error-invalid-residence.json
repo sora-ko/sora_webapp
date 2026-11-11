@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "invalid_evaluation_context",
+    "message": "在学期間は0年以上100年以下の有限数で入力してください。"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "revision": 5,
+  "session": {
+    "schema_version": 1,
+    "status": "active",
+    "csrf_token": "fictional_workspace_token_0002_____________",
+    "ttl_seconds": 1200,
+    "expires_in_seconds": 1200
+  },
+  "report": null,
+  "timetable": {
+    "schema_version": 1,
+    "format": "niigata-rsrefer-grid",
+    "context": {
+      "academic_year": 2026,
+      "semester": 2,
+      "term": null
+    },
+    "display_contexts": [
+      {
+        "academic_year": 2026,
+        "term": 3
+      },
+      {
+        "academic_year": 2026,
+        "term": 4
+      }
+    ],
+    "represented_weekdays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "represented_periods": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "courses": [],
+    "busy_slots": [],
+    "excluded_term_zero_course_count": 0,
+    "policy_notes": [],
+    "unresolved_courses": [],
+    "ready_for_recommendation": true,
+    "warnings": []
+  }
+}

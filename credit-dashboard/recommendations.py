@@ -117,7 +117,7 @@ def recommend_for_slot(catalog: dict, context: dict, timetable: dict | None = No
                          "excluded_unconfirmed": 0, "excluded_registered": 0},
               "checks": {"timetable": "checked" if timetable is not None else "not_provided",
                          "earned_credits": "not_checked", "requirements": "not_checked", "enrollment": "not_checked"},
-              "messages": [{"code": "scope_note", "message": "代表科目からの候補です。修得済み・不足単位・先修条件・履修許可は未確認です。"}]}
+              "messages": [{"code": "scope_note", "message": "開講カタログからの候補です。修得済み・不足単位・先修条件・履修許可は未確認です。"}]}
     if timetable is None:
         result["candidates"] = matching
         result["messages"].append({"code": "timetable_not_provided", "message": "履修表未読込のため、登録済み授業との時間重複は確認していません。"})

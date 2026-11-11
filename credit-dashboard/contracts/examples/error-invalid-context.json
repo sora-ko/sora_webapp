@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "invalid_recommendation_context",
+    "message": "年度・ターム・曜日・時限を正しく指定してください。"
+  }
+}

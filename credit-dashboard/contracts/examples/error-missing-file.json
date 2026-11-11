@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "missing_file",
+    "message": "必要なCSVファイルを選択してください。",
+    "details": {
+      "field": "file"
+    }
+  }
+}

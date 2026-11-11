@@ -1,0 +1,3249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:credit-dashboard:api-contract:1.2.0",
+  "title": "単位取得状況APIの型定義",
+  "description": "単体の応答は$defsの対応する型で検証する。全体を応答スキーマとして使わない。",
+  "x-contract-version": "1.2.0",
+  "$defs": {
+    "ApiErrorBody": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "description": "機械可読コード。未知のコードは共通の表示へフォールバックする。",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "details": {
+          "$ref": "#/$defs/ErrorDetails"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ApiErrorBody",
+      "type": "object"
+    },
+    "ApiMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ApiMessage",
+      "type": "object"
+    },
+    "BaselineCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate"
+      ],
+      "title": "BaselineCondition",
+      "type": "object"
+    },
+    "BusySlot": {
+      "additionalProperties": false,
+      "properties": {
+        "weekday": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Weekday",
+          "type": "integer"
+        },
+        "period": {
+          "maximum": 99,
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        },
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "term": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Term",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "weekday",
+        "period",
+        "academic_year",
+        "term"
+      ],
+      "title": "BusySlot",
+      "type": "object"
+    },
+    "Candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "course_code": {
+          "title": "Course Code",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "credits": {
+          "exclusiveMinimum": 0,
+          "title": "Credits",
+          "type": "number"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "terms": {
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Terms",
+          "type": "array"
+        },
+        "schedule": {
+          "items": {
+            "$ref": "#/$defs/OfferingSlot"
+          },
+          "minItems": 1,
+          "title": "Schedule",
+          "type": "array"
+        }
+      },
+      "required": [
+        "course_code",
+        "name",
+        "credits",
+        "category",
+        "terms",
+        "schedule"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "CandidateBenefit": {
+      "additionalProperties": false,
+      "properties": {
+        "condition_id": {
+          "title": "Condition Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "before_shortfall": {
+          "minimum": 0,
+          "title": "Before Shortfall",
+          "type": "number"
+        },
+        "after_shortfall": {
+          "minimum": 0,
+          "title": "After Shortfall",
+          "type": "number"
+        },
+        "reduced_credits": {
+          "exclusiveMinimum": 0,
+          "title": "Reduced Credits",
+          "type": "number"
+        },
+        "before_status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Before Status",
+          "type": "string"
+        },
+        "after_status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "After Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "condition_id",
+        "label",
+        "before_shortfall",
+        "after_shortfall",
+        "reduced_credits",
+        "before_status",
+        "after_status"
+      ],
+      "title": "CandidateBenefit",
+      "type": "object"
+    },
+    "CategorySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "major": {
+          "enum": [
+            "教養",
+            "専門",
+            "不明",
+            "対象外"
+          ],
+          "title": "Major",
+          "type": "string"
+        },
+        "earned_credits": {
+          "minimum": 0,
+          "title": "Earned Credits",
+          "type": "number"
+        },
+        "unconfirmed_credits": {
+          "minimum": 0,
+          "title": "Unconfirmed Credits",
+          "type": "number"
+        },
+        "course_count": {
+          "minimum": 0,
+          "title": "Course Count",
+          "type": "integer"
+        },
+        "source_category": {
+          "title": "Source Category",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Detail"
+        },
+        "passed_count": {
+          "minimum": 0,
+          "title": "Passed Count",
+          "type": "integer"
+        },
+        "unconfirmed_count": {
+          "minimum": 0,
+          "title": "Unconfirmed Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "major",
+        "earned_credits",
+        "unconfirmed_credits",
+        "course_count",
+        "source_category",
+        "field",
+        "detail",
+        "passed_count",
+        "unconfirmed_count"
+      ],
+      "title": "CategorySummary",
+      "type": "object"
+    },
+    "Caveat": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "resolved"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "message"
+      ],
+      "title": "Caveat",
+      "type": "object"
+    },
+    "CreditCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "description": "確認済み値との差。statusがunknownなら確定した不足とは限らない。",
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        },
+        "applied_credit_caps": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Applied Credit Caps",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate",
+        "applied_credit_caps"
+      ],
+      "title": "CreditCondition",
+      "type": "object"
+    },
+    "Curriculum": {
+      "additionalProperties": false,
+      "properties": {
+        "institution": {
+          "title": "Institution",
+          "type": "string"
+        },
+        "faculty": {
+          "title": "Faculty",
+          "type": "string"
+        },
+        "program": {
+          "title": "Program",
+          "type": "string"
+        },
+        "admission_year": {
+          "title": "Admission Year",
+          "type": "integer"
+        },
+        "rules_version": {
+          "description": "選択されたprofile_idと同じ値。",
+          "title": "Rules Version",
+          "type": "string"
+        },
+        "policy_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Policy Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "institution",
+        "faculty",
+        "program",
+        "admission_year",
+        "rules_version",
+        "policy_notes"
+      ],
+      "title": "Curriculum",
+      "type": "object"
+    },
+    "DisplayContext": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "term": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Term",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "academic_year",
+        "term"
+      ],
+      "title": "DisplayContext",
+      "type": "object"
+    },
+    "ErrorDetails": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "enum": [
+            "file",
+            "grades_file",
+            "timetable_file"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "array"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        }
+      },
+      "title": "ErrorDetails",
+      "type": "object"
+    },
+    "ErrorResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "$ref": "#/$defs/ApiErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "title": "ErrorResponse",
+      "type": "object"
+    },
+    "Evaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "advisory_only": {
+          "const": true,
+          "title": "Advisory Only",
+          "type": "boolean"
+        },
+        "rule_status": {
+          "enum": [
+            "ready",
+            "partial",
+            "blocked"
+          ],
+          "title": "Rule Status",
+          "type": "string"
+        },
+        "evidence_status": {
+          "enum": [
+            "transcribed",
+            "verified",
+            "needs_confirmation"
+          ],
+          "title": "Evidence Status",
+          "type": "string"
+        },
+        "input_context": {
+          "$ref": "#/$defs/EvaluationInputContext"
+        },
+        "conditions": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/CreditCondition"
+              },
+              {
+                "$ref": "#/$defs/NamedCourseCondition"
+              },
+              {
+                "$ref": "#/$defs/SharedSurplusCondition"
+              },
+              {
+                "$ref": "#/$defs/ResidualCreditCondition"
+              },
+              {
+                "$ref": "#/$defs/RequiredCoursesCondition"
+              },
+              {
+                "$ref": "#/$defs/ResidenceCondition"
+              },
+              {
+                "$ref": "#/$defs/UnsupportedCondition"
+              }
+            ]
+          },
+          "title": "Conditions",
+          "type": "array"
+        },
+        "source_refs": {
+          "items": {
+            "$ref": "#/$defs/SourceRef"
+          },
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/ResolvedSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "caveat_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveat Ids",
+          "type": "array"
+        },
+        "caveats": {
+          "items": {
+            "$ref": "#/$defs/Caveat"
+          },
+          "title": "Caveats",
+          "type": "array"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "title",
+        "profile_id",
+        "status",
+        "description",
+        "advisory_only",
+        "rule_status",
+        "evidence_status",
+        "input_context",
+        "conditions",
+        "source_refs",
+        "sources",
+        "caveat_ids",
+        "caveats"
+      ],
+      "title": "Evaluation",
+      "type": "object"
+    },
+    "EvaluationContext": {
+      "additionalProperties": false,
+      "properties": {
+        "residence_years": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Residence Years"
+        },
+        "residence_years_source": {
+          "enum": [
+            "user_input",
+            "student_grade_assumption",
+            "unavailable"
+          ],
+          "title": "Residence Years Source",
+          "type": "string"
+        },
+        "student_grade_year": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Student Grade Year"
+        },
+        "displayed_requirement_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Displayed Requirement Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "residence_years",
+        "residence_years_source",
+        "student_grade_year",
+        "displayed_requirement_ids"
+      ],
+      "title": "EvaluationContext",
+      "type": "object"
+    },
+    "EvaluationInputContext": {
+      "additionalProperties": false,
+      "properties": {
+        "residence_years": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Residence Years"
+        },
+        "residence_years_source": {
+          "enum": [
+            "user_input",
+            "student_grade_assumption",
+            "unavailable"
+          ],
+          "title": "Residence Years Source",
+          "type": "string"
+        },
+        "student_grade_year": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Student Grade Year"
+        }
+      },
+      "required": [
+        "residence_years",
+        "residence_years_source",
+        "student_grade_year"
+      ],
+      "title": "EvaluationInputContext",
+      "type": "object"
+    },
+    "HealthResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "ok",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "HealthResponse",
+      "type": "object"
+    },
+    "MajorSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "major": {
+          "enum": [
+            "教養",
+            "専門",
+            "不明",
+            "対象外"
+          ],
+          "title": "Major",
+          "type": "string"
+        },
+        "earned_credits": {
+          "minimum": 0,
+          "title": "Earned Credits",
+          "type": "number"
+        },
+        "unconfirmed_credits": {
+          "minimum": 0,
+          "title": "Unconfirmed Credits",
+          "type": "number"
+        },
+        "course_count": {
+          "minimum": 0,
+          "title": "Course Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "major",
+        "earned_credits",
+        "unconfirmed_credits",
+        "course_count"
+      ],
+      "title": "MajorSummary",
+      "type": "object"
+    },
+    "MissingCourseCode": {
+      "additionalProperties": false,
+      "properties": {
+        "weekday": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Weekday",
+          "type": "integer"
+        },
+        "period": {
+          "maximum": 99,
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        },
+        "course_code": {
+          "title": "Course Code",
+          "type": "null"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "reason_code": {
+          "const": "missing_course_code",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "weekday",
+        "period",
+        "course_code",
+        "row_number",
+        "reason_code"
+      ],
+      "title": "MissingCourseCode",
+      "type": "object"
+    },
+    "NamedCourseCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "description": "確認済み値との差。statusがunknownなら確定した不足とは限らない。",
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        },
+        "matched_course_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched Course Names",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate",
+        "matched_course_names"
+      ],
+      "title": "NamedCourseCondition",
+      "type": "object"
+    },
+    "OfferingSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "weekday": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Weekday",
+          "type": "integer"
+        },
+        "period": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "weekday",
+        "period"
+      ],
+      "title": "OfferingSlot",
+      "type": "object"
+    },
+    "OutsideGridCourse": {
+      "additionalProperties": false,
+      "properties": {
+        "course_code": {
+          "title": "Course Code",
+          "type": "string"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "reason_code": {
+          "const": "regular_course_outside_grid",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "course_code",
+        "row_number",
+        "reason_code"
+      ],
+      "title": "OutsideGridCourse",
+      "type": "object"
+    },
+    "RecommendationCatalog": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "program": {
+          "title": "Program",
+          "type": "string"
+        },
+        "course_count": {
+          "minimum": 0,
+          "title": "Course Count",
+          "type": "integer"
+        },
+        "terms": {
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
+          },
+          "title": "Terms",
+          "type": "array"
+        },
+        "weekdays": {
+          "items": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Weekdays",
+          "type": "array"
+        },
+        "periods": {
+          "items": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Periods",
+          "type": "array"
+        }
+      },
+      "required": [
+        "academic_year",
+        "profile_id",
+        "program",
+        "course_count",
+        "terms",
+        "weekdays",
+        "periods"
+      ],
+      "title": "RecommendationCatalog",
+      "type": "object"
+    },
+    "RecommendationCatalogsResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "catalogs": {
+          "items": {
+            "$ref": "#/$defs/RecommendationCatalog"
+          },
+          "title": "Catalogs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "catalogs"
+      ],
+      "title": "RecommendationCatalogsResponse",
+      "type": "object"
+    },
+    "RecommendationContext": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "term": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Term",
+          "type": "integer"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "academic_year",
+        "term",
+        "profile_id"
+      ],
+      "title": "RecommendationContext",
+      "type": "object"
+    },
+    "RecommendationSearchResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "context": {
+          "$ref": "#/$defs/RecommendationContext"
+        },
+        "target_requirement_id": {
+          "const": "graduation",
+          "title": "Target Requirement Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "empty",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "baseline": {
+          "items": {
+            "$ref": "#/$defs/BaselineCondition"
+          },
+          "title": "Baseline",
+          "type": "array"
+        },
+        "free_slots": {
+          "items": {
+            "$ref": "#/$defs/OfferingSlot"
+          },
+          "title": "Free Slots",
+          "type": "array"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/SearchCandidate"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "review_candidates": {
+          "items": {
+            "$ref": "#/$defs/SearchCandidate"
+          },
+          "title": "Review Candidates",
+          "type": "array"
+        },
+        "counts": {
+          "$ref": "#/$defs/SearchCounts"
+        },
+        "checks": {
+          "$ref": "#/$defs/SearchChecks"
+        },
+        "messages": {
+          "items": {
+            "$ref": "#/$defs/ApiMessage"
+          },
+          "title": "Messages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "context",
+        "target_requirement_id",
+        "status",
+        "baseline",
+        "free_slots",
+        "candidates",
+        "review_candidates",
+        "counts",
+        "checks",
+        "messages"
+      ],
+      "title": "RecommendationSearchResponse",
+      "type": "object"
+    },
+    "RecommendationSearchUpload": {
+      "type": "object",
+      "properties": {
+        "grades_file": {
+          "type": "string",
+          "format": "binary",
+          "description": "大学が出力した成績CSV。UTF-8/BOM/CP932。保存しない。",
+          "x-max-file-bytes": 5242880
+        },
+        "timetable_file": {
+          "type": "string",
+          "format": "binary",
+          "description": "履修表CSV。UTF-8/BOM/CP932。保存しない。",
+          "x-max-file-bytes": 5242880
+        },
+        "profile_id": {
+          "type": "string",
+          "description": "省略・空欄で既定値。規則一覧のprofile_idを使う。"
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2099
+        },
+        "term": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      },
+      "required": [
+        "grades_file",
+        "timetable_file",
+        "academic_year",
+        "term"
+      ],
+      "additionalProperties": true,
+      "description": "数値はFormDataへ文字列化して送る。既知フィールドの重複は拒否。未知のフィールドは無視する。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 10551296
+    },
+    "ReportResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 2,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "curriculum": {
+          "$ref": "#/$defs/Curriculum"
+        },
+        "student": {
+          "$ref": "#/$defs/Student"
+        },
+        "summary": {
+          "$ref": "#/$defs/ReportSummary"
+        },
+        "courses": {
+          "items": {
+            "$ref": "#/$defs/TranscriptCourse"
+          },
+          "title": "Courses",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "evaluations": {
+          "items": {
+            "$ref": "#/$defs/Evaluation"
+          },
+          "title": "Evaluations",
+          "type": "array"
+        },
+        "evaluation_context": {
+          "$ref": "#/$defs/EvaluationContext"
+        }
+      },
+      "required": [
+        "schema_version",
+        "curriculum",
+        "student",
+        "summary",
+        "courses",
+        "warnings",
+        "evaluations",
+        "evaluation_context"
+      ],
+      "title": "ReportResponse",
+      "type": "object"
+    },
+    "ReportSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "course_count": {
+          "minimum": 0,
+          "title": "Course Count",
+          "type": "integer"
+        },
+        "passed_count": {
+          "minimum": 0,
+          "title": "Passed Count",
+          "type": "integer"
+        },
+        "unconfirmed_count": {
+          "minimum": 0,
+          "title": "Unconfirmed Count",
+          "type": "integer"
+        },
+        "unknown_credit_count": {
+          "minimum": 0,
+          "title": "Unknown Credit Count",
+          "type": "integer"
+        },
+        "earned_credits": {
+          "description": "確認済みの修得単位。不明な単位数は加算しない。",
+          "minimum": 0,
+          "title": "Earned Credits",
+          "type": "number"
+        },
+        "unconfirmed_credits": {
+          "minimum": 0,
+          "title": "Unconfirmed Credits",
+          "type": "number"
+        },
+        "majors": {
+          "items": {
+            "$ref": "#/$defs/MajorSummary"
+          },
+          "title": "Majors",
+          "type": "array"
+        },
+        "categories": {
+          "items": {
+            "$ref": "#/$defs/CategorySummary"
+          },
+          "title": "Categories",
+          "type": "array"
+        }
+      },
+      "required": [
+        "course_count",
+        "passed_count",
+        "unconfirmed_count",
+        "unknown_credit_count",
+        "earned_credits",
+        "unconfirmed_credits",
+        "majors",
+        "categories"
+      ],
+      "title": "ReportSummary",
+      "type": "object"
+    },
+    "ReportUpload": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "binary",
+          "description": "CSV原本。ファイル名・拡張子・MIME typeに依存せず内容を検証する。",
+          "x-max-file-bytes": 5242880
+        },
+        "profile_id": {
+          "type": "string",
+          "description": "省略・空欄で既定値。規則一覧のprofile_idを使う。"
+        },
+        "residence_years": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "const": "",
+              "type": "string"
+            }
+          ],
+          "description": "任意の在学年数。空欄・省略はCSV学年からの仮定を使う。有限数のみ。"
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "additionalProperties": true,
+      "description": "数値はFormDataへ文字列化して送る。既知フィールドの重複は拒否。未知のフィールドは無視する。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 5308416
+    },
+    "RequiredCourseResult": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_course_id": {
+          "title": "Catalog Course Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        },
+        "source_refs": {
+          "items": {
+            "$ref": "#/$defs/SourceRef"
+          },
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "catalog_course_id",
+        "name",
+        "status",
+        "reason_code",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate",
+        "source_refs",
+        "description"
+      ],
+      "title": "RequiredCourseResult",
+      "type": "object"
+    },
+    "RequiredCoursesCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "required_course_count": {
+          "minimum": 0,
+          "title": "Required Course Count",
+          "type": "integer"
+        },
+        "satisfied_course_count": {
+          "minimum": 0,
+          "title": "Satisfied Course Count",
+          "type": "integer"
+        },
+        "missing_course_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Course Names",
+          "type": "array"
+        },
+        "unknown_course_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unknown Course Names",
+          "type": "array"
+        },
+        "course_results": {
+          "items": {
+            "$ref": "#/$defs/RequiredCourseResult"
+          },
+          "title": "Course Results",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "required_course_count",
+        "satisfied_course_count",
+        "missing_course_names",
+        "unknown_course_names",
+        "course_results"
+      ],
+      "title": "RequiredCoursesCondition",
+      "type": "object"
+    },
+    "ResidenceCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "minimum_years": {
+          "minimum": 0,
+          "title": "Minimum Years",
+          "type": "number"
+        },
+        "confirmed_years": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confirmed Years"
+        },
+        "value_source": {
+          "enum": [
+            "user_input",
+            "student_grade_assumption",
+            "unavailable"
+          ],
+          "title": "Value Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "minimum_years",
+        "confirmed_years",
+        "value_source"
+      ],
+      "title": "ResidenceCondition",
+      "type": "object"
+    },
+    "ResidualCreditCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "description": "確認済み値との差。statusがunknownなら確定した不足とは限らない。",
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        },
+        "applied_credit_caps": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Applied Credit Caps",
+          "type": "object"
+        },
+        "confirmed_area_credits": {
+          "minimum": 0,
+          "title": "Confirmed Area Credits",
+          "type": "number"
+        },
+        "allocated_to_prior_conditions": {
+          "minimum": 0,
+          "title": "Allocated To Prior Conditions",
+          "type": "number"
+        },
+        "allocated_by_condition": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Allocated By Condition",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate",
+        "applied_credit_caps",
+        "confirmed_area_credits",
+        "allocated_to_prior_conditions",
+        "allocated_by_condition"
+      ],
+      "title": "ResidualCreditCondition",
+      "type": "object"
+    },
+    "ResolvedSource": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "printed_pages": {
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Printed Pages",
+          "type": "array"
+        },
+        "pdf_pages": {
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pdf Pages",
+          "type": "array"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "printed_pages",
+        "pdf_pages",
+        "section",
+        "title",
+        "url"
+      ],
+      "title": "ResolvedSource",
+      "type": "object"
+    },
+    "RuleProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "institution": {
+          "title": "Institution",
+          "type": "string"
+        },
+        "faculty": {
+          "title": "Faculty",
+          "type": "string"
+        },
+        "program": {
+          "title": "Program",
+          "type": "string"
+        },
+        "admission_year": {
+          "title": "Admission Year",
+          "type": "integer"
+        },
+        "policy_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Policy Notes",
+          "type": "array"
+        },
+        "requirements": {
+          "items": {
+            "$ref": "#/$defs/RuleRequirement"
+          },
+          "title": "Requirements",
+          "type": "array"
+        },
+        "implemented_requirement_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Implemented Requirement Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile_id",
+        "institution",
+        "faculty",
+        "program",
+        "admission_year",
+        "policy_notes",
+        "requirements",
+        "implemented_requirement_ids"
+      ],
+      "title": "RuleProfile",
+      "type": "object"
+    },
+    "RuleProfilesResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "profiles": {
+          "items": {
+            "$ref": "#/$defs/RuleProfile"
+          },
+          "title": "Profiles",
+          "type": "array"
+        },
+        "default_profile_id": {
+          "title": "Default Profile Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "profiles",
+        "default_profile_id"
+      ],
+      "title": "RuleProfilesResponse",
+      "type": "object"
+    },
+    "RuleRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "rule_status": {
+          "enum": [
+            "ready",
+            "partial",
+            "blocked"
+          ],
+          "title": "Rule Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "title",
+        "rule_status"
+      ],
+      "title": "RuleRequirement",
+      "type": "object"
+    },
+    "SearchCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "course_code": {
+          "title": "Course Code",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "credits": {
+          "exclusiveMinimum": 0,
+          "title": "Credits",
+          "type": "number"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "terms": {
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Terms",
+          "type": "array"
+        },
+        "schedule": {
+          "items": {
+            "$ref": "#/$defs/OfferingSlot"
+          },
+          "minItems": 1,
+          "title": "Schedule",
+          "type": "array"
+        },
+        "benefits": {
+          "items": {
+            "$ref": "#/$defs/CandidateBenefit"
+          },
+          "title": "Benefits",
+          "type": "array"
+        },
+        "uncertain_benefits": {
+          "items": {
+            "$ref": "#/$defs/CandidateBenefit"
+          },
+          "title": "Uncertain Benefits",
+          "type": "array"
+        },
+        "review_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "course_code",
+        "name",
+        "credits",
+        "category",
+        "terms",
+        "schedule",
+        "benefits",
+        "uncertain_benefits",
+        "review_reasons"
+      ],
+      "title": "SearchCandidate",
+      "type": "object"
+    },
+    "SearchChecks": {
+      "additionalProperties": false,
+      "properties": {
+        "timetable": {
+          "enum": [
+            "checked",
+            "needs_review"
+          ],
+          "title": "Timetable",
+          "type": "string"
+        },
+        "earned_credits": {
+          "const": "checked",
+          "title": "Earned Credits",
+          "type": "string"
+        },
+        "requirements": {
+          "enum": [
+            "checked",
+            "needs_review"
+          ],
+          "title": "Requirements",
+          "type": "string"
+        },
+        "enrollment": {
+          "const": "not_checked",
+          "title": "Enrollment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timetable",
+        "earned_credits",
+        "requirements",
+        "enrollment"
+      ],
+      "title": "SearchChecks",
+      "type": "object"
+    },
+    "SearchCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_in_term": {
+          "minimum": 0,
+          "title": "Catalog In Term",
+          "type": "integer"
+        },
+        "excluded_earned": {
+          "minimum": 0,
+          "title": "Excluded Earned",
+          "type": "integer"
+        },
+        "excluded_registered": {
+          "minimum": 0,
+          "title": "Excluded Registered",
+          "type": "integer"
+        },
+        "excluded_overlap": {
+          "minimum": 0,
+          "title": "Excluded Overlap",
+          "type": "integer"
+        },
+        "excluded_unconfirmed_time": {
+          "minimum": 0,
+          "title": "Excluded Unconfirmed Time",
+          "type": "integer"
+        },
+        "excluded_no_benefit": {
+          "minimum": 0,
+          "title": "Excluded No Benefit",
+          "type": "integer"
+        },
+        "returned": {
+          "minimum": 0,
+          "title": "Returned",
+          "type": "integer"
+        },
+        "review_required": {
+          "minimum": 0,
+          "title": "Review Required",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "catalog_in_term",
+        "excluded_earned",
+        "excluded_registered",
+        "excluded_overlap",
+        "excluded_unconfirmed_time",
+        "excluded_no_benefit",
+        "returned",
+        "review_required"
+      ],
+      "title": "SearchCounts",
+      "type": "object"
+    },
+    "SessionEndHeaders": {
+      "type": "object",
+      "properties": {
+        "X-Session-Request": {
+          "type": "string",
+          "const": "1"
+        },
+        "X-CSRF-Token": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        }
+      },
+      "required": [
+        "X-Session-Request",
+        "X-CSRF-Token"
+      ],
+      "additionalProperties": true
+    },
+    "SessionEndedResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "status": {
+          "const": "ended",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status"
+      ],
+      "title": "SessionEndedResponse",
+      "type": "object"
+    },
+    "SessionRequestHeaders": {
+      "type": "object",
+      "properties": {
+        "X-Session-Request": {
+          "type": "string",
+          "const": "1"
+        }
+      },
+      "required": [
+        "X-Session-Request"
+      ],
+      "additionalProperties": true
+    },
+    "SessionResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "status": {
+          "const": "active",
+          "title": "Status",
+          "type": "string"
+        },
+        "csrf_token": {
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "title": "Csrf Token",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "minimum": 1,
+          "title": "Ttl Seconds",
+          "type": "integer"
+        },
+        "expires_in_seconds": {
+          "description": "作成時からの固定期限までの残り秒数。GET・POSTで延長しない。",
+          "minimum": 1,
+          "title": "Expires In Seconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "csrf_token",
+        "ttl_seconds",
+        "expires_in_seconds"
+      ],
+      "title": "SessionResponse",
+      "type": "object"
+    },
+    "SessionWorkspaceResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "revision": {
+          "minimum": 0,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "session": {
+          "$ref": "#/$defs/SessionResponse"
+        },
+        "report": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReportResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "timetable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimetableResponse"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "revision",
+        "session",
+        "report",
+        "timetable"
+      ],
+      "title": "SessionWorkspaceResponse",
+      "type": "object"
+    },
+    "SharedSurplusCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "satisfied",
+            "not_satisfied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "minimum_credits": {
+          "minimum": 0,
+          "title": "Minimum Credits",
+          "type": "number"
+        },
+        "confirmed_credits": {
+          "minimum": 0,
+          "title": "Confirmed Credits",
+          "type": "number"
+        },
+        "confirmed_credit_shortfall": {
+          "description": "確認済み値との差。statusがunknownなら確定した不足とは限らない。",
+          "minimum": 0,
+          "title": "Confirmed Credit Shortfall",
+          "type": "number"
+        },
+        "has_uncertain_candidate": {
+          "title": "Has Uncertain Candidate",
+          "type": "boolean"
+        },
+        "source_surplus_credits": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Source Surplus Credits",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description",
+        "minimum_credits",
+        "confirmed_credits",
+        "confirmed_credit_shortfall",
+        "has_uncertain_candidate",
+        "source_surplus_credits"
+      ],
+      "title": "SharedSurplusCondition",
+      "type": "object"
+    },
+    "SlotChecks": {
+      "additionalProperties": false,
+      "properties": {
+        "timetable": {
+          "enum": [
+            "checked",
+            "not_provided",
+            "needs_review"
+          ],
+          "title": "Timetable",
+          "type": "string"
+        },
+        "earned_credits": {
+          "const": "not_checked",
+          "title": "Earned Credits",
+          "type": "string"
+        },
+        "requirements": {
+          "const": "not_checked",
+          "title": "Requirements",
+          "type": "string"
+        },
+        "enrollment": {
+          "const": "not_checked",
+          "title": "Enrollment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timetable",
+        "earned_credits",
+        "requirements",
+        "enrollment"
+      ],
+      "title": "SlotChecks",
+      "type": "object"
+    },
+    "SlotContext": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "term": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Term",
+          "type": "integer"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "weekday": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Weekday",
+          "type": "integer"
+        },
+        "period": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "academic_year",
+        "term",
+        "profile_id",
+        "weekday",
+        "period"
+      ],
+      "title": "SlotContext",
+      "type": "object"
+    },
+    "SlotCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "matching": {
+          "minimum": 0,
+          "title": "Matching",
+          "type": "integer"
+        },
+        "returned": {
+          "minimum": 0,
+          "title": "Returned",
+          "type": "integer"
+        },
+        "excluded_overlap": {
+          "minimum": 0,
+          "title": "Excluded Overlap",
+          "type": "integer"
+        },
+        "excluded_unconfirmed": {
+          "minimum": 0,
+          "title": "Excluded Unconfirmed",
+          "type": "integer"
+        },
+        "excluded_registered": {
+          "minimum": 0,
+          "title": "Excluded Registered",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "matching",
+        "returned",
+        "excluded_overlap",
+        "excluded_unconfirmed",
+        "excluded_registered"
+      ],
+      "title": "SlotCounts",
+      "type": "object"
+    },
+    "SlotRecommendationUpload": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "binary",
+          "description": "CSV原本。ファイル名・拡張子・MIME typeに依存せず内容を検証する。",
+          "x-max-file-bytes": 5242880
+        },
+        "profile_id": {
+          "type": "string",
+          "description": "省略・空欄で既定値。規則一覧のprofile_idを使う。"
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2099
+        },
+        "term": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "weekday": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "period": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "academic_year",
+        "term",
+        "weekday",
+        "period"
+      ],
+      "additionalProperties": true,
+      "description": "数値はFormDataへ文字列化して送る。既知フィールドの重複は拒否。未知のフィールドは無視する。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 5308416
+    },
+    "SlotRecommendationsResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "context": {
+          "$ref": "#/$defs/SlotContext"
+        },
+        "basis": {
+          "enum": [
+            "catalog",
+            "timetable"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "empty",
+            "occupied",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/Candidate"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "counts": {
+          "$ref": "#/$defs/SlotCounts"
+        },
+        "checks": {
+          "$ref": "#/$defs/SlotChecks"
+        },
+        "messages": {
+          "items": {
+            "$ref": "#/$defs/ApiMessage"
+          },
+          "title": "Messages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "context",
+        "basis",
+        "status",
+        "candidates",
+        "counts",
+        "checks",
+        "messages"
+      ],
+      "title": "SlotRecommendationsResponse",
+      "type": "object"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "printed_pages": {
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Printed Pages",
+          "type": "array"
+        },
+        "pdf_pages": {
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pdf Pages",
+          "type": "array"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        }
+      },
+      "required": [
+        "document_id",
+        "printed_pages",
+        "pdf_pages"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "Student": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        },
+        "student_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Student Number"
+        },
+        "affiliation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Affiliation"
+        },
+        "grade": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "CSVの学年表記。数値化した学年とは別。",
+          "title": "Grade"
+        }
+      },
+      "required": [
+        "name",
+        "student_number",
+        "affiliation",
+        "grade"
+      ],
+      "title": "Student",
+      "type": "object"
+    },
+    "TimetableContext": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "anyOf": [
+            {
+              "maximum": 2099,
+              "minimum": 2000,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Academic Year"
+        },
+        "semester": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Semester"
+        },
+        "term": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Term"
+        }
+      },
+      "required": [
+        "academic_year",
+        "semester",
+        "term"
+      ],
+      "title": "TimetableContext",
+      "type": "object"
+    },
+    "TimetableCourse": {
+      "additionalProperties": false,
+      "properties": {
+        "academic_year": {
+          "maximum": 2099,
+          "minimum": 2000,
+          "title": "Academic Year",
+          "type": "integer"
+        },
+        "term": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Term",
+          "type": "integer"
+        },
+        "course_code": {
+          "title": "Course Code",
+          "type": "string"
+        },
+        "slots": {
+          "items": {
+            "$ref": "#/$defs/TimetableSlot"
+          },
+          "title": "Slots",
+          "type": "array"
+        }
+      },
+      "required": [
+        "academic_year",
+        "term",
+        "course_code",
+        "slots"
+      ],
+      "title": "TimetableCourse",
+      "type": "object"
+    },
+    "TimetableResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "format": {
+          "const": "niigata-rsrefer-grid",
+          "title": "Format",
+          "type": "string"
+        },
+        "context": {
+          "$ref": "#/$defs/TimetableContext"
+        },
+        "display_contexts": {
+          "items": {
+            "$ref": "#/$defs/DisplayContext"
+          },
+          "title": "Display Contexts",
+          "type": "array"
+        },
+        "represented_weekdays": {
+          "items": {
+            "maximum": 7,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Represented Weekdays",
+          "type": "array"
+        },
+        "represented_periods": {
+          "items": {
+            "maximum": 99,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Represented Periods",
+          "type": "array"
+        },
+        "courses": {
+          "items": {
+            "$ref": "#/$defs/TimetableCourse"
+          },
+          "title": "Courses",
+          "type": "array"
+        },
+        "busy_slots": {
+          "items": {
+            "$ref": "#/$defs/BusySlot"
+          },
+          "title": "Busy Slots",
+          "type": "array"
+        },
+        "excluded_term_zero_course_count": {
+          "minimum": 0,
+          "title": "Excluded Term Zero Course Count",
+          "type": "integer"
+        },
+        "policy_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Policy Notes",
+          "type": "array"
+        },
+        "unresolved_courses": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/OutsideGridCourse"
+              },
+              {
+                "$ref": "#/$defs/MissingCourseCode"
+              }
+            ]
+          },
+          "title": "Unresolved Courses",
+          "type": "array"
+        },
+        "ready_for_recommendation": {
+          "title": "Ready For Recommendation",
+          "type": "boolean"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/TimetableWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "format",
+        "context",
+        "display_contexts",
+        "represented_weekdays",
+        "represented_periods",
+        "courses",
+        "busy_slots",
+        "excluded_term_zero_course_count",
+        "policy_notes",
+        "unresolved_courses",
+        "ready_for_recommendation",
+        "warnings"
+      ],
+      "title": "TimetableResponse",
+      "type": "object"
+    },
+    "TimetableSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "weekday": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Weekday",
+          "type": "integer"
+        },
+        "period": {
+          "maximum": 99,
+          "minimum": 1,
+          "title": "Period",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "weekday",
+        "period"
+      ],
+      "title": "TimetableSlot",
+      "type": "object"
+    },
+    "TimetableUpload": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "binary",
+          "description": "CSV原本。ファイル名・拡張子・MIME typeに依存せず内容を検証する。",
+          "x-max-file-bytes": 5242880
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "additionalProperties": true,
+      "description": "数値はFormDataへ文字列化して送る。既知フィールドの重複は拒否。未知のフィールドは無視する。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 5308416
+    },
+    "TimetableWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "row_number",
+        "message"
+      ],
+      "title": "TimetableWarning",
+      "type": "object"
+    },
+    "TranscriptCourse": {
+      "additionalProperties": false,
+      "properties": {
+        "no": {
+          "minimum": 0,
+          "title": "No",
+          "type": "integer"
+        },
+        "sequence": {
+          "description": "noの互換エイリアス。",
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Code"
+        },
+        "course_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "codeと同じ開講番号。",
+          "title": "Course Code"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "source_category": {
+          "title": "Source Category",
+          "type": "string"
+        },
+        "normalized_name": {
+          "title": "Normalized Name",
+          "type": "string"
+        },
+        "major": {
+          "enum": [
+            "教養",
+            "専門",
+            "不明",
+            "対象外"
+          ],
+          "title": "Major",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Detail"
+        },
+        "curriculum_area": {
+          "enum": [
+            "liberal_arts",
+            "faculty_specialized",
+            "unknown",
+            "excluded"
+          ],
+          "title": "Curriculum Area",
+          "type": "string"
+        },
+        "classification_status": {
+          "enum": [
+            "classified",
+            "unknown"
+          ],
+          "title": "Classification Status",
+          "type": "string"
+        },
+        "course_group": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Course Group"
+        },
+        "requirement_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requirement Code"
+        },
+        "catalog_course_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Catalog Course Id"
+        },
+        "classification_reason_code": {
+          "title": "Classification Reason Code",
+          "type": "string"
+        },
+        "requirement_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requirement Type"
+        },
+        "field_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Field Codes",
+          "type": "array"
+        },
+        "level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Level"
+        },
+        "credits": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "nullは単位数未確認。0への置換は禁止。",
+          "title": "Credits"
+        },
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "unconfirmed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "result": {
+          "description": "statusと同じ正規化状態。原文はsource_result。",
+          "enum": [
+            "passed",
+            "failed",
+            "unconfirmed"
+          ],
+          "title": "Result",
+          "type": "string"
+        },
+        "source_result": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Result"
+        },
+        "year": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Year"
+        },
+        "earned_year": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "yearの互換エイリアス。",
+          "title": "Earned Year"
+        },
+        "term": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Term"
+        },
+        "earned_term": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "termの互換エイリアス。",
+          "title": "Earned Term"
+        }
+      },
+      "required": [
+        "no",
+        "sequence",
+        "row_number",
+        "code",
+        "course_code",
+        "name",
+        "source_category",
+        "normalized_name",
+        "major",
+        "field",
+        "detail",
+        "curriculum_area",
+        "classification_status",
+        "course_group",
+        "requirement_code",
+        "catalog_course_id",
+        "classification_reason_code",
+        "requirement_type",
+        "field_codes",
+        "level",
+        "credits",
+        "status",
+        "result",
+        "source_result",
+        "year",
+        "earned_year",
+        "term",
+        "earned_term"
+      ],
+      "title": "TranscriptCourse",
+      "type": "object"
+    },
+    "UnsupportedCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "const": "unknown",
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "const": "condition_kind_not_implemented",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "status",
+        "reason_code",
+        "description"
+      ],
+      "title": "UnsupportedCondition",
+      "type": "object"
+    },
+    "WorkspaceMutationHeaders": {
+      "type": "object",
+      "properties": {
+        "X-Session-Request": {
+          "type": "string",
+          "const": "1"
+        },
+        "X-CSRF-Token": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "X-Session-Revision": {
+          "type": "string",
+          "pattern": "^[0-9]{1,15}$",
+          "description": "直前のworkspace.revisionを文字列化して送る。"
+        }
+      },
+      "required": [
+        "X-Session-Request",
+        "X-CSRF-Token",
+        "X-Session-Revision"
+      ],
+      "additionalProperties": true
+    },
+    "WorkspaceSearchFields": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "description": "省略・空欄で既定値。規則一覧のprofile_idを使う。"
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2099
+        },
+        "term": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      },
+      "required": [
+        "academic_year",
+        "term"
+      ],
+      "additionalProperties": true,
+      "description": "解析済み情報を使う。年度・ターム等だけをFormDataで送信し、CSVは送信しない。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 65536
+    },
+    "WorkspaceSlotFields": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "description": "省略・空欄で既定値。規則一覧のprofile_idを使う。"
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2099
+        },
+        "term": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "weekday": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "period": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "academic_year",
+        "term",
+        "weekday",
+        "period"
+      ],
+      "additionalProperties": true,
+      "description": "解析済み情報を使う。年度・ターム等だけをFormDataで送信し、CSVは送信しない。",
+      "x-max-field-bytes": 256,
+      "x-max-multipart-bytes": 65536
+    }
+  }
+}

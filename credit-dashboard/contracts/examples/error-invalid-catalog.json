@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "recommendation_catalog_invalid",
+    "message": "推薦用カタログを読み取れません。配置と形式を確認してください。"
+  }
+}

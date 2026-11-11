@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "context": {
+    "profile_id": "niigata-engineering-sis-2025-v1",
+    "academic_year": 2026,
+    "term": 3,
+    "weekday": 2,
+    "period": 2
+  },
+  "basis": "catalog",
+  "status": "ok",
+  "candidates": [
+    {
+      "course_code": "263G9901",
+      "name": "架空の教養候補A",
+      "credits": 2,
+      "category": "自然科学（工学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "matching": 1,
+    "returned": 1,
+    "excluded_overlap": 0,
+    "excluded_unconfirmed": 0,
+    "excluded_registered": 0
+  },
+  "checks": {
+    "timetable": "not_provided",
+    "earned_credits": "not_checked",
+    "requirements": "not_checked",
+    "enrollment": "not_checked"
+  },
+  "messages": [
+    {
+      "code": "scope_note",
+      "message": "開講カタログからの候補です。修得済み・不足単位・先修条件・履修許可は未確認です。"
+    },
+    {
+      "code": "timetable_not_provided",
+      "message": "履修表未読込のため、登録済み授業との時間重複は確認していません。"
+    }
+  ]
+}

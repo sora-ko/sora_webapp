@@ -16,6 +16,7 @@
 
   function clearResult() {
     timetable = null;
+    window.creditWorkspace.setParsed('timetable', false);
     window.creditRecommendations.clear();
     $('timetable-dashboard').hidden = true;
     $('timetable-empty').hidden = false;
@@ -40,6 +41,10 @@
     $('timetable-error').textContent = '';
     $('timetable-status').textContent = '';
     clearResult();
+    window.creditWorkspace.session.clear('timetables').catch(error => {
+      $('timetable-error').textContent='一時保持した履修表の削除を確認できませんでした。'+error.message;
+      $('timetable-error').hidden=false;
+    });
   }
 
   function validate(data) {
@@ -63,19 +68,8 @@
   }
 
   async function requestTimetable(file, signal) {
-    const body = new FormData();
-    body.append('file', file, file.name);
-    const response = await fetch('/api/v1/timetables', {method: 'POST', body, signal, cache: 'no-store'});
-    let data;
-    try {
-      data = await response.json();
-    } catch {
-      throw new Error('サーバーの応答を読み取れませんでした。接続先と起動状態を確認してください。');
-    }
-    if (!response.ok) {
-      if (response.status === 404) throw new Error('履修表APIが見つかりません。Dockerを利用している場合は再ビルドしてください。');
-      throw new Error(data.error?.message || `HTTP ${response.status}`);
-    }
+    const saved = await window.creditWorkspace.session.saveTimetable(file, signal);
+    const data = saved.timetable;
     validate(data);
     return data;
   }
@@ -181,7 +175,8 @@
 
   function renderTimetable(data) {
     timetable = data;
-    window.creditRecommendations.setTimetable(data, selectedFile);
+    window.creditWorkspace.setParsed('timetable', true);
+    window.creditRecommendations.setTimetable(data);
     const context = data.context;
     $('timetable-context').textContent = context.academic_year != null
       ? `${context.academic_year}年度${context.semester != null ? ` · 第${context.semester}学期` : ''}${context.term != null ? ` · 第${context.term}ターム` : ''}`
@@ -267,5 +262,21 @@
       $('timetable-file').value = '';
       setFile(file);
     }
+  });
+  window.addEventListener('credit-session-reset', () => {
+    requestVersion+=1;controller?.abort();controller=null;selectedFile=null;$('timetable-file').value='';
+    $('timetable-selected-file').textContent='ファイルが選択されていません';
+    $('timetable-status').textContent='';$('timetable-error').hidden=true;$('timetable-error').textContent='';
+    $('timetable-form').setAttribute('aria-busy','false');$('timetable-submit').disabled=false;
+    clearResult();
+  });
+  window.creditWorkspace.session.restore().then(saved => {
+    if (requestVersion !== 0 || !saved?.timetable) return;
+    validate(saved.timetable);renderTimetable(saved.timetable);
+    $('timetable-selected-file').textContent='解析済みの時間割を復元しました。';
+    $('timetable-status').textContent='一時保持している履修表情報を復元しました。';
+  }).catch(error => {
+    if(error.name==='AbortError')return;
+    $('timetable-error').textContent=error.message;$('timetable-error').hidden=false;
   });
 })();

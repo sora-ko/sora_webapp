@@ -1,0 +1,1516 @@
+{
+  "schema_version": 2,
+  "curriculum": {
+    "institution": "新潟大学",
+    "faculty": "工学部",
+    "program": "知能情報システムプログラム",
+    "admission_year": 2025,
+    "rules_version": "niigata-engineering-sis-2025-v1",
+    "policy_notes": [
+      "通常入学・留年なし・編入なしを前提とし、留学生向け代替規則と早期卒業は対象外です。夜間主科目は含まれない前提です。",
+      "MVP独自方針として、対象の専門科目一覧にない専門科目を教養の選択単位へ算入します。大学の正式な他プログラム科目の取扱いとは異なります。",
+      "他大学の単位認定は未対応です。既知の他大学単位ラベルは要件集計から除外し、未知の表記は推測しません。"
+    ]
+  },
+  "student": {
+    "name": "架空 契約確認",
+    "student_number": "T00000000",
+    "affiliation": "知能情報システムプログラム（架空学生）",
+    "grade": "不明"
+  },
+  "summary": {
+    "course_count": 6,
+    "passed_count": 3,
+    "unconfirmed_count": 2,
+    "unknown_credit_count": 1,
+    "earned_credits": 5.5,
+    "unconfirmed_credits": 2,
+    "majors": [
+      {
+        "major": "教養",
+        "earned_credits": 3.5,
+        "unconfirmed_credits": 2,
+        "course_count": 5
+      },
+      {
+        "major": "専門",
+        "earned_credits": 0,
+        "unconfirmed_credits": 0,
+        "course_count": 0
+      },
+      {
+        "major": "不明",
+        "earned_credits": 2,
+        "unconfirmed_credits": 0,
+        "course_count": 1
+      }
+    ],
+    "categories": [
+      {
+        "source_category": "英語（英語）",
+        "major": "教養",
+        "field": "英語",
+        "detail": "英語",
+        "earned_credits": 1.5,
+        "unconfirmed_credits": 2,
+        "course_count": 3,
+        "passed_count": 1,
+        "unconfirmed_count": 2
+      },
+      {
+        "source_category": "自然科学（工学）",
+        "major": "教養",
+        "field": "自然科学",
+        "detail": "工学",
+        "earned_credits": 0,
+        "unconfirmed_credits": 0,
+        "course_count": 1,
+        "passed_count": 0,
+        "unconfirmed_count": 0
+      },
+      {
+        "source_category": "架空の未知区分",
+        "major": "不明",
+        "field": "架空の未知区分",
+        "detail": null,
+        "earned_credits": 2,
+        "unconfirmed_credits": 0,
+        "course_count": 1,
+        "passed_count": 1,
+        "unconfirmed_count": 0
+      },
+      {
+        "source_category": "専門応用科目群（選択）",
+        "major": "教養",
+        "field": "対象専門科目一覧外",
+        "detail": "専門応用科目群",
+        "earned_credits": 2,
+        "unconfirmed_credits": 0,
+        "course_count": 1,
+        "passed_count": 1,
+        "unconfirmed_count": 0
+      }
+    ]
+  },
+  "courses": [
+    {
+      "no": 1,
+      "sequence": 1,
+      "row_number": 3,
+      "code": "FAKE-1",
+      "course_code": "FAKE-1",
+      "name": "架空の修得科目",
+      "source_category": "英語（英語）",
+      "normalized_name": "架空の修得科目",
+      "major": "教養",
+      "field": "英語",
+      "detail": "英語",
+      "curriculum_area": "liberal_arts",
+      "classification_status": "classified",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "source_category",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": 1.5,
+      "status": "passed",
+      "result": "passed",
+      "source_result": "合",
+      "year": "2025",
+      "earned_year": "2025",
+      "term": "第1学期",
+      "earned_term": "第1学期"
+    },
+    {
+      "no": 2,
+      "sequence": 2,
+      "row_number": 4,
+      "code": "FAKE-2",
+      "course_code": "FAKE-2",
+      "name": "架空の未修得科目",
+      "source_category": "自然科学（工学）",
+      "normalized_name": "架空の未修得科目",
+      "major": "教養",
+      "field": "自然科学",
+      "detail": "工学",
+      "curriculum_area": "liberal_arts",
+      "classification_status": "classified",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "source_category",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": 2,
+      "status": "failed",
+      "result": "failed",
+      "source_result": "否",
+      "year": null,
+      "earned_year": null,
+      "term": null,
+      "earned_term": null
+    },
+    {
+      "no": 3,
+      "sequence": 3,
+      "row_number": 5,
+      "code": "FAKE-3",
+      "course_code": "FAKE-3",
+      "name": "架空の未確定科目",
+      "source_category": "英語（英語）",
+      "normalized_name": "架空の未確定科目",
+      "major": "教養",
+      "field": "英語",
+      "detail": "英語",
+      "curriculum_area": "liberal_arts",
+      "classification_status": "classified",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "source_category",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": null,
+      "status": "unconfirmed",
+      "result": "unconfirmed",
+      "source_result": "合",
+      "year": null,
+      "earned_year": null,
+      "term": null,
+      "earned_term": null
+    },
+    {
+      "no": 4,
+      "sequence": 4,
+      "row_number": 6,
+      "code": "FAKE-4",
+      "course_code": "FAKE-4",
+      "name": "架空の分類不明",
+      "source_category": "架空の未知区分",
+      "normalized_name": "架空の分類不明",
+      "major": "不明",
+      "field": "架空の未知区分",
+      "detail": null,
+      "curriculum_area": "unknown",
+      "classification_status": "unknown",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "unknown_category",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": 2,
+      "status": "passed",
+      "result": "passed",
+      "source_result": "合",
+      "year": null,
+      "earned_year": null,
+      "term": null,
+      "earned_term": null
+    },
+    {
+      "no": 5,
+      "sequence": 5,
+      "row_number": 7,
+      "code": "FAKE-5",
+      "course_code": "FAKE-5",
+      "name": "架空の一覧外専門",
+      "source_category": "専門応用科目群（選択）",
+      "normalized_name": "架空の一覧外専門",
+      "major": "教養",
+      "field": "対象専門科目一覧外",
+      "detail": "専門応用科目群",
+      "curriculum_area": "liberal_arts",
+      "classification_status": "classified",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "outside_catalog_as_liberal",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": 2,
+      "status": "passed",
+      "result": "passed",
+      "source_result": "合",
+      "year": null,
+      "earned_year": null,
+      "term": null,
+      "earned_term": null
+    },
+    {
+      "no": 6,
+      "sequence": 6,
+      "row_number": 8,
+      "code": "FAKE-6",
+      "course_code": "FAKE-6",
+      "name": "架空の結果不明",
+      "source_category": "英語（英語）",
+      "normalized_name": "架空の結果不明",
+      "major": "教養",
+      "field": "英語",
+      "detail": "英語",
+      "curriculum_area": "liberal_arts",
+      "classification_status": "classified",
+      "course_group": null,
+      "requirement_code": null,
+      "catalog_course_id": null,
+      "classification_reason_code": "source_category",
+      "requirement_type": null,
+      "field_codes": [],
+      "level": null,
+      "credits": 2,
+      "status": "unconfirmed",
+      "result": "unconfirmed",
+      "source_result": "判定待ち",
+      "year": null,
+      "earned_year": null,
+      "term": null,
+      "earned_term": null
+    }
+  ],
+  "warnings": [
+    "5行目: 単位数が未確定です（取得済みには含めません）",
+    "6行目: 未知の科目区分のため分類できませんでした",
+    "7行目: MVP方針により、対象専門科目一覧にない専門科目を教養の選択枠へ分類しました",
+    "8行目: 未知の合否を未確定として扱いました"
+  ],
+  "evaluations": [
+    {
+      "requirement_id": "progression_year_2",
+      "title": "第2年次進級条件",
+      "profile_id": "niigata-engineering-sis-2025-v1",
+      "status": "not_satisfied",
+      "description": "入力内容から確認できる範囲で、満たしていない条件があります。",
+      "advisory_only": true,
+      "rule_status": "partial",
+      "evidence_status": "transcribed",
+      "input_context": {
+        "residence_years": null,
+        "residence_years_source": "unavailable",
+        "student_grade_year": null
+      },
+      "conditions": [
+        {
+          "id": "minimum_residence",
+          "label": "在学期間",
+          "status": "unknown",
+          "reason_code": "residence_years_not_provided",
+          "minimum_years": 1,
+          "confirmed_years": null,
+          "value_source": "unavailable",
+          "description": "在学期間が入力されていないため、この条件は判定できません。"
+        },
+        {
+          "id": "total_credits",
+          "label": "D科目を除く修得単位",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 32,
+          "confirmed_credits": 3.5,
+          "confirmed_credit_shortfall": 28.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは3.5単位で、確定値ではあと28.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "designated_course_group",
+          "label": "指定5科目の修得単位",
+          "status": "not_satisfied",
+          "reason_code": "confirmed_credits_below_minimum",
+          "minimum_credits": 4,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 4,
+          "has_uncertain_candidate": false,
+          "matched_course_names": [],
+          "description": "確認済みは0単位で、必要な4単位まであと4単位です。"
+        }
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程細則 第10条〜第13条",
+          "printed_pages": [
+            23,
+            24
+          ],
+          "pdf_pages": [
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "履修上の注意 第8項（進級・卒業要件単位に含まれない科目）",
+          "printed_pages": [
+            65
+          ],
+          "pdf_pages": [
+            69
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "工学部規程細則 第10条〜第13条",
+          "printed_pages": [
+            23,
+            24
+          ],
+          "pdf_pages": [
+            27,
+            28
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "履修上の注意 第8項（進級・卒業要件単位に含まれない科目）",
+          "printed_pages": [
+            65
+          ],
+          "pdf_pages": [
+            69
+          ]
+        }
+      ],
+      "caveat_ids": [],
+      "caveats": []
+    },
+    {
+      "requirement_id": "progression_year_4",
+      "title": "第4年次進級条件",
+      "profile_id": "niigata-engineering-sis-2025-v1",
+      "status": "unknown",
+      "description": "不足入力または未確定情報があるため、総合結果を確定できません。",
+      "advisory_only": true,
+      "rule_status": "partial",
+      "evidence_status": "transcribed",
+      "input_context": {
+        "residence_years": null,
+        "residence_years_source": "unavailable",
+        "student_grade_year": null
+      },
+      "conditions": [
+        {
+          "id": "minimum_residence",
+          "label": "在学期間",
+          "status": "unknown",
+          "reason_code": "residence_years_not_provided",
+          "minimum_years": 3,
+          "confirmed_years": null,
+          "value_source": "unavailable",
+          "description": "在学期間が入力されていないため、この条件は判定できません。"
+        },
+        {
+          "id": "specialized_foundation_a",
+          "label": "専門基礎 A科目",
+          "status": "satisfied",
+          "reason_code": "minimum_reached",
+          "minimum_credits": 0,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 0,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済み0単位で、必要な0単位以上です。"
+        },
+        {
+          "id": "specialized_foundation_b",
+          "label": "専門基礎 B科目",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 10,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 10,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと10単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_applied_a",
+          "label": "専門応用 A科目",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 19,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 19,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと19単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_applied_b",
+          "label": "専門応用 B科目（専門基礎Bの10単位超過分を含む）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 26,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 26,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "specialized_foundation_b": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと26単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_applied_pool",
+          "label": "専門応用 B・C・E科目（最低枠への充当後）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 11,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 11,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {
+            "E": 6
+          },
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "specialized_foundation_b": 0,
+            "specialized_applied_b": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと11単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_total",
+          "label": "学部専門系科目 計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 66,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 66,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {
+            "E": 6
+          },
+          "description": "確認済みは0単位で、確定値ではあと66単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_university_study",
+          "label": "教養・工学リテラシー入門（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_english",
+          "label": "教養・英語（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 1.5,
+          "confirmed_credit_shortfall": 0.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは1.5単位で、確定値ではあと0.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_initial_language",
+          "label": "教養・初修外国語（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_health_sports",
+          "label": "教養・健康スポーツ科学実習Ⅰ（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 1,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 1,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと1単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_information_literacy",
+          "label": "教養・データサイエンス入門（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_humanities_social_required",
+          "label": "教養・人文社会／教育科学（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 4,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 4,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと4単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_humanities_personalization_required_elective",
+          "label": "教養・人文社会／教育科学または新潟大学個性化科目（選択必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "liberal_humanities_social_required": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと2単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_natural_foundation",
+          "label": "教養・情報リテラシー／自然系共通専門基礎／自然科学（選択必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 10,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 10,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと10単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_elective",
+          "label": "教養系 選択（必修・選択必修への充当後）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 7,
+          "confirmed_credits": 2,
+          "confirmed_credit_shortfall": 5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 3.5,
+          "allocated_to_prior_conditions": 1.5,
+          "allocated_by_condition": {
+            "liberal_university_study": 0,
+            "liberal_english": 1.5,
+            "liberal_initial_language": 0,
+            "liberal_health_sports": 0,
+            "liberal_information_literacy": 0,
+            "liberal_humanities_social_required": 0,
+            "liberal_humanities_personalization_required_elective": 0,
+            "liberal_natural_foundation": 0
+          },
+          "description": "対象となる確認済み3.5単位のうち、先行する最低枠へ1.5単位を充当し、残りは2単位です。確定値ではあと5単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_total",
+          "label": "教養系科目 計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 32,
+          "confirmed_credits": 3.5,
+          "confirmed_credit_shortfall": 28.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは3.5単位で、確定値ではあと28.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "cross_area_surplus",
+          "label": "専門または教養の超過単位",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 6,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 6,
+          "has_uncertain_candidate": true,
+          "source_surplus_credits": {
+            "specialized_total": 0,
+            "liberal_total": 0
+          },
+          "description": "確認済みは0単位で、確定値ではあと6単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "overall_total",
+          "label": "修得単位 総計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 104,
+          "confirmed_credits": 3.5,
+          "confirmed_credit_shortfall": 100.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {
+            "E": 6
+          },
+          "description": "確認済みは3.5単位で、確定値ではあと100.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        }
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程細則 別表第1 第4年次進級基準",
+          "printed_pages": [
+            26
+          ],
+          "pdf_pages": [
+            30
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程 別表第1（教養系内訳）",
+          "printed_pages": [
+            7
+          ],
+          "pdf_pages": [
+            11
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "section": "履修上の注意 第5項〜第8項",
+          "printed_pages": [
+            64,
+            65
+          ],
+          "pdf_pages": [
+            68,
+            69
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "工学部規程細則 別表第1 第4年次進級基準",
+          "printed_pages": [
+            26
+          ],
+          "pdf_pages": [
+            30
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "工学部規程 別表第1（教養系内訳）",
+          "printed_pages": [
+            7
+          ],
+          "pdf_pages": [
+            11
+          ]
+        },
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "履修上の注意 第5項〜第8項",
+          "printed_pages": [
+            64,
+            65
+          ],
+          "pdf_pages": [
+            68,
+            69
+          ]
+        }
+      ],
+      "caveat_ids": [],
+      "caveats": []
+    },
+    {
+      "requirement_id": "graduation",
+      "title": "卒業資格条件",
+      "profile_id": "niigata-engineering-sis-2025-v1",
+      "status": "not_satisfied",
+      "description": "入力内容から確認できる範囲で、満たしていない条件があります。",
+      "advisory_only": true,
+      "rule_status": "partial",
+      "evidence_status": "transcribed",
+      "input_context": {
+        "residence_years": null,
+        "residence_years_source": "unavailable",
+        "student_grade_year": null
+      },
+      "conditions": [
+        {
+          "id": "minimum_residence",
+          "label": "在学期間",
+          "status": "unknown",
+          "reason_code": "residence_years_not_provided",
+          "minimum_years": 4,
+          "confirmed_years": null,
+          "value_source": "unavailable",
+          "description": "在学期間が入力されていないため、この条件は判定できません。"
+        },
+        {
+          "id": "specialized_foundation_a",
+          "label": "専門基礎 A科目",
+          "status": "satisfied",
+          "reason_code": "minimum_reached",
+          "minimum_credits": 0,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 0,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済み0単位で、必要な0単位以上です。"
+        },
+        {
+          "id": "specialized_foundation_b",
+          "label": "専門基礎 B科目",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 10,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 10,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと10単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_applied_a",
+          "label": "専門応用 A科目",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 27,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 27,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと27単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "individual_required_courses",
+          "label": "専門系の個別必修科目",
+          "status": "not_satisfied",
+          "reason_code": "required_courses_missing",
+          "required_course_count": 16,
+          "satisfied_course_count": 0,
+          "missing_course_names": [
+            "総合工学概論",
+            "総合技術科学演習",
+            "技術者の心がまえ",
+            "知的財産概論",
+            "情報セキュリティ概論",
+            "国際工学概論",
+            "プログラミングＡⅠ",
+            "プログラミングＡⅡ",
+            "情報システム基礎実習",
+            "知能情報システム実験Ⅰ",
+            "知能情報システム実験Ⅱ",
+            "知能情報システム実験Ⅲ",
+            "知能情報システム実験Ⅳ",
+            "研究室体験実習",
+            "卒業研修",
+            "卒業研究"
+          ],
+          "unknown_course_names": [],
+          "course_results": [
+            {
+              "catalog_course_id": "sis-common-a-01",
+              "name": "総合工学概論",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-common-a-02",
+              "name": "総合技術科学演習",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-common-a-03",
+              "name": "技術者の心がまえ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-common-a-04",
+              "name": "知的財産概論",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-common-a-05",
+              "name": "情報セキュリティ概論",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-common-a-06",
+              "name": "国際工学概論",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    8,
+                    39
+                  ],
+                  "pdf_pages": [
+                    12,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-01",
+              "name": "プログラミングＡⅠ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-02",
+              "name": "プログラミングＡⅡ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-03",
+              "name": "情報システム基礎実習",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-04",
+              "name": "知能情報システム実験Ⅰ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-05",
+              "name": "知能情報システム実験Ⅱ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-06",
+              "name": "知能情報システム実験Ⅲ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-07",
+              "name": "知能情報システム実験Ⅳ",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-08",
+              "name": "研究室体験実習",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 1,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 1,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な1単位まであと1単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-09",
+              "name": "卒業研修",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 2,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 2,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な2単位まであと2単位です。"
+            },
+            {
+              "catalog_course_id": "sis-applied-a-10",
+              "name": "卒業研究",
+              "status": "not_satisfied",
+              "reason_code": "confirmed_credits_below_minimum",
+              "minimum_credits": 6,
+              "confirmed_credits": 0,
+              "confirmed_credit_shortfall": 6,
+              "has_uncertain_candidate": false,
+              "source_refs": [
+                {
+                  "document_id": "student_handbook_2025",
+                  "section": "専門応用 A科目（工学科共通・情報電子分野を含む）",
+                  "printed_pages": [
+                    12,
+                    39
+                  ],
+                  "pdf_pages": [
+                    16,
+                    43
+                  ]
+                }
+              ],
+              "description": "確認済みは0単位で、必要な6単位まであと6単位です。"
+            }
+          ],
+          "description": "必修16科目のうち0科目の修得を確認しました。未修得または必要単位未達が16科目、判定不能が0科目です。"
+        },
+        {
+          "id": "specialized_applied_b",
+          "label": "専門応用 B科目（専門基礎Bの10単位超過分を含む）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 28,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 28,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "specialized_foundation_b": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと28単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_applied_pool",
+          "label": "専門応用 B・C・D・E科目（最低枠への充当後）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 17,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 17,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "specialized_foundation_b": 0,
+            "specialized_applied_b": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと17単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "specialized_total",
+          "label": "学部専門系科目 計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 82,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 82,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと82単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_university_study",
+          "label": "教養・工学リテラシー入門（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_english",
+          "label": "教養・英語（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 1.5,
+          "confirmed_credit_shortfall": 0.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは1.5単位で、確定値ではあと0.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_initial_language",
+          "label": "教養・初修外国語（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_health_sports",
+          "label": "教養・健康スポーツ科学実習Ⅰ（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 1,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 1,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと1単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_information_literacy",
+          "label": "教養・データサイエンス入門（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと2単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_humanities_social_required",
+          "label": "教養・人文社会／教育科学（必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 4,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 4,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと4単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_humanities_personalization_required_elective",
+          "label": "教養・人文社会／教育科学または新潟大学個性化科目（選択必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 2,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 2,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 0,
+          "allocated_to_prior_conditions": 0,
+          "allocated_by_condition": {
+            "liberal_humanities_social_required": 0
+          },
+          "description": "対象となる確認済み0単位のうち、先行する最低枠へ0単位を充当し、残りは0単位です。確定値ではあと2単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_natural_foundation",
+          "label": "教養・情報リテラシー／自然系共通専門基礎／自然科学（選択必修）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 10,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 10,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは0単位で、確定値ではあと10単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_elective",
+          "label": "教養系 選択（必修・選択必修への充当後）",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 11,
+          "confirmed_credits": 2,
+          "confirmed_credit_shortfall": 9,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "confirmed_area_credits": 3.5,
+          "allocated_to_prior_conditions": 1.5,
+          "allocated_by_condition": {
+            "liberal_university_study": 0,
+            "liberal_english": 1.5,
+            "liberal_initial_language": 0,
+            "liberal_health_sports": 0,
+            "liberal_information_literacy": 0,
+            "liberal_humanities_social_required": 0,
+            "liberal_humanities_personalization_required_elective": 0,
+            "liberal_natural_foundation": 0
+          },
+          "description": "対象となる確認済み3.5単位のうち、先行する最低枠へ1.5単位を充当し、残りは2単位です。確定値ではあと9単位ですが、未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "liberal_total",
+          "label": "教養系科目 計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 36,
+          "confirmed_credits": 3.5,
+          "confirmed_credit_shortfall": 32.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは3.5単位で、確定値ではあと32.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "cross_area_surplus",
+          "label": "専門または教養の超過単位",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 6,
+          "confirmed_credits": 0,
+          "confirmed_credit_shortfall": 6,
+          "has_uncertain_candidate": true,
+          "source_surplus_credits": {
+            "specialized_total": 0,
+            "liberal_total": 0
+          },
+          "description": "確認済みは0単位で、確定値ではあと6単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        },
+        {
+          "id": "overall_total",
+          "label": "修得単位 総計",
+          "status": "unknown",
+          "reason_code": "uncertain_courses_may_affect_result",
+          "minimum_credits": 124,
+          "confirmed_credits": 3.5,
+          "confirmed_credit_shortfall": 120.5,
+          "has_uncertain_candidate": true,
+          "applied_credit_caps": {},
+          "description": "確認済みは3.5単位で、確定値ではあと120.5単位です。未確定または分類不能な科目が結果へ影響するため判定できません。"
+        }
+      ],
+      "source_refs": [
+        {
+          "document_id": "student_handbook_2025",
+          "section": "工学部規程 別表第1・別表第2、工学部規程細則 別表第2、知能情報システムプログラム標準課程表、履修上の注意",
+          "printed_pages": [
+            7,
+            12,
+            27,
+            38,
+            39,
+            40,
+            64,
+            65
+          ],
+          "pdf_pages": [
+            11,
+            16,
+            31,
+            42,
+            43,
+            44,
+            68,
+            69
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "document_id": "student_handbook_2025",
+          "title": "新潟大学工学部 学生必携 2025（令和7）年度入学生用",
+          "url": "https://www.eng.niigata-u.ac.jp/student/files/hikkei_2025.pdf",
+          "section": "工学部規程 別表第1・別表第2、工学部規程細則 別表第2、知能情報システムプログラム標準課程表、履修上の注意",
+          "printed_pages": [
+            7,
+            12,
+            27,
+            38,
+            39,
+            40,
+            64,
+            65
+          ],
+          "pdf_pages": [
+            11,
+            16,
+            31,
+            42,
+            43,
+            44,
+            68,
+            69
+          ]
+        }
+      ],
+      "caveat_ids": [],
+      "caveats": []
+    }
+  ],
+  "evaluation_context": {
+    "residence_years": null,
+    "residence_years_source": "unavailable",
+    "student_grade_year": null,
+    "displayed_requirement_ids": [
+      "progression_year_2",
+      "progression_year_4",
+      "graduation"
+    ]
+  }
+}

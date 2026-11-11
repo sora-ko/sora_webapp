@@ -63,6 +63,7 @@ const state = {
 };
 const jobs = new Map();
 const epochs = {};
+let userChanged = false;
 const profile = () => state.profiles.find(item => item.profile_id === state.profileId);
 const contextKey = context => context ? `${context.academic_year}:${context.term}` : '';
 function catalog() {
@@ -80,7 +81,7 @@ function busy(key, active) {
   state.busy[key] = active;
   const areas = {report:$('grades-drop').closest('.panel'), table:$('timetable-drop').closest('.panel'), slot:$('slot-candidates'), search:$('search-results')};
   areas[key]?.setAttribute('aria-busy', String(active));
-  if (key === 'report') $('retry-grades').disabled = active;
+  if (key === 'report') $('retry-grades').disabled = active || !state.gradesFile;
   if (key === 'search') {
     $('search-button').disabled = active;
     $('search-button').replaceChildren(document.createTextNode(active ? '照合しています…' : '不足単位から探す'), icon('arrow'));
@@ -131,11 +132,13 @@ function renderTarget() {
   $('policy-notes').replaceChildren(...(item?.policy_notes || []).map(note => node('p', displayMessage(note))));
 }
 function renderFiles() {
-  $('grades-file-name').textContent = state.gradesFile?.name || 'ファイルをここにドロップ';
-  $('timetable-file-name').textContent = state.timetableFile?.name || '登録済み授業との重複を確認できます。';
-  $('grades-actions').hidden = !state.gradesFile;
-  $('timetable-actions').hidden = !state.timetableFile;
-  $('matching-files').textContent = `成績CSV：${state.gradesFile ? '選択済み' : '未選択'}　／　履修表CSV：${state.timetableFile ? '選択済み' : '未選択'}`;
+  $('grades-file-name').textContent = state.gradesFile?.name || (state.report ? '解析済みの成績情報を復元しました' : 'ファイルをここにドロップ');
+  $('timetable-file-name').textContent = state.timetableFile?.name || (state.timetable ? '解析済みの時間割を復元しました' : '登録済み授業との重複を確認できます。');
+  $('grades-actions').hidden = !(state.gradesFile || state.report);
+  $('timetable-actions').hidden = !(state.timetableFile || state.timetable);
+  $('retry-grades').disabled = !state.gradesFile || Boolean(state.busy.report);
+  $('retry-grades').title = state.gradesFile ? '' : '再解析する場合はCSVを選択し直してください。';
+  $('matching-files').textContent = `成績CSV：${state.report ? '解析済み' : state.gradesFile ? '未解析' : '未選択'}　／　履修表CSV：${state.timetable ? '解析済み' : state.timetableFile ? '未解析' : '未選択'}`;
 }
 function renderOverview() {
   const data = state.report;
@@ -378,7 +381,7 @@ function findSlot(weekday,period) {
   const item=catalog();
   if (!item || !state.context) { error('slot-error',catalogMessage());return; }
   $('slot-status').textContent='この時間の教養候補を確認しています…';
-  run('slot',signal=>api.slot({profile_id:state.profileId,...state.context,weekday,period},state.timetableFile,signal),data=>{
+  run('slot',signal=>api.slot({profile_id:state.profileId,...state.context,weekday,period},signal),data=>{
     validateCandidates(data);state.slot=data;renderSlot();
   },exception=>{$('slot-status').textContent='候補を取得できませんでした。';error('slot-error',exception.message);});
 }
@@ -402,46 +405,57 @@ function renderSearch() {
 $('search-button').addEventListener('click',()=>{
   cancel('search');state.search=null;renderSearch();error('search-error');
   const missing=[];
-  if (!state.gradesFile) missing.push('成績CSVを「単位の状況」から追加してください。');
-  if (!state.timetableFile) missing.push('履修表CSVをこの画面の上部から追加してください。');
+  if (!state.report) missing.push('成績CSVを「単位の状況」から追加・解析してください。');
+  if (!state.timetable) missing.push('履修表CSVをこの画面の上部から追加・解析してください。');
   if (missing.length) { error('search-error',missing.join(' ')); return; }
   if (state.busy.table || !state.timetable) { error('search-error','履修表CSVの読み込みを完了してください。上部のエラーがあれば、CSVを読み直してください。');return; }
   if (!catalog() || !state.context) { error('search-error',catalogMessage());return; }
   $('search-results').hidden=false;$('search-status').textContent='取得単位と空き時間を照合しています…';
-  run('search',signal=>api.search({profile_id:state.profileId,...state.context},state.gradesFile,state.timetableFile,signal),data=>{
+  run('search',signal=>api.search({profile_id:state.profileId,...state.context},signal),data=>{
     validateCandidates(data,true);state.search=data;renderSearch();
   },exception=>{renderSearch();error('search-error',exception.message);});
 });
 $('clear-search').addEventListener('click',()=>{cancel('search');state.search=null;error('search-error');renderSearch();});
 
 function clearReport() {cancel('report');state.report=null;state.coursePage=0;renderOverview();error('grades-error');$('grades-status').textContent='';}
+function sessionStatus() {
+  const saved = api.session.data();
+  if (saved) $('session-status').textContent = saved.report || saved.timetable
+    ? `解析結果を一時保持しています。残り約${Math.ceil(saved.session.expires_in_seconds / 60)}分で自動削除されます。` : '';
+}
+function forget(kind, id) {
+  api.session.clear(kind).then(sessionStatus).catch(exception => error(id,
+    '一時保持している情報の削除を確認できませんでした。' + exception.message));
+}
 function checkFile(file) {
   if (!file) return;
   if (file.size>5*1024*1024) throw new ApiError('ファイルが5 MBを超えています。大学から取得したCSVを確認してください。','file_too_large');
   if (!file.size) throw new ApiError('空のファイルです。内容のあるCSVを選択してください。','empty_file');
 }
 function readGrades(file) {
+  userChanged=true;
   clearReport();invalidateRecommendations();state.gradesFile=file || null;renderFiles();
-  if (!file) return;
-  try {checkFile(file);} catch (exception) {error('grades-error',exception.message);return;}
+  if (!file) {forget('reports','grades-error');return;}
+  try {checkFile(file);} catch (exception) {forget('reports','grades-error');error('grades-error',exception.message);return;}
   if (!profile()) {error('grades-error','対象カリキュラムの読み込みを完了してください。');return;}
   $('grades-status').textContent='成績CSVを読み込んでいます…';
   run('report',signal=>api.report({profile_id:state.profileId,residence_years:$('residence-years').value},file,signal),data=>{
     if (!data.student || !data.summary || !Array.isArray(data.courses) || !Array.isArray(data.evaluations) || !Array.isArray(data.warnings)) throw new ApiError('成績情報の形式を確認できませんでした。','invalid_response');
-    state.report=data;renderOverview();$('grades-status').textContent=`${number(data.summary.course_count)}科目を読み込みました。修得済みは ${number(data.summary.earned_credits)} 単位です。`;
+    state.report=data;renderOverview();renderFiles();sessionStatus();$('grades-status').textContent=`${number(data.summary.course_count)}科目を読み込みました。修得済みは ${number(data.summary.earned_credits)} 単位です。`;
   },exception=>{state.report=null;renderOverview();$('grades-status').textContent='';error('grades-error',exception.message);});
 }
 function readTimetable(file) {
+  userChanged=true;
   cancel('table');state.timetable=null;state.timetableFile=file || null;state.context=null;invalidateRecommendations();
   renderFiles();error('timetable-error');$('timetable-status').textContent='';
-  if (!file) {renderCalendar();return;}
-  try {checkFile(file);} catch(exception) {error('timetable-error',exception.message);renderCalendar();return;}
+  if (!file) {forget('timetables','timetable-error');renderCalendar();return;}
+  try {checkFile(file);} catch(exception) {forget('timetables','timetable-error');error('timetable-error',exception.message);renderCalendar();return;}
   $('timetable-status').textContent='履修表CSVを読み込んでいます…';
   run('table',signal=>api.timetable(file,signal),data=>{
     if (!Array.isArray(data.display_contexts) || !Array.isArray(data.busy_slots) || !Array.isArray(data.courses)
       || !Array.isArray(data.represented_weekdays) || !Array.isArray(data.represented_periods)
       || typeof data.ready_for_recommendation!=='boolean') throw new ApiError('履修表の形式を確認できませんでした。','invalid_response');
-    state.timetable=data;syncContext();renderCalendar();
+    state.timetable=data;syncContext();renderCalendar();renderFiles();sessionStatus();
     $('timetable-status').textContent=data.ready_for_recommendation ? '時間割を読み込みました。気になるマスを選択してください。' : '時間割に未確認の情報があります。注意事項を確認してください。';
   },exception=>{state.timetable=null;$('timetable-status').textContent='';error('timetable-error',exception.message);renderCalendar();});
   renderCalendar();
@@ -458,14 +472,32 @@ $('retry-grades').addEventListener('click',()=>readGrades(state.gradesFile));
 $('clear-grades').addEventListener('click',()=>{$('grades-input').value='';readGrades(null);});
 $('clear-timetable').addEventListener('click',()=>{$('timetable-input').value='';readTimetable(null);});
 $('profile-select').addEventListener('change',()=>{
+  userChanged=true;forget('reports','grades-error');
   state.profileId=$('profile-select').value;clearReport();invalidateRecommendations();state.context=null;renderTarget();renderCalendar();
   if(state.gradesFile) $('grades-status').textContent='対象を変更しました。「このCSVで再解析」を押すと、新しい対象で確認できます。';
 });
-$('residence-years').addEventListener('input',()=>{clearReport();if(state.gradesFile)$('grades-status').textContent='判定条件を変更しました。「このCSVで再解析」を押してください。';});
+$('residence-years').addEventListener('input',()=>{userChanged=true;forget('reports','grades-error');clearReport();if(state.gradesFile)$('grades-status').textContent='判定条件を変更しました。「このCSVで再解析」を押してください。';});
 $('clear-all').addEventListener('click',()=>{
-  $('grades-input').value='';$('timetable-input').value='';$('residence-years').value='';
-  readGrades(null);readTimetable(null);$('course-search').value='';$('course-area').value='all';$('course-result').value='all';
+  userChanged=true;resetLocal('clearing');
+  api.session.end().catch(exception=>error('initial-error','一時保持の終了を確認できませんでした。'+exception.message));
 });
+function resetLocal(reason) {
+  for (const key of ['report','table','slot','search']) cancel(key);
+  state.gradesFile=null;state.timetableFile=null;state.timetable=null;state.context=null;
+  $('grades-input').value='';$('timetable-input').value='';$('residence-years').value='';
+  $('course-search').value='';$('course-area').value='all';$('course-result').value='all';
+  clearReport();invalidateRecommendations();renderFiles();renderCalendar();
+  $('timetable-status').textContent='';error('timetable-error');
+  $('session-status').textContent=reason==='expired' ? '一時保持の期限が切れました。CSVを読み込み直してください。'
+    : reason==='ended' ? '読み込んだ情報を削除しました。'
+    : reason==='conflict' ? '別のタブまたは別の操作で情報が更新されました。ページを再読み込みして最新の情報を確認してください。'
+    : reason==='clearing' ? '画面の情報を消去しました。一時保持の削除を確認しています…' : '';
+}
+api.session.onReset(resetLocal);
+window.addEventListener('pagehide',()=>api.session.suspend());
+window.addEventListener('pageshow',event=>{if(event.persisted) location.reload();});
+window.addEventListener('focus',()=>api.session.check());
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)api.session.check();});
 async function load() {
   error('initial-error');
   await Promise.allSettled([
@@ -489,6 +521,22 @@ async function load() {
       state.catalogs=data.catalogs;state.catalogError='';renderCalendar();
     },exception=>{state.catalogs=[];state.catalogError=exception.message;renderCalendar();}),
   ]);
+  try {
+    const saved = await api.session.restore();
+    if (saved && !userChanged) {
+      if (saved.report) {
+        const id=saved.report.curriculum.rules_version;
+        if (!state.profiles.some(item=>item.profile_id===id)) throw new ApiError('保持中の成績に対応する対象がありません。CSVを読み込み直してください。');
+        state.profileId=id;$('profile-select').value=id;state.report=saved.report;
+        $('residence-years').value=saved.report.evaluation_context.residence_years_source==='user_input'
+          ? saved.report.evaluation_context.residence_years : '';
+        $('grades-status').textContent='一時保持している成績情報を復元しました。再解析する場合はCSVを選択し直してください。';
+      }
+      state.timetable=saved.timetable;
+      if(state.timetable) $('timetable-status').textContent='一時保持している時間割を復元しました。';
+      syncContext();renderTarget();renderFiles();renderOverview();renderCalendar();sessionStatus();
+    }
+  } catch(exception) {if(exception.name!=='AbortError')error('initial-error',exception.message);}
 }
 renderFiles();renderOverview();renderSlot();renderSearch();
 load();

@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_required",
+    "message": "セッションがないか、有効期限が切れています。新しく開始してください。"
+  }
+}

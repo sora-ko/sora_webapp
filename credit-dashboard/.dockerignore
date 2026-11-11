@@ -8,4 +8,12 @@ tests
 docs
 examples
 handoff
+presentations
+contracts
+*.[cC][sS][vV]
+.env
+.env.*
+*.sqlite*
+*.db
+*.db-*
 *:Zone.Identifier

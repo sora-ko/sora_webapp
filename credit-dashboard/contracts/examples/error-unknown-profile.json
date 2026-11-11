@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "unknown_rule_profile",
+    "message": "選択された対象年度・プログラムには対応していません。",
+    "details": {
+      "profile_id": "fictional-unregistered-profile"
+    }
+  }
+}

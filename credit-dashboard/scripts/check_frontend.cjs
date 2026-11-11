@@ -1,6 +1,7 @@
 /* localhost専用。架空CSVをメモリ内で生成し、参考UIを実ブラウザーで検証する。
  * Playwrightは開発環境から提供する。アプリの実行依存には追加しない。
  * CSV・API応答・トレース・動画は保存しない。任意の画面画像も架空データのみ。
+ * 表示回帰にはstateless-session-adapterを注入する。実際のCookie・復元はcheck_session_reload.cjsで検証する。
  */
 'use strict';
 
@@ -67,6 +68,7 @@ function gradeRows(name = '架空 画面確認') {
   let count = 0;
   try {
     const context = await browser.newContext({viewport: {width: 1440, height: 1000}, acceptDownloads: false});
+    await context.addInitScript({content: fs.readFileSync(path.join(path.dirname(process.argv[1]), 'test-support', 'stateless-session-adapter.js'), 'utf8')});
     const outsideRequests = [];
     await context.route('**/*', route => {
       if (new URL(route.request().url()).origin !== baseUrl.origin) {
@@ -162,8 +164,8 @@ function gradeRows(name = '架空 画面確認') {
       await click('#credit-search-submit');
       await visible('#credit-search-error');
       const message = await page.locator('#credit-search-error').textContent();
-      assert.match(message, /成績CSVが選択されていません/);
-      assert.match(message, /履修表CSVが選択されていません/);
+      assert.match(message, /成績CSVが未解析です/);
+      assert.match(message, /履修表CSVが未解析です/);
       assert.equal(await page.locator('#credit-search-result').isVisible(), false);
       assert.equal(requests, 0);
       page.off('request', countRequest);
@@ -174,21 +176,25 @@ function gradeRows(name = '架空 画面確認') {
       page.on('request', countRequest);
       await click('#report-tab');
       await upload('#csv-file', csv(gradeRows()));
+      await click('#submit');
+      await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       await visible('#credit-search-error', false);
       await click('#credit-search-submit');
       await visible('#credit-search-error');
-      assert.match(await page.locator('#credit-search-error').textContent(), /履修表CSVが選択されていません/);
-      assert.doesNotMatch(await page.locator('#credit-search-error').textContent(), /成績CSVが選択されていません/);
+      assert.match(await page.locator('#credit-search-error').textContent(), /履修表CSVが未解析です/);
+      assert.doesNotMatch(await page.locator('#credit-search-error').textContent(), /成績CSVが未解析です/);
       await upload('#timetable-file', csv(timetableRows()));
+      await click('#timetable-submit');
+      await page.waitForFunction(() => document.querySelector('#timetable-courses').textContent.length > 0);
       await visible('#credit-search-error', false);
       await click('#report-tab');
       await click('#clear-report');
       await click('#timetable-tab');
       await click('#credit-search-submit');
       await visible('#credit-search-error');
-      assert.match(await page.locator('#credit-search-error').textContent(), /成績CSVが選択されていません/);
-      assert.doesNotMatch(await page.locator('#credit-search-error').textContent(), /履修表CSVが選択されていません/);
+      assert.match(await page.locator('#credit-search-error').textContent(), /成績CSVが未解析です/);
+      assert.doesNotMatch(await page.locator('#credit-search-error').textContent(), /履修表CSVが未解析です/);
       assert.equal(requests, 0);
       page.off('request', countRequest);
       await click('#timetable-clear');
@@ -335,6 +341,7 @@ function gradeRows(name = '架空 画面確認') {
       const rows = gradeRows();
       rows.push(['2', '10', '1', 'FAKE-PREVIOUS-CODE', acquired.name, acquired.category, '選択', String(acquired.credits), '合']);
       await upload('#csv-file', csv(rows));
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       assert.equal(await page.locator('#credit-search-json').textContent(), '');
       await click('#credit-search-submit');
@@ -349,6 +356,7 @@ function gradeRows(name = '架空 画面確認') {
       rows[1] = ['No.', '分野', '水準', '開講番号', '科目', '科目区分', '必選区分', '単位数', '合否'];
       rows[2] = ['1', '10', '1', 'FAKE-UNCERTAIN', '架空未確定科目', '未確認の区分', '選択', '2', ''];
       await upload('#csv-file', csv(rows));
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       await click('#credit-search-submit');
       await page.waitForFunction(() => document.querySelector('#credit-search-json').textContent.length > 0);
@@ -585,6 +593,11 @@ function gradeRows(name = '架空 画面確認') {
     const profileMetadata = await (await page.request.get(new URL('/api/v1/rule-profiles', baseUrl).href)).json();
     const catalogMetadata = await (await page.request.get(new URL('/api/v1/recommendation-catalogs', baseUrl).href)).json();
     const originalProfile = profileMetadata.profiles[0];
+    const reportFixtureResponse = await page.request.post(new URL('/api/v1/reports', baseUrl).href, {multipart: {
+      profile_id: originalProfile.profile_id, file: {name: 'fictional.csv', mimeType: 'text/csv', buffer: csv(gradeRows())},
+    }});
+    assert.equal(reportFixtureResponse.status(), 200);
+    const reportFixture = await reportFixtureResponse.json();
     const alternativeProfile = {...originalProfile, profile_id: 'fictional-ui-profile', program: '架空の別プログラム'};
     const unavailableProfile = {...originalProfile, profile_id: 'fictional-no-catalog', program: '架空の未対応プログラム'};
     const originalCatalog = catalogMetadata.catalogs[0];
@@ -600,6 +613,13 @@ function gradeRows(name = '架空 画面確認') {
       target_requirement_id: 'graduation', status: 'empty', baseline: [], free_slots: [], candidates: [], review_candidates: [],
       messages: [], checks: {}, counts: {}});
     const formFields = request => new Request(request.url(), {method: 'POST', headers: request.headers(), body: request.postDataBuffer()}).formData();
+    // この節は未登録プログラムを含むUI契約テスト。学務規則は推測せず、固定の架空応答で表示を確認する。
+    await page.route('**/api/v1/reports', async route => {
+      const fields = await formFields(route.request());
+      const target = [originalProfile, alternativeProfile, unavailableProfile].find(item => item.profile_id === fields.get('profile_id'));
+      await route.fulfill({json: {...reportFixture, curriculum: {...reportFixture.curriculum,
+        rules_version: target.profile_id, program: target.program}}});
+    });
     await page.route('**/api/v1/rule-profiles', route => route.fulfill({json: {...profileMetadata,
       profiles: [originalProfile, alternativeProfile, unavailableProfile]}}));
     await page.route('**/api/v1/recommendation-catalogs', route => route.fulfill({json: {schema_version: 1,
@@ -633,6 +653,7 @@ function gradeRows(name = '架空 画面確認') {
       await click('#report-tab');
       await select('#profile-select', alternativeProfile.profile_id);
       await upload('#csv-file', csv(gradeRows()));
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       assert.match(await page.locator('#recommendation-target').textContent(), /架空の別プログラム/);
       assert.equal(await page.locator('#recommendation-json').textContent(), '');
@@ -645,6 +666,7 @@ function gradeRows(name = '架空 画面確認') {
       assert.equal(searchCalls.at(-1), alternativeProfile.profile_id);
       await click('#report-tab');
       await select('#profile-select', originalProfile.profile_id);
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       assert.equal(await page.locator('#recommendation-json').textContent(), '');
       assert.equal(await page.locator('#credit-search-json').textContent(), '');
@@ -655,6 +677,7 @@ function gradeRows(name = '架空 画面確認') {
     await check('a profile without a catalog cannot reuse another programs candidates', async () => {
       await click('#report-tab');
       await select('#profile-select', unavailableProfile.profile_id);
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       assert.match(await page.locator('#recommendation-scope').textContent(), /対応する教養候補データがありません/);
       assert.equal(await page.locator('#recommendation-browse').isDisabled(), true);
@@ -670,6 +693,7 @@ function gradeRows(name = '架空 画面確認') {
     await check('the timetable year never falls back to a different catalog year', async () => {
       await click('#report-tab');
       await select('#profile-select', originalProfile.profile_id);
+      await click('#submit');await page.waitForFunction(() => document.querySelector('#student').textContent.length > 0);
       await click('#timetable-tab');
       const rows = timetableRows({empty: true}).map(row => row.map(cell => cell.replaceAll('2026年度', '2027年度')));
       await timetableUpload(rows);
@@ -713,7 +737,7 @@ function gradeRows(name = '架空 画面確認') {
       await page.unroute('**/api/v1/recommendation-searches', delayedSearch);
       await page.evaluate(() => { window.fetch = window.profileOriginalFetch; delete window.profileOriginalFetch; });
     });
-    for (const path of ['/api/v1/rule-profiles', '/api/v1/recommendation-catalogs', '/api/v1/recommendations', '/api/v1/recommendation-searches']) await page.unroute(`**${path}`);
+    for (const path of ['/api/v1/reports', '/api/v1/rule-profiles', '/api/v1/recommendation-catalogs', '/api/v1/recommendations', '/api/v1/recommendation-searches']) await page.unroute(`**${path}`);
     await check('profile and catalog loading can finish in either order without a wrong fallback', async () => {
       for (const delayedPath of ['/api/v1/rule-profiles', '/api/v1/recommendation-catalogs']) {
         let release;

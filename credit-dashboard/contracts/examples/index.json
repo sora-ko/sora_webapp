@@ -1,0 +1,583 @@
+{
+  "contract_version": "1.2.0",
+  "synthetic_data_only": true,
+  "description": "固定の架空CSV・メモリ生成データとローカルASGI応答だけから生成。利用者CSVは含めない。",
+  "examples": [
+    {
+      "name": "health",
+      "method": "GET",
+      "path": "/api/healthz",
+      "status": 200,
+      "model": "HealthResponse",
+      "file": "examples/health.json"
+    },
+    {
+      "name": "rule-profiles",
+      "method": "GET",
+      "path": "/api/v1/rule-profiles",
+      "status": 200,
+      "model": "RuleProfilesResponse",
+      "file": "examples/rule-profiles.json"
+    },
+    {
+      "name": "catalogs",
+      "method": "GET",
+      "path": "/api/v1/recommendation-catalogs",
+      "status": 200,
+      "model": "RecommendationCatalogsResponse",
+      "file": "examples/catalogs.json"
+    },
+    {
+      "name": "report-year1",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-year1.json"
+    },
+    {
+      "name": "report-year2",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-year2.json"
+    },
+    {
+      "name": "report-year3",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-year3.json"
+    },
+    {
+      "name": "report-graduation",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-graduation.json"
+    },
+    {
+      "name": "report-unknown",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-unknown.json"
+    },
+    {
+      "name": "report-no-courses",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-no-courses.json"
+    },
+    {
+      "name": "timetable",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable.json"
+    },
+    {
+      "name": "timetable-empty",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-empty.json"
+    },
+    {
+      "name": "timetable-term-zero",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-term-zero.json"
+    },
+    {
+      "name": "timetable-missing-code",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-missing-code.json"
+    },
+    {
+      "name": "timetable-outside-grid",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-outside-grid.json"
+    },
+    {
+      "name": "timetable-no-context",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-no-context.json"
+    },
+    {
+      "name": "timetable-weekend",
+      "method": "POST",
+      "path": "/api/v1/timetables",
+      "status": 200,
+      "model": "TimetableResponse",
+      "file": "examples/timetable-weekend.json"
+    },
+    {
+      "name": "slot-catalog",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/slot-catalog.json"
+    },
+    {
+      "name": "slot-empty",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/slot-empty.json"
+    },
+    {
+      "name": "slot-timetable",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/slot-timetable.json"
+    },
+    {
+      "name": "slot-occupied",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/slot-occupied.json"
+    },
+    {
+      "name": "slot-unknown",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/slot-unknown.json"
+    },
+    {
+      "name": "search-ok",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-ok.json"
+    },
+    {
+      "name": "search-review",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-review.json"
+    },
+    {
+      "name": "search-unknown-time",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-unknown-time.json"
+    },
+    {
+      "name": "search-fulfilled",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-fulfilled.json"
+    },
+    {
+      "name": "search-fulfilled-unknown-time",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-fulfilled-unknown-time.json"
+    },
+    {
+      "name": "error-missing-file",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 400,
+      "model": "ErrorResponse",
+      "file": "examples/error-missing-file.json"
+    },
+    {
+      "name": "error-invalid-csv",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-invalid-csv.json"
+    },
+    {
+      "name": "error-unknown-profile",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-unknown-profile.json"
+    },
+    {
+      "name": "error-unsupported-media",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 415,
+      "model": "ErrorResponse",
+      "file": "examples/error-unsupported-media.json"
+    },
+    {
+      "name": "error-invalid-context",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-invalid-context.json"
+    },
+    {
+      "name": "error-invalid-residence",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-invalid-residence.json"
+    },
+    {
+      "name": "error-invalid-multipart",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 400,
+      "model": "ErrorResponse",
+      "file": "examples/error-invalid-multipart.json"
+    },
+    {
+      "name": "error-multiple-files",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 400,
+      "model": "ErrorResponse",
+      "file": "examples/error-multiple-files.json"
+    },
+    {
+      "name": "error-unsupported-encoding",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 415,
+      "model": "ErrorResponse",
+      "file": "examples/error-unsupported-encoding.json"
+    },
+    {
+      "name": "error-no-catalog",
+      "method": "POST",
+      "path": "/api/v1/recommendations",
+      "status": 404,
+      "model": "ErrorResponse",
+      "file": "examples/error-no-catalog.json"
+    },
+    {
+      "name": "error-search-csv",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-search-csv.json"
+    },
+    {
+      "name": "error-route",
+      "method": "GET",
+      "path": "/api/v1/fictional-missing",
+      "status": 404,
+      "model": "ErrorResponse",
+      "file": "examples/error-route.json"
+    },
+    {
+      "name": "error-method",
+      "method": "GET",
+      "path": "/api/v1/reports",
+      "status": 405,
+      "model": "ErrorResponse",
+      "file": "examples/error-method.json"
+    },
+    {
+      "name": "error-legacy",
+      "method": "GET",
+      "path": "/api/report",
+      "status": 410,
+      "model": "ErrorResponse",
+      "file": "examples/error-legacy.json"
+    },
+    {
+      "name": "error-too-large",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 413,
+      "model": "ErrorResponse",
+      "file": "examples/error-too-large.json"
+    },
+    {
+      "name": "catalogs-empty",
+      "method": "GET",
+      "path": "/api/v1/recommendation-catalogs",
+      "status": 200,
+      "model": "RecommendationCatalogsResponse",
+      "file": "examples/catalogs-empty.json"
+    },
+    {
+      "name": "report-blocked",
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "status": 200,
+      "model": "ReportResponse",
+      "file": "examples/report-blocked.json"
+    },
+    {
+      "name": "search-blocked",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-blocked.json"
+    },
+    {
+      "name": "search-empty",
+      "method": "POST",
+      "path": "/api/v1/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/search-empty.json"
+    },
+    {
+      "name": "error-invalid-catalog",
+      "method": "GET",
+      "path": "/api/v1/recommendation-catalogs",
+      "status": 503,
+      "model": "ErrorResponse",
+      "file": "examples/error-invalid-catalog.json"
+    },
+    {
+      "name": "error-internal",
+      "method": "GET",
+      "path": "/api/v1/recommendation-catalogs",
+      "status": 500,
+      "model": "ErrorResponse",
+      "file": "examples/error-internal.json"
+    },
+    {
+      "name": "error-session-required",
+      "method": "GET",
+      "path": "/api/v1/session",
+      "status": 401,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-required.json"
+    },
+    {
+      "name": "error-session-header",
+      "method": "POST",
+      "path": "/api/v1/session",
+      "status": 403,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-header.json"
+    },
+    {
+      "name": "error-session-origin",
+      "method": "POST",
+      "path": "/api/v1/session",
+      "status": 403,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-origin.json"
+    },
+    {
+      "name": "session-created",
+      "method": "POST",
+      "path": "/api/v1/session",
+      "status": 200,
+      "model": "SessionResponse",
+      "file": "examples/session-created.json"
+    },
+    {
+      "name": "session-active",
+      "method": "GET",
+      "path": "/api/v1/session",
+      "status": 200,
+      "model": "SessionResponse",
+      "file": "examples/session-active.json"
+    },
+    {
+      "name": "session-resumed",
+      "method": "POST",
+      "path": "/api/v1/session",
+      "status": 200,
+      "model": "SessionResponse",
+      "file": "examples/session-resumed.json"
+    },
+    {
+      "name": "error-session-csrf",
+      "method": "DELETE",
+      "path": "/api/v1/session",
+      "status": 403,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-csrf.json"
+    },
+    {
+      "name": "session-ended",
+      "method": "DELETE",
+      "path": "/api/v1/session",
+      "status": 200,
+      "model": "SessionEndedResponse",
+      "file": "examples/session-ended.json"
+    },
+    {
+      "name": "error-session-capacity",
+      "method": "POST",
+      "path": "/api/v1/session",
+      "status": 503,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-capacity.json"
+    },
+    {
+      "name": "error-session-expired",
+      "method": "GET",
+      "path": "/api/v1/session",
+      "status": 401,
+      "model": "ErrorResponse",
+      "file": "examples/error-session-expired.json"
+    },
+    {
+      "name": "workspace-empty",
+      "method": "GET",
+      "path": "/api/v1/session/workspace",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-empty.json"
+    },
+    {
+      "name": "workspace-report",
+      "method": "POST",
+      "path": "/api/v1/session/reports",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-report.json"
+    },
+    {
+      "name": "workspace-both",
+      "method": "POST",
+      "path": "/api/v1/session/timetables",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-both.json"
+    },
+    {
+      "name": "workspace-restored",
+      "method": "GET",
+      "path": "/api/v1/session/workspace",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-restored.json"
+    },
+    {
+      "name": "workspace-slot",
+      "method": "POST",
+      "path": "/api/v1/session/recommendations",
+      "status": 200,
+      "model": "SlotRecommendationsResponse",
+      "file": "examples/workspace-slot.json"
+    },
+    {
+      "name": "workspace-search",
+      "method": "POST",
+      "path": "/api/v1/session/recommendation-searches",
+      "status": 200,
+      "model": "RecommendationSearchResponse",
+      "file": "examples/workspace-search.json"
+    },
+    {
+      "name": "workspace-cleared",
+      "method": "DELETE",
+      "path": "/api/v1/session/reports",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-cleared.json"
+    },
+    {
+      "name": "error-workspace-conflict",
+      "method": "DELETE",
+      "path": "/api/v1/session/reports",
+      "status": 409,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-conflict.json"
+    },
+    {
+      "name": "error-workspace-inputs",
+      "method": "POST",
+      "path": "/api/v1/session/recommendation-searches",
+      "status": 409,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-inputs.json"
+    },
+    {
+      "name": "error-workspace-csv",
+      "method": "POST",
+      "path": "/api/v1/session/reports",
+      "status": 422,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-csv.json"
+    },
+    {
+      "name": "error-workspace-media",
+      "method": "POST",
+      "path": "/api/v1/session/reports",
+      "status": 415,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-media.json"
+    },
+    {
+      "name": "error-workspace-csrf",
+      "method": "DELETE",
+      "path": "/api/v1/session/timetables",
+      "status": 403,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-csrf.json"
+    },
+    {
+      "name": "workspace-cleared-all-documents",
+      "method": "DELETE",
+      "path": "/api/v1/session/timetables",
+      "status": 200,
+      "model": "SessionWorkspaceResponse",
+      "file": "examples/workspace-cleared-all-documents.json"
+    },
+    {
+      "name": "error-workspace-capacity",
+      "method": "POST",
+      "path": "/api/v1/session/reports",
+      "status": 413,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-capacity.json"
+    },
+    {
+      "name": "error-workspace-expired",
+      "method": "GET",
+      "path": "/api/v1/session/workspace",
+      "status": 401,
+      "model": "ErrorResponse",
+      "file": "examples/error-workspace-expired.json"
+    }
+  ]
+}

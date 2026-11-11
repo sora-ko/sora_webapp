@@ -1,0 +1,39 @@
+{
+  "profiles": [
+    {
+      "profile_id": "niigata-engineering-sis-2025-v1",
+      "institution": "新潟大学",
+      "faculty": "工学部",
+      "program": "知能情報システムプログラム",
+      "admission_year": 2025,
+      "policy_notes": [
+        "通常入学・留年なし・編入なしを前提とし、留学生向け代替規則と早期卒業は対象外です。夜間主科目は含まれない前提です。",
+        "MVP独自方針として、対象の専門科目一覧にない専門科目を教養の選択単位へ算入します。大学の正式な他プログラム科目の取扱いとは異なります。",
+        "他大学の単位認定は未対応です。既知の他大学単位ラベルは要件集計から除外し、未知の表記は推測しません。"
+      ],
+      "requirements": [
+        {
+          "requirement_id": "progression_year_2",
+          "title": "第2年次進級条件",
+          "rule_status": "partial"
+        },
+        {
+          "requirement_id": "progression_year_4",
+          "title": "第4年次進級条件",
+          "rule_status": "partial"
+        },
+        {
+          "requirement_id": "graduation",
+          "title": "卒業資格条件",
+          "rule_status": "partial"
+        }
+      ],
+      "implemented_requirement_ids": [
+        "progression_year_2",
+        "progression_year_4",
+        "graduation"
+      ]
+    }
+  ],
+  "default_profile_id": "niigata-engineering-sis-2025-v1"
+}

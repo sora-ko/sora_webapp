@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>単位・時間割ダッシュボード</title>
   <link rel="stylesheet" href="/styles.css">
+  <script src="/session-client.js" defer></script>
   <script src="/workspace-state.js" defer></script>
   <script src="/app.js" defer></script>
   <script src="/navigation.js" defer></script>
@@ -21,8 +22,10 @@
         <h1>単位と時間割</h1>
         <p id="target-summary" class="muted">対象年度・プログラムを読み込んでいます…</p>
       </div>
-      <span class="privacy-label"><span class="privacy-dot" aria-hidden="true"></span>データは保存しません</span>
+      <span class="privacy-label"><span class="privacy-dot" aria-hidden="true"></span>ファイル・DBへ保存しません</span>
     </header>
+
+    <div class="session-controls"><p id="session-status" class="status" role="status" aria-live="polite">解析結果は作成から最大20分、メモリだけに一時保持します。</p><button id="session-end" class="button-secondary" type="button">読み込んだ情報をすべて削除</button></div>
 
     <div class="workspace-tabs" role="tablist" aria-label="確認する機能">
       <button id="report-tab" class="workspace-tab" type="button" role="tab" aria-controls="report-panel" aria-selected="true" tabindex="0" data-panel="report-panel">
@@ -41,7 +44,7 @@
     <section class="upload-panel" aria-labelledby="upload-heading">
       <div>
         <p class="eyebrow">LOCAL PROCESSING</p>
-        <p class="muted upload-description">CSVはこのアプリのバックエンドでメモリ上だけで解析し、保存しません。上限は5 MiBです。</p>
+        <p class="muted upload-description">CSV原本は保存しません。解析結果だけをメモリで最大20分一時保持し、再読み込み後も復元できます。上限は5 MiBです。</p>
       </div>
       <form id="upload-form">
         <div class="context-grid">
@@ -234,7 +237,7 @@
         <details class="recommendation-debug"><summary>候補APIのJSONを確認</summary><pre id="recommendation-json"></pre></details>
       </details>
     </section>
-    <footer class="page-footer">タブの切り替えでは結果を保持します。ページの再読み込みや「クリア」で、読み込んだデータは破棄されます。</footer>
+    <footer class="page-footer">解析結果は最大20分、一時保持し、再読み込み後も復元できます。「クリア」または「すべて削除」で一時保持した情報も削除します。</footer>
   </main>
 </body>
 </html>

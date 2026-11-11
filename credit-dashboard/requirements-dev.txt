@@ -1,3 +1,6 @@
 -r requirements.txt
 httpx2==2.16.0
 pytest==9.1.1
+jsonschema==4.25.1
+# 生成するAPIスキーマの再現性を保つ。FastAPIの既存依存を開発環境だけ固定する。
+pydantic==2.14.1

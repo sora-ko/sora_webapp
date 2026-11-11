@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_capacity_exceeded",
+    "message": "セッション数が上限に達しています。時間をおいて再試行してください。"
+  }
+}

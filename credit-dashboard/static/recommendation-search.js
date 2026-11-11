@@ -26,8 +26,8 @@
     updateFiles();
   }
   function updateFiles() {
-    const files = window.creditWorkspace.files();
-    $('credit-search-files').textContent = `成績CSV：${files.grades ? '選択済み' : '未選択'} ／ 履修表CSV：${files.timetable ? '選択済み' : '未選択'}`;
+    const files = window.creditWorkspace.parsed();
+    $('credit-search-files').textContent = `成績CSV：${files.grades ? '解析済み' : '未解析'} ／ 履修表CSV：${files.timetable ? '解析済み' : '未解析'}`;
   }
   function showError(message) {
     $('credit-search-result').hidden = true;
@@ -68,10 +68,11 @@
     event.preventDefault();
     invalidate();
     const files = window.creditWorkspace.files();
+    const parsed = window.creditWorkspace.parsed();
     const catalog = selected();
     const missing = [];
-    if (!files.grades) missing.push('成績CSVが選択されていません。「単位集計」タブで成績CSVを選択してください。');
-    if (!files.timetable) missing.push('履修表CSVが選択されていません。上の「履修表を読み込む」でCSVを選択してください。');
+    if (!parsed.grades) missing.push('成績CSVが未解析です。「単位集計」タブで成績CSVを選択・解析してください。');
+    if (!parsed.timetable) missing.push('履修表CSVが未解析です。上の「履修表を読み込む」でCSVを選択・解析してください。');
     if (missing.length) {
       showError(missing.join(' '));
       return;
@@ -118,6 +119,7 @@
     }
   });
   window.addEventListener('credit-files-changed', invalidate);
+  window.addEventListener('credit-parsed-changed', invalidate);
   window.addEventListener('recommendation-context-changed', updateCatalog);
   $('credit-search-term').addEventListener('change', invalidate);
   $('credit-search-clear').addEventListener('click', invalidate);

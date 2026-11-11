@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "format": "niigata-rsrefer-grid",
+  "context": {
+    "academic_year": 2026,
+    "semester": 2,
+    "term": null
+  },
+  "display_contexts": [
+    {
+      "academic_year": 2026,
+      "term": 3
+    },
+    {
+      "academic_year": 2026,
+      "term": 4
+    }
+  ],
+  "represented_weekdays": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "represented_periods": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "courses": [
+    {
+      "course_code": "263T9501",
+      "academic_year": 2026,
+      "term": 3,
+      "slots": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264T9502",
+      "academic_year": 2026,
+      "term": 4,
+      "slots": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    }
+  ],
+  "busy_slots": [
+    {
+      "academic_year": 2026,
+      "term": 3,
+      "weekday": 1,
+      "period": 1
+    },
+    {
+      "academic_year": 2026,
+      "term": 4,
+      "weekday": 3,
+      "period": 2
+    }
+  ],
+  "excluded_term_zero_course_count": 1,
+  "policy_notes": [
+    "利用者指定のMVP方針で開講番号の3桁目が0の科目を除外しています。0には通常の曜限を持つ授業もあるため、除外した科目との時間重複は確認しません。"
+  ],
+  "unresolved_courses": [],
+  "ready_for_recommendation": true,
+  "warnings": []
+}

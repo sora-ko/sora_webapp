@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_revision_conflict",
+    "message": "別の操作で情報が更新されました。最新の状態を取得してからやり直してください。"
+  }
+}

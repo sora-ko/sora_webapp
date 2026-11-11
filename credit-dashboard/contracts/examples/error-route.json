@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "route_not_found",
+    "message": "指定されたAPIのURLが見つかりません。"
+  }
+}

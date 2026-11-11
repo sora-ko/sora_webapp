@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_origin_forbidden",
+    "message": "この接続元からセッションは操作できません。"
+  }
+}

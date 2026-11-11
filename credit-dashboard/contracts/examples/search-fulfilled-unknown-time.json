@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "context": {
+    "profile_id": "niigata-engineering-sis-2025-v1",
+    "academic_year": 2026,
+    "term": 3
+  },
+  "target_requirement_id": "graduation",
+  "status": "empty",
+  "baseline": [
+    {
+      "id": "liberal_university_study",
+      "label": "教養・工学リテラシー入門（必修）",
+      "status": "satisfied",
+      "minimum_credits": 2,
+      "confirmed_credits": 2,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_english",
+      "label": "教養・英語（必修）",
+      "status": "satisfied",
+      "minimum_credits": 2,
+      "confirmed_credits": 2,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_initial_language",
+      "label": "教養・初修外国語（必修）",
+      "status": "satisfied",
+      "minimum_credits": 2,
+      "confirmed_credits": 2,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_health_sports",
+      "label": "教養・健康スポーツ科学実習Ⅰ（必修）",
+      "status": "satisfied",
+      "minimum_credits": 1,
+      "confirmed_credits": 1,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_information_literacy",
+      "label": "教養・データサイエンス入門（必修）",
+      "status": "satisfied",
+      "minimum_credits": 2,
+      "confirmed_credits": 2,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_humanities_social_required",
+      "label": "教養・人文社会／教育科学（必修）",
+      "status": "satisfied",
+      "minimum_credits": 4,
+      "confirmed_credits": 4,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_humanities_personalization_required_elective",
+      "label": "教養・人文社会／教育科学または新潟大学個性化科目（選択必修）",
+      "status": "satisfied",
+      "minimum_credits": 2,
+      "confirmed_credits": 2,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_natural_foundation",
+      "label": "教養・情報リテラシー／自然系共通専門基礎／自然科学（選択必修）",
+      "status": "satisfied",
+      "minimum_credits": 10,
+      "confirmed_credits": 21,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_elective",
+      "label": "教養系 選択（必修・選択必修への充当後）",
+      "status": "satisfied",
+      "minimum_credits": 11,
+      "confirmed_credits": 11,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "liberal_total",
+      "label": "教養系科目 計",
+      "status": "satisfied",
+      "minimum_credits": 36,
+      "confirmed_credits": 36,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "cross_area_surplus",
+      "label": "専門または教養の超過単位",
+      "status": "satisfied",
+      "minimum_credits": 6,
+      "confirmed_credits": 6,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    },
+    {
+      "id": "overall_total",
+      "label": "修得単位 総計",
+      "status": "satisfied",
+      "minimum_credits": 124,
+      "confirmed_credits": 124,
+      "confirmed_credit_shortfall": 0,
+      "has_uncertain_candidate": false
+    }
+  ],
+  "free_slots": [],
+  "candidates": [],
+  "review_candidates": [],
+  "counts": {
+    "catalog_in_term": 0,
+    "excluded_earned": 0,
+    "excluded_registered": 0,
+    "excluded_overlap": 0,
+    "excluded_unconfirmed_time": 0,
+    "excluded_no_benefit": 0,
+    "returned": 0,
+    "review_required": 0
+  },
+  "checks": {
+    "timetable": "needs_review",
+    "earned_credits": "checked",
+    "requirements": "checked",
+    "enrollment": "not_checked"
+  },
+  "messages": [
+    {
+      "code": "individual_simulation",
+      "message": "各候補を1科目修得した場合の卒業要件への効果です。候補同士の同時履修は確認していません。"
+    },
+    {
+      "code": "benefits_not_additive",
+      "message": "分類別条件と教養合計・総計の改善量は重なるため合算できません。履修中の単位は修得済みに含めません。"
+    },
+    {
+      "code": "search_scope",
+      "message": "開講カタログから探索します。学年で絞らず、修得済みは開講番号または科目名の一致で除外します。先修条件・履修許可は未確認です。"
+    },
+    {
+      "code": "liberal_shortage_scope",
+      "message": "教養の必修・選択必修・選択・合計の不足を改善する科目だけを推薦します。専門との共通超過分や総計だけの不足では推薦しません。"
+    },
+    {
+      "code": "timetable_unconfirmed",
+      "message": "履修表に未解決の情報や期間の矛盾があるため、候補の判定を保留しました。"
+    },
+    {
+      "code": "liberal_requirements_satisfied",
+      "message": "教養の必修・選択必修・選択・合計はすべて充足しています。追加の教養科目は推薦しません。"
+    }
+  ]
+}

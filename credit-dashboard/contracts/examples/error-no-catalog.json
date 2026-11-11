@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "recommendation_catalog_not_found",
+    "message": "この年度・プロファイルの教養候補データはありません。"
+  }
+}

@@ -464,14 +464,14 @@ async def test_security_headers_and_health_check(client):
     assert "default-src 'self'" in response.headers["content-security-policy"]
 
 
-def test_upload_screen_uses_versioned_api_without_browser_persistence():
+def test_upload_screen_exposes_csv_controls_without_browser_persistence():
     html = Path("static/index.html").read_text(encoding="utf-8")
     script = Path("static/app.js").read_text(encoding="utf-8")
     assert any(getattr(route, "name", None) == "static" for route in app.routes)
     assert 'id="upload-form"' in html
     assert 'id="profile-select"' in html
     assert 'id="residence-years"' in html
-    assert "/api/v1/reports" in script
+    assert 'src="/session-client.js"' in html
     assert "/api/v1/rule-profiles" in script
     assert "/api/report" not in script
     assert "localStorage" not in script
@@ -481,7 +481,7 @@ def test_upload_screen_uses_versioned_api_without_browser_persistence():
 @pytest.mark.anyio
 async def test_reference_screen_serves_independent_timetable_assets_with_no_store(client):
     html = (await client.get("/")).text
-    for name in ["workspace-state.js", "app.js", "navigation.js", "recommendation-api.js", "recommendations.js", "timetable.js", "recommendation-search.js"]:
+    for name in ["session-client.js", "workspace-state.js", "app.js", "navigation.js", "recommendation-api.js", "recommendations.js", "timetable.js", "recommendation-search.js"]:
         assert f'src="/{name}"' in html
         response = await client.get(f"/{name}")
         assert response.status_code == 200
@@ -492,7 +492,6 @@ async def test_reference_screen_serves_independent_timetable_assets_with_no_stor
     assert 'aria-controls="timetable-panel"' in html
     assert 'id="timetable-file"' in html
     assert 'id="timetable-term"' in html
-    assert "/api/v1/timetables" in Path("static/timetable.js").read_text(encoding="utf-8")
 
 
 @pytest.mark.anyio

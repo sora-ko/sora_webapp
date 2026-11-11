@@ -1,5 +1,6 @@
 /* API仕様とlocalhostのHTTP応答だけで試作UIを検証する。Pythonや既存UIをimportしない。
  * 使用するCSVは既知の架空サンプルとメモリ内生成のみ。応答・CSV・トレースを保存しない。
+ * 表示回帰にはstateless-session-adapterを注入する。実際のCookie・復元はcheck_session_reload.cjsで検証する。
  */
 'use strict';
 const assert=require('node:assert/strict');
@@ -35,6 +36,7 @@ function timetable({empty=false,unknown=false,year=2026}={}) {
   let passed=0;
   try {
     const context=await browser.newContext({viewport:{width:1440,height:1050},acceptDownloads:false});
+    await context.addInitScript({content:fs.readFileSync(path.join(path.dirname(process.argv[1]),'test-support','stateless-session-adapter.js'),'utf8')});
     const outside=[],exceptions=[],policyErrors=[];
     await context.route('**/*',route=>{
       if(new URL(route.request().url()).origin!==base.origin){outside.push('outside-origin');return route.abort();}

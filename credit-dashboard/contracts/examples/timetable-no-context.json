@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "niigata-rsrefer-grid",
+  "context": {
+    "academic_year": null,
+    "semester": null,
+    "term": null
+  },
+  "display_contexts": [],
+  "represented_weekdays": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "represented_periods": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "courses": [],
+  "busy_slots": [],
+  "excluded_term_zero_course_count": 0,
+  "policy_notes": [],
+  "unresolved_courses": [],
+  "ready_for_recommendation": true,
+  "warnings": []
+}

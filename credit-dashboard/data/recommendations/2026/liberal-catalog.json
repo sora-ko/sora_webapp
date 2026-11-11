@@ -23,6 +23,40 @@
       ]
     },
     {
+      "course_code": "261G0056",
+      "name": "中級EAP( Listening & Speaking)",
+      "credits": 2,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G0058",
+      "name": "中級EAP( Listening & Speaking: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "261G0059",
       "name": "中級EAP( Listening & Speaking: Term Course)",
       "credits": 1,
@@ -49,6 +83,21 @@
         {
           "weekday": 4,
           "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G0063",
+      "name": "中級EAP( Reading: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
         }
       ]
     },
@@ -83,6 +132,201 @@
       ]
     },
     {
+      "course_code": "261G1005",
+      "name": "ドイツ語圏グローバル理解 3 (ドイツ語圏で暮らしてみれば)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1007",
+      "name": "ドイツ語圏グローバル理解4(東西ドイツの分断と統一って?)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1009",
+      "name": "ドイツ語圏グローバル理解 5 (映像で見る日独文化比較)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1012",
+      "name": "ドイツ語圏グローバル理解6(声に出すドイツ語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1013",
+      "name": "フランス語圏グローバル理解1(フランスの文化と社会)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1015",
+      "name": "フランス語圏グローバル理解 2(フランス語圏の世界を発見しよう)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1017",
+      "name": "フランス語圏グローバル理解3(フランス言語技術入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1019",
+      "name": "ロシア語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1021",
+      "name": "中国語圏グローバル理解 1 (日中韓比較文化)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1023",
+      "name": "中国語圏グローバル理解 2 (映像で探る中国文化)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1025",
+      "name": "中国語圏グローバル理解 3 (多民族国家中国)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1027",
+      "name": "中国語圏グローバル理解 5 (中国の生活と経済)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1029",
+      "name": "中国語圏グローバル理解 6 (中国滞在事情)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "261G1031",
       "name": "中国語圏グローバル理解 7 (エリアスタディーズ北京)",
       "credits": 1,
@@ -93,6 +337,231 @@
       "schedule": [
         {
           "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1033",
+      "name": "中国語圏グローバル理解 8 (エリアスタディーズ上海)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1035",
+      "name": "中国語圏グローバル理解 9 (エリアスタディーズ東北三省)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1037",
+      "name": "中国語圏グローバル理解 10 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1039",
+      "name": "中国語圏グローバル理解 11 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1041",
+      "name": "朝鮮語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1043",
+      "name": "朝鮮語圏グローバル理解 2",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1045",
+      "name": "スペイン語圏グローバル理解 1(メキシコの文化とスペイン語入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1047",
+      "name": "スペイン語圏グローバル理解 2(ラテンアメリカの文化・生活と言語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1049",
+      "name": "イタリア語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1052",
+      "name": "フィリピノ語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1053",
+      "name": "西洋古典文芸A",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1055",
+      "name": "古代ローマ帝国ラテン語",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G1057",
+      "name": "ドイツ語インテンシブ IA1a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1058",
+      "name": "ドイツ語インテンシブ IA2a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1059",
+      "name": "ドイツ語インテンシブ IA3a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
           "period": 2
         }
       ]
@@ -113,6 +582,336 @@
       ]
     },
     {
+      "course_code": "261G1066",
+      "name": "ドイツ語スタンダード IA5a",
+      "credits": 1.5,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1080",
+      "name": "フランス語インテンシブ IA1a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1081",
+      "name": "フランス語インテンシブ IA2a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1082",
+      "name": "フランス語インテンシブ IA3a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1086",
+      "name": "フランス語スタンダード IA1a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1087",
+      "name": "フランス語スタンダード IA2a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1088",
+      "name": "フランス語スタンダード IA4a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1089",
+      "name": "フランス語スタンダード IA5a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1102",
+      "name": "ロシア語インテンシブ IAa",
+      "credits": 2,
+      "category": "初修外国語（ロシア語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1104",
+      "name": "ロシア語スタンダード IAa",
+      "credits": 1.5,
+      "category": "初修外国語（ロシア語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1109",
+      "name": "中国語インテンシブ IA1a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1110",
+      "name": "中国語インテンシブ IA2a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1111",
+      "name": "中国語インテンシブ IA3a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1115",
+      "name": "中国語スタンダード IA1a",
+      "credits": 1.5,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G1120",
+      "name": "中国語スタンダード IA6a",
+      "credits": 1.5,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1139",
+      "name": "朝鮮語インテンシブ IAa",
+      "credits": 2,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G1141",
+      "name": "朝鮮語スタンダード IA1a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1142",
+      "name": "朝鮮語スタンダード IA2a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G1143",
+      "name": "朝鮮語スタンダード IA3a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1152",
+      "name": "スペイン語スタンダード IA1a",
+      "credits": 1.5,
+      "category": "初修外国語（スペイン語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G1153",
+      "name": "スペイン語スタンダード IA2a",
+      "credits": 1.5,
+      "category": "初修外国語（スペイン語）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G2028",
+      "name": "健康スポーツ科学実習 Ia",
+      "credits": 0.5,
+      "category": "健康・スポーツ（体育実技）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
       "course_code": "261G2029",
       "name": "健康スポーツ科学実習 Ia",
       "credits": 0.5,
@@ -123,6 +922,21 @@
       "schedule": [
         {
           "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G2036",
+      "name": "健康スポーツ科学講義a",
+      "credits": 1,
+      "category": "健康・スポーツ（体育講義）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
           "period": 4
         }
       ]
@@ -147,6 +961,25 @@
       ]
     },
     {
+      "course_code": "261G3012",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "261G3013",
       "name": "データサイエンス基礎演習",
       "credits": 2,
@@ -162,6 +995,25 @@
         {
           "weekday": 4,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3014",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
         }
       ]
     },
@@ -185,6 +1037,216 @@
       ]
     },
     {
+      "course_code": "261G3212",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3214",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3215",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3216",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3220",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G3221",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G3224",
+      "name": "アクティブラーニングA",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G3227",
+      "name": "アクティブラーニングC",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3229",
+      "name": "多文化間共修A1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G3231",
+      "name": "多文化間共修B1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3233",
+      "name": "多文化間共修C1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3235",
+      "name": "多文化間共修D1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3237",
+      "name": "日本と外国人A",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3239",
+      "name": "教員志望者のための日本語教育入門A",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
       "course_code": "261G3253",
       "name": "ワーク&ライフのキャリアデザイン",
       "credits": 2,
@@ -200,6 +1262,40 @@
         {
           "weekday": 4,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G3256",
+      "name": "日本手話A",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G3258",
+      "name": "数学的思考法",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
         }
       ]
     },
@@ -238,6 +1334,36 @@
       ]
     },
     {
+      "course_code": "261G6026",
+      "name": "放射性廃棄物処理法",
+      "credits": 1,
+      "category": "自然科学（工学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G6027",
+      "name": "原子力・放射線物理学入門",
+      "credits": 1,
+      "category": "自然科学（工学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
       "course_code": "261G6029",
       "name": "原子力・放射線防護学入門",
       "credits": 1,
@@ -249,6 +1375,196 @@
         {
           "weekday": 2,
           "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "261G6031",
+      "name": "特許・経営および製品開発入門",
+      "credits": 2,
+      "category": "自然科学（工学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        },
+        {
+          "weekday": 5,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "261G7011",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "261G7012",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G7013",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G7014",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G7015",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "261G7016",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7017",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7018",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7019",
+      "name": "英語基礎 L",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
         }
       ]
     },
@@ -272,6 +1588,82 @@
       ]
     },
     {
+      "course_code": "261G7043",
+      "name": "現代社会と科学技術",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        },
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7044",
+      "name": "実験心理学と応用",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7055",
+      "name": "歴史学I",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "261G7071",
+      "name": "組織マネジメント論",
+      "credits": 2,
+      "category": "人文社会・教育科学（経済学）",
+      "terms": [
+        1
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 1
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
       "course_code": "261G8005",
       "name": "「食べる」",
       "credits": 2,
@@ -287,6 +1679,66 @@
         {
           "weekday": 2,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0005",
+      "name": "iStep Academic Reading",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G0006",
+      "name": "iStep Academic Reading",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G0007",
+      "name": "iStep Academic Reading",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0008",
+      "name": "iStep Academic Writing",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
         }
       ]
     },
@@ -321,6 +1773,96 @@
       ]
     },
     {
+      "course_code": "262G0011",
+      "name": "iStep Listening and Speaking",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G0012",
+      "name": "iStep Listening and Speaking",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G0013",
+      "name": "iStep Listening and Speaking",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0014",
+      "name": "iStep Presentations",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G0015",
+      "name": "iStep Presentations",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G0016",
+      "name": "iStep Presentations",
+      "credits": 0.5,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "262G0057",
       "name": "中級EAP( Listening & Speaking)",
       "credits": 2,
@@ -340,6 +1882,111 @@
       ]
     },
     {
+      "course_code": "262G0061",
+      "name": "中級EAP( Listening & Speaking: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G0064",
+      "name": "中級EAP( Writing: Term Course)",
+      "credits": 1,
+      "category": "英語（英語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1002",
+      "name": "ドイツ語圏グローバル理解1(スイス学入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1004",
+      "name": "ドイツ語圏グローバル理解 2 (ドイツ語文化圏研究入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G1006",
+      "name": "ドイツ語圏グローバル理解 3 (ドイツ語圏で暮らしてみれば)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1008",
+      "name": "ドイツ語圏グローバル理解4(東西ドイツの分断と統一って?)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1010",
+      "name": "ドイツ語圏グローバル理解 5 (映像で見る日独文化比較)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "262G1011",
       "name": "ドイツ語圏グローバル理解6(声に出すドイツ語)",
       "credits": 1,
@@ -351,6 +1998,711 @@
         {
           "weekday": 2,
           "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1014",
+      "name": "フランス語圏グローバル理解1(フランスの文化と社会)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1016",
+      "name": "フランス語圏グローバル理解 2(フランス語圏の世界を発見しよう)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1018",
+      "name": "フランス語圏グローバル理解3(フランス言語技術入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1020",
+      "name": "ロシア語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1022",
+      "name": "中国語圏グローバル理解 1 (日中韓比較文化)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1024",
+      "name": "中国語圏グローバル理解 2 (映像で探る中国文化)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1026",
+      "name": "中国語圏グローバル理解 3 (多民族国家中国)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1028",
+      "name": "中国語圏グローバル理解 5 (中国の生活と経済)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1030",
+      "name": "中国語圏グローバル理解 6 (中国滞在事情)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1032",
+      "name": "中国語圏グローバル理解 7 (エリアスタディーズ北京)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1034",
+      "name": "中国語圏グローバル理解 8 (エリアスタディーズ上海)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1036",
+      "name": "中国語圏グローバル理解 9 (エリアスタディーズ東北三省)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1038",
+      "name": "中国語圏グローバル理解 10 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1040",
+      "name": "中国語圏グローバル理解 11 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1042",
+      "name": "朝鮮語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1044",
+      "name": "朝鮮語圏グローバル理解 2",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1046",
+      "name": "スペイン語圏グローバル理解 1(メキシコの文化とスペイン語入門)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1048",
+      "name": "スペイン語圏グローバル理解 2(ラテンアメリカの文化・生活と言語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1050",
+      "name": "イタリア語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1051",
+      "name": "フィリピノ語圏グローバル理解 1",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1054",
+      "name": "西洋古典文芸B",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1056",
+      "name": "古典古代ギリシア語",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G1060",
+      "name": "ドイツ語インテンシブ IB1a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1061",
+      "name": "ドイツ語インテンシブ IB2a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1062",
+      "name": "ドイツ語インテンシブ IB3a",
+      "credits": 2,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1072",
+      "name": "ドイツ語スタンダード IB4a",
+      "credits": 1.5,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G1073",
+      "name": "ドイツ語スタンダード IB5a",
+      "credits": 1.5,
+      "category": "初修外国語（ドイツ語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1083",
+      "name": "フランス語インテンシブ IB1a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1084",
+      "name": "フランス語インテンシブ IB2a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1085",
+      "name": "フランス語インテンシブ IB3a",
+      "credits": 2,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1090",
+      "name": "フランス語スタンダード IB1a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1091",
+      "name": "フランス語スタンダード IB2a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1092",
+      "name": "フランス語スタンダード IB4a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1093",
+      "name": "フランス語スタンダード IB5a",
+      "credits": 1.5,
+      "category": "初修外国語（フランス語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1103",
+      "name": "ロシア語インテンシブ IBa",
+      "credits": 2,
+      "category": "初修外国語（ロシア語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1105",
+      "name": "ロシア語スタンダード IBa",
+      "credits": 1.5,
+      "category": "初修外国語（ロシア語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1112",
+      "name": "中国語インテンシブ IB1a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1113",
+      "name": "中国語インテンシブ IB2a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1114",
+      "name": "中国語インテンシブ IB3a",
+      "credits": 2,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1123",
+      "name": "中国語スタンダード IB1a",
+      "credits": 1.5,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G1128",
+      "name": "中国語スタンダード IB6a",
+      "credits": 1.5,
+      "category": "初修外国語（中国語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1140",
+      "name": "朝鮮語インテンシブ IBa",
+      "credits": 2,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G1144",
+      "name": "朝鮮語スタンダード IB1a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1145",
+      "name": "朝鮮語スタンダード IB2a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G1146",
+      "name": "朝鮮語スタンダード IB3a",
+      "credits": 1.5,
+      "category": "初修外国語（朝鮮語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1154",
+      "name": "スペイン語スタンダード IB1a",
+      "credits": 1.5,
+      "category": "初修外国語（スペイン語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G1155",
+      "name": "スペイン語スタンダード IB2a",
+      "credits": 1.5,
+      "category": "初修外国語（スペイン語）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
         }
       ]
     },
@@ -370,6 +2722,36 @@
       ]
     },
     {
+      "course_code": "262G2031",
+      "name": "健康スポーツ科学実習 Ib",
+      "credits": 0.5,
+      "category": "健康・スポーツ（体育実技）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G2038",
+      "name": "健康スポーツ科学講義b",
+      "credits": 1,
+      "category": "健康・スポーツ（体育講義）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "262G3017",
       "name": "データサイエンス基礎演習",
       "credits": 2,
@@ -384,6 +2766,63 @@
         },
         {
           "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3018",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G3019",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G3020",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
           "period": 2
         }
       ]
@@ -408,6 +2847,51 @@
       ]
     },
     {
+      "course_code": "262G3033",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3036",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3037",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "262G3039",
       "name": "データサイエンス総論II",
       "credits": 1,
@@ -423,6 +2907,21 @@
       ]
     },
     {
+      "course_code": "262G3204",
+      "name": "日本酒学C",
+      "credits": 1,
+      "category": "新潟大学個性化科目（地域入門）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
       "course_code": "262G3213",
       "name": "分野横断デザイン",
       "credits": 1,
@@ -434,6 +2933,51 @@
         {
           "weekday": 3,
           "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3217",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G3218",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G3219",
+      "name": "分野横断デザイン",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
         }
       ]
     },
@@ -468,6 +3012,171 @@
       ]
     },
     {
+      "course_code": "262G3225",
+      "name": "アクティブラーニングA",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G3226",
+      "name": "アクティブラーニングB",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3228",
+      "name": "アクティブラーニングC",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G3230",
+      "name": "多文化間共修A2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3232",
+      "name": "多文化間共修B2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3234",
+      "name": "多文化間共修C2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3236",
+      "name": "多文化間共修D2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3238",
+      "name": "日本と外国人B",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3240",
+      "name": "教員志望者のための日本語教育入門B",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "262G3241",
+      "name": "韓国留学プログラムの準備講座:グローバルコンピテンシー強化",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3242",
+      "name": "中国留学準備講座 サマーセミナー中国入門",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "262G3246",
       "name": "自己・他者理解から始まるキャリア自律",
       "credits": 2,
@@ -483,6 +3192,74 @@
         {
           "weekday": 4,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G3252",
+      "name": "今ここから平和を考える",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3254",
+      "name": "地域災害環境システム学入門",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G3257",
+      "name": "日本手話B",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G3260",
+      "name": "西シドニー大学国際交流プログラムA",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        },
+        {
+          "weekday": 3,
+          "period": 2
         }
       ]
     },
@@ -525,6 +3302,226 @@
       ]
     },
     {
+      "course_code": "262G6024",
+      "name": "生活を支える化学技術-化学工学への招待-",
+      "credits": 2,
+      "category": "自然科学（工学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G6028",
+      "name": "原子力・放射線関連法規入門",
+      "credits": 1,
+      "category": "自然科学（工学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G6030",
+      "name": "原子力入門",
+      "credits": 1,
+      "category": "自然科学（工学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "262G7031",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G7032",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G7033",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G7034",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G7035",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "262G7036",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G7037",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G7038",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "262G7039",
+      "name": "英語基礎 R",
+      "credits": 1,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
       "course_code": "262G7040",
       "name": "日本古典文学K",
       "credits": 2,
@@ -539,6 +3536,25 @@
         },
         {
           "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "262G7056",
+      "name": "歴史学Q",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        2
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 1
+        },
+        {
+          "weekday": 1,
           "period": 2
         }
       ]
@@ -578,6 +3594,21 @@
         {
           "weekday": 1,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G1501",
+      "name": "中国語圏グローバル理解 4 (漢文と中国語)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
         }
       ]
     },
@@ -661,6 +3692,101 @@
       ]
     },
     {
+      "course_code": "263G3502",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3503",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G3504",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3505",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3506",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "263G3710",
       "name": "私のローカルキャリア論 -地域とかかわる多様な働きかた・暮らしかた-",
       "credits": 2,
@@ -680,6 +3806,25 @@
       ]
     },
     {
+      "course_code": "263G3711",
+      "name": "生涯学習社会とメディア",
+      "credits": 2,
+      "category": "新潟大学個性化科目（地域研究）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
       "course_code": "263G3712",
       "name": "分野横断デザイン",
       "credits": 1,
@@ -691,6 +3836,224 @@
         {
           "weekday": 4,
           "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G3714",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G3715",
+      "name": "分野横断リフレクション",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3718",
+      "name": "アクティブラーニングA",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3721",
+      "name": "アクティブラーニングC",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3723",
+      "name": "多文化間共修A1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "263G3725",
+      "name": "多文化間共修B1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3727",
+      "name": "多文化間共修C1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3729",
+      "name": "多文化間共修D1",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3731",
+      "name": "日本と外国人C",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3733",
+      "name": "教員志望者のための日本語教育入門C",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G3739",
+      "name": "国際共修:留学生と考える日中言語文化A",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3741",
+      "name": "コリア学入門A",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G3743",
+      "name": "仕事・業界理解から働く意味を探究する",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G3745",
+      "name": "キャリア形成と法制度",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
         }
       ]
     },
@@ -710,6 +4073,25 @@
         {
           "weekday": 1,
           "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G3749",
+      "name": "トキをシンボルとした自然再生",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
         }
       ]
     },
@@ -748,6 +4130,63 @@
       ]
     },
     {
+      "course_code": "263G6514",
+      "name": "地学実験B",
+      "credits": 1,
+      "category": "自然科学（理学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "263G6519",
+      "name": "数学の世界",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 4
+        },
+        {
+          "weekday": 3,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "263G6524",
+      "name": "くらしを支える機械システム工学",
+      "credits": 2,
+      "category": "自然科学（工学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
       "course_code": "263G7505",
       "name": "心理学概論",
       "credits": 2,
@@ -782,6 +4221,120 @@
         {
           "weekday": 5,
           "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G7512",
+      "name": "文化人類学の方法—他者へのまなざし",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G7519",
+      "name": "中国語オプショナルA",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G7523",
+      "name": "文学E",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        },
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "263G7524",
+      "name": "歴史学H",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G7525",
+      "name": "歴史学P",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        },
+        {
+          "weekday": 5,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "263G7543",
+      "name": "哲学",
+      "credits": 2,
+      "category": "人文社会・教育科学（人文科学）",
+      "terms": [
+        3
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        },
+        {
+          "weekday": 4,
+          "period": 3
         }
       ]
     },
@@ -839,6 +4392,36 @@
       ]
     },
     {
+      "course_code": "264G1504",
+      "name": "中国語圏グローバル理解 12 (中国語の基礎知識)",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G1506",
+      "name": "朝鮮語圏グローバル理解 3",
+      "credits": 1,
+      "category": "初修外国語（グローバル理解）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "264G1587",
       "name": "古代エジプト神聖文字文B",
       "credits": 1,
@@ -888,6 +4471,44 @@
       ]
     },
     {
+      "course_code": "264G3509",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3510",
+      "name": "データサイエンス基礎演習",
+      "credits": 2,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "264G3512",
       "name": "データサイエンス基礎演習",
       "credits": 2,
@@ -926,6 +4547,21 @@
       ]
     },
     {
+      "course_code": "264G3523",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "264G3524",
       "name": "データサイエンス総論II",
       "credits": 1,
@@ -937,6 +4573,51 @@
         {
           "weekday": 3,
           "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G3525",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3526",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 5,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3527",
+      "name": "データサイエンス総論II",
+      "credits": 1,
+      "category": "情報リテラシー（情報リテラシー）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 3
         }
       ]
     },
@@ -1001,6 +4682,205 @@
       ]
     },
     {
+      "course_code": "264G3719",
+      "name": "アクティブラーニングA",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3720",
+      "name": "アクティブラーニングB",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264G3722",
+      "name": "アクティブラーニングC",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3724",
+      "name": "多文化間共修A2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 3,
+          "period": 1
+        }
+      ]
+    },
+    {
+      "course_code": "264G3726",
+      "name": "多文化間共修B2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3728",
+      "name": "多文化間共修C2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3730",
+      "name": "多文化間共修D2",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3732",
+      "name": "日本と外国人D",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3734",
+      "name": "教員志望者のための日本語教育入門D",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 2
+        }
+      ]
+    },
+    {
+      "course_code": "264G3735",
+      "name": "オックスフォード大学スプリングセミナーの準備講座:グローバルコンピテンシー強化",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "264G3736",
+      "name": "シンガポール・スプリングセミナーの準備講座:グローバルコンピテンシー強化",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 5
+        }
+      ]
+    },
+    {
+      "course_code": "264G3742",
+      "name": "コリア学入門B",
+      "credits": 1,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
+      "course_code": "264G3750",
+      "name": "佐渡学概論:佐渡島の自然と人々の営み",
+      "credits": 2,
+      "category": "新潟大学個性化科目（自由主題）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 4
+        },
+        {
+          "weekday": 4,
+          "period": 4
+        }
+      ]
+    },
+    {
       "course_code": "264G3752",
       "name": "知の交流",
       "credits": 2,
@@ -1020,8 +4900,46 @@
       ]
     },
     {
+      "course_code": "264G6511",
+      "name": "生物学-生物多様性A-",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 1,
+          "period": 3
+        },
+        {
+          "weekday": 4,
+          "period": 3
+        }
+      ]
+    },
+    {
       "course_code": "264G6513",
       "name": "地学概論A",
+      "credits": 2,
+      "category": "自然科学（理学）",
+      "terms": [
+        4
+      ],
+      "schedule": [
+        {
+          "weekday": 2,
+          "period": 4
+        },
+        {
+          "weekday": 5,
+          "period": 4
+        }
+      ]
+    },
+    {
+      "course_code": "264G6517",
+      "name": "地球と気象",
       "credits": 2,
       "category": "自然科学（理学）",
       "terms": [

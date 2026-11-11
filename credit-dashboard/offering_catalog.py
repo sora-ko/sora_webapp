@@ -321,12 +321,14 @@ def compact_course(offering: dict) -> dict:
             "schedule": [{"weekday": day, "period": period} for day, period in sorted(by_term[0])]}
 
 
-def build_compact_catalog(catalog: dict, config: dict) -> tuple[dict, dict]:
+def build_compact_catalog(catalog: dict, config: dict, *, selection: str = "representative") -> tuple[dict, dict]:
     target = config["target_profile"]
     pool = common_offerings(catalog["offerings"], target)
-    selected = representative_offerings(pool)
+    if selection not in {"all", "representative"}:
+        raise ValueError("科目の選定方法が不正です")
+    selected = pool if selection == "all" else representative_offerings(pool)
     result = {"schema_version": 3, "academic_year": config["academic_year"],
               "profile_id": target["profile_id"],
               "courses": [compact_course(item) for item in selected]}
-    report = {"pool": summarize_coverage(pool), "selected": summarize_coverage(selected)}
+    report = {"pool": summarize_coverage(pool), "selected": summarize_coverage(selected), "selection": selection}
     return result, report

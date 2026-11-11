@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_inputs_missing",
+    "message": "成績CSVと履修表CSVを解析してから探索してください。"
+  }
+}

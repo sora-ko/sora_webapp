@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "upload_required",
+    "message": "固定CSVの読み込みは廃止しました。画面からCSVをアップロードしてください。"
+  }
+}

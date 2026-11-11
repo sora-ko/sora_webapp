@@ -1,0 +1,6 @@
+{
+  "error": {
+    "code": "session_request_header_required",
+    "message": "X-Session-Request: 1を指定してください。"
+  }
+}
